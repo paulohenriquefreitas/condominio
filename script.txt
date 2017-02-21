@@ -1,0 +1,10 @@
+Create database Condominio;
+
+use Condominio;
+
+Create table Modelo(
+CPF int primary key not null,
+Nome varchar (25) not null,
+Ap int (3),
+Estado varchar (25)
+)
