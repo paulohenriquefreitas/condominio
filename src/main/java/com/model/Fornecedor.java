@@ -1,4 +1,4 @@
-package com.Fornecedor;
+package com.model;
 
 public class Fornecedor {
 
