@@ -1,9 +1,8 @@
 package com.model;
 
-import javax.persistence.*;
+import org.hibernate.annotations.Entity;
 
 @Entity
-
 public class Morador {
 
 	private static final long seriaLVesrionUID= 1l;	
