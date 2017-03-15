@@ -1,6 +1,0 @@
-Projetos para gerar relatórios para os pagamentos,despesas e finamceiros do Condomínio Adail
-
-
-01- Criar um objeto que represente um morador (nome, cpf, numero do aparatamento, estado).
-    Na pasta src/main/java criar um pacote com.model e dentro desse pacote criar as classes de modelo(Morador)
-02- Criar tabela no banco
