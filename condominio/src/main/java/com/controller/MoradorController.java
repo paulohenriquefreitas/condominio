@@ -21,11 +21,10 @@ public class MoradorController {
 	MoradorDao moradorDao;
 	
 	@RequestMapping(method=RequestMethod.GET)	
-	public String list()throws ServletException, IOException{
-		System.out.println("ola");
-		ModelAndView modelAndView = new ModelAndView("moradores/list");
+	public ModelAndView list()throws ServletException, IOException{
+		ModelAndView modelAndView = new ModelAndView("index.html");
         modelAndView.addObject("moradores", moradorDao.findAll());
-        return "TESTe";
+        return modelAndView ;
 		
 	}
 
