@@ -10,6 +10,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.controller.MoradorController;
+import com.dao.FornecedorDao;
 import com.dao.MoradorDao;
 
 @SpringBootApplication
@@ -19,8 +20,14 @@ public class CondominioApplication {
 	@Bean
 	public MoradorDao morador(){
 		return new MoradorDao();
-		
+	
 	}
+	
+	@Bean
+	public FornecedorDao fornecedor(){
+		return new FornecedorDao();
+	}
+	
 	@Bean	
 	public DataSource dataSource(Environment environment) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
