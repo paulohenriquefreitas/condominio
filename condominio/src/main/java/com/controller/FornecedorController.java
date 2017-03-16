@@ -21,7 +21,7 @@ public class FornecedorController {
 	
 	@RequestMapping(method=RequestMethod.GET)	
 	public ModelAndView list()throws ServletException, IOException{
-		ModelAndView modelAndView = new ModelAndView("index.html");
+		ModelAndView modelAndView = new ModelAndView("formsFornec.html");
         modelAndView.addObject("fornecedor", fornecedorDao.findAll());
         return modelAndView ;
 		

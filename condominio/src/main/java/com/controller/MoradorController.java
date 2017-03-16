@@ -22,7 +22,7 @@ public class MoradorController {
 	
 	@RequestMapping(method=RequestMethod.GET)	
 	public ModelAndView list()throws ServletException, IOException{
-		ModelAndView modelAndView = new ModelAndView("index.html");
+		ModelAndView modelAndView = new ModelAndView("formsMorador.html");
         modelAndView.addObject("moradores", moradorDao.findAll());
         return modelAndView ;
 		
