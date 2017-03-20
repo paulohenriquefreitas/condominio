@@ -1,26 +1,51 @@
 package com.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.sql.DataSource;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.Environment;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.model.Morador;
 
 public class MoradorDao {
 	
-	public String findAll(){
-	return "teste";
-	}
+	
+@Autowired
+public DataSource datasource;
 
-	@Bean	
-	public DataSource dataSource(Environment environment) {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/?user=root");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
-        return dataSource;
-    }
+public List<Morador> moradores;
+
+public List<Morador> findAll() {
+	Connection con;
+    PreparedStatement pstmt;
+    ResultSet rs;
+    moradores = new ArrayList<Morador>();
+try {
+    con = datasource.getConnection();
+	pstmt = con.prepareStatement("SELECT * FROM Morador	");
+	rs = pstmt.executeQuery();
+	while (rs.next()){
+		Morador morador = new Morador();
+		morador.setCPF(rs.getString("CPF"));
+		morador.setNome(rs.getString("Nome"));
+		morador.setAp(rs.getInt("Ap"));
+		
+		moradores.add(morador);
+				
+	}
+} catch (SQLException e) {
+	System.out.println("Ocorreu um erro de conexão com o banco!");
+	e.printStackTrace();
+}
+	return moradores;
+} 
 	
 	
 }
+
