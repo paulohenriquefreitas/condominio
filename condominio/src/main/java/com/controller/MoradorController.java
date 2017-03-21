@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dao.MoradorDao;
+import com.dao.MoradorDaoImpl;
 import com.model.Morador;
 
 @RestController
@@ -18,7 +18,7 @@ import com.model.Morador;
 public class MoradorController {
 	
 	@Autowired
-	MoradorDao moradorDao;
+	MoradorDaoImpl moradorDao;
 	
 	@RequestMapping(method=RequestMethod.GET)	
 	public ModelAndView list()throws ServletException, IOException{

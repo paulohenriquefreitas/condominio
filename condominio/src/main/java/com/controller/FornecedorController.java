@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dao.FornecedorDao;
+import com.dao.FornecedorDaoImpl;
 
 @RestController
 @RequestMapping("/fornecedor")
 public class FornecedorController {
 	
 	@Autowired
-	FornecedorDao fornecedorDao;
+	FornecedorDaoImpl fornecedorDao;
 	
 	@RequestMapping(method=RequestMethod.GET)	
 	public ModelAndView list()throws ServletException, IOException{
