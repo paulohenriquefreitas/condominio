@@ -78,7 +78,20 @@ public class MoradorDaoImpl implements MoradorDao {
 
 	@Override
 	public void delete(int ap) {
-		// TODO Auto-generated method stub
+		Connection con = null ;	
+		PreparedStatement pstmt;
+	
+		try {
+			pstmt = con.prepareStatement("delete" +
+                 "from Morador where Ap=?");
+			pstmt.setInt(1, ap);
+			pstmt.execute();
+			pstmt.close();
+			
+		} catch (SQLException e) {
+			System.out.println("Ocorreu um erro ao Deletar  dados ");
+			e.printStackTrace();
+		}
 		
 	} 
 	

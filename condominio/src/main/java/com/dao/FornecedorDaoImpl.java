@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.model.Fornecedor;
-import com.model.Morador;
 
 public class FornecedorDaoImpl {
 	
@@ -47,6 +46,44 @@ public List<Fornecedor> findAll() {
 	
 	return fornecedores;
 }
+public void save(Fornecedor fornecedor) {
 	
+	Connection con;	
+	PreparedStatement pstmt;
+
+try {
 	
+	con = datasource.getConnection();
+	pstmt = con.prepareStatement("insert into Fornecedor"
+			+ "(Nome_Fornecedor) VALUES"
+			+ "(?)");
+		
+	pstmt.setString(1, fornecedor.getNome_Fornecedor());
+
+	
+	pstmt.execute();
+	con.close();
+	pstmt.close();
+	
+} catch (SQLException e) {
+	System.out.println("Ocorreu um erro ao inserir dados ");
+	e.printStackTrace();
+}	
+}
+
+public void delete(Fornecedor fornecedor) throws SQLException{
+	Connection con = null;	
+	PreparedStatement pstmt;
+	pstmt = con.prepareStatement("delete" +
+            "from Fornecedor where Ap=?");
+		pstmt.setString(1,fornecedor.getNome_Fornecedor());
+		pstmt.execute();
+		pstmt.close();
+	try {
+		
+	} catch (Exception e) {
+		// TODO: handle exception
+	}
+
+}
 }
