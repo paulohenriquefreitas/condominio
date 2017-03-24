@@ -19,7 +19,7 @@ public class Morador {
 	public void setNome(String nome) {
 		Nome = nome;
 	}
-	public String getCPF() {
+	public static String getCPF() {
 		return CPF;
 	}
 	public void setCPF(String CPF) {
@@ -36,6 +36,10 @@ public class Morador {
 	}
 	public void setEstado(String estado) {
 		Estado = estado;
+	}
+	
+	public  void test(){
+		
 	}
 }
 

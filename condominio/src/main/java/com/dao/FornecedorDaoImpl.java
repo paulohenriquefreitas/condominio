@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.model.Fornecedor;
 
-public class FornecedorDaoImpl {
+public class FornecedorDaoImpl implements FornecedorDao {
 	
 @Autowired
 public DataSource datasource;
@@ -46,6 +46,7 @@ public List<Fornecedor> findAll() {
 	
 	return fornecedores;
 }
+@Override
 public void save(Fornecedor fornecedor) {
 	
 	Connection con;	
@@ -70,20 +71,41 @@ try {
 	e.printStackTrace();
 }	
 }
-
-public void delete(Fornecedor fornecedor) throws SQLException{
+@Override
+public void delete(String fornecedorNome) {
 	Connection con = null;	
 	PreparedStatement pstmt;
-	pstmt = con.prepareStatement("delete" +
-            "from Fornecedor where Ap=?");
-		pstmt.setString(1,fornecedor.getNome_Fornecedor());
-		pstmt.execute();
-		pstmt.close();
+	
 	try {
 		
+		pstmt = con.prepareStatement("delete" +
+	            "from Fornecedor where Fornecedor_Nome=?");
+			pstmt.setString(1,fornecedorNome);
+			pstmt.execute();
+			pstmt.close();
 	} catch (Exception e) {
-		// TODO: handle exception
+		System.out.println("Ocorreu um erro ao Deletar os dados do Fornecedor ");
+		e.printStackTrace();
 	}
 
+}
+
+@Override
+public void altera(Fornecedor fornecedor) {
+	Connection con = null;
+	  PreparedStatement pstmt;
+	  
+	  try {
+		pstmt = con.prepareCall("update Fornecedor set CPF=?, Nome=?,"+
+
+       " where Ap=?");
+		pstmt.setString(1, fornecedor.getNome_Fornecedor());
+		
+		
+	} catch (SQLException e) {
+		System.out.println("Ocorreu um erro ao Editar os dados Morador");
+		e.printStackTrace();
+	}
+	
 }
 }

@@ -1,8 +1,15 @@
 package com.dao;
 
-import com.model.Morador;
+import com.model.Fornecedor;
 
 public interface FornecedorDao {
-public void save (Morador morador);
+
+	public void delete (String fornecedorNome);
+
+	public void altera(Fornecedor fornecedor);
+	 
+    public void save (Fornecedor fornecedor);
+
+	
 
 }
