@@ -1,15 +1,16 @@
 package com.model;
 
 public class Fornecedor {
+	private static final long seriaLVesrionUID= 1l;	
 
- String  Nome_Fornecedor;
+ String  nome;
 
-public String getNome_Fornecedor() {
-	return Nome_Fornecedor;
+public String getNome() {
+	return nome;
 }
 
-public void setNome_Fornecedor(String nome_Fornecedor) {
-	Nome_Fornecedor = nome_Fornecedor;
+public void setNome(String nome) {
+	this.nome = nome;
 } 
 	
 }

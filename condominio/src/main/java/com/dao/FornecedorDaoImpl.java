@@ -34,7 +34,7 @@ public List<Fornecedor> findAll() {
     	
     	Fornecedor fornecedor = new Fornecedor();
     		
-         fornecedor.setNome_Fornecedor(rs.getString("Nome"));    		
+         fornecedor.setNome(rs.getString("Nome"));    		
     		
     	fornecedores.add(fornecedor);
     				
@@ -59,7 +59,7 @@ try {
 			+ "(Nome_Fornecedor) VALUES"
 			+ "(?)");
 		
-	pstmt.setString(1, fornecedor.getNome_Fornecedor());
+	pstmt.setString(1, fornecedor.getNome());
 
 	
 	pstmt.execute();
@@ -99,7 +99,7 @@ public void altera(Fornecedor fornecedor) {
 		pstmt = con.prepareCall("update Fornecedor set CPF=?, Nome=?,"+
 
        " where Ap=?");
-		pstmt.setString(1, fornecedor.getNome_Fornecedor());
+		pstmt.setString(1, fornecedor.getNome());
 		
 		
 	} catch (SQLException e) {

@@ -1,8 +1,6 @@
 package com.model;
 
-import org.hibernate.annotations.Entity;
 
-@Entity
 public class Morador {
 
 	private static final long seriaLVesrionUID= 1l;	
@@ -19,11 +17,9 @@ public class Morador {
 	public void setNome(String nome) {
 		Nome = nome;
 	}
-	public static String getCPF() {
-		return CPF;
-	}
-	public void setCPF(String CPF) {
-		CPF = CPF;
+	
+	public void setCPF(String cpf) {
+		CPF = cpf;
 	}
 	public int getAp() {
 		return Ap;
@@ -37,9 +33,11 @@ public class Morador {
 	public void setEstado(String estado) {
 		Estado = estado;
 	}
-	
-	public  void test(){
-		
+	public String getCPF() {
+		return CPF;
 	}
+	
+	
+
 }
 

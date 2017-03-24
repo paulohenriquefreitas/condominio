@@ -4,6 +4,8 @@ import javax.sql.DataSource;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
@@ -15,7 +17,13 @@ import com.dao.MoradorDaoImpl;
 
 @SpringBootApplication
 @ComponentScan(basePackageClasses = MoradorController.class)
-public class CondominioApplication {	
+public class CondominioApplication extends SpringBootServletInitializer {	
+	
+	@Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(CondominioApplication.class);
+    }
+
 	
 	@Bean
 	public MoradorDaoImpl morador(){
@@ -32,7 +40,7 @@ public class CondominioApplication {
 	public DataSource dataSource(Environment environment) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/Condominio");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/condominio");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         
