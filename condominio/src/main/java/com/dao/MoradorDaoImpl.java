@@ -32,7 +32,6 @@ public class MoradorDaoImpl implements MoradorDao {
 		rs = pstmt.executeQuery();
 		while (rs.next()){
 			Morador morador = new Morador();
-			morador.setCPF(rs.getString("CPF"));
 			morador.setNome(rs.getString("Nome"));
 			morador.setAp(rs.getInt("Ap"));
 			
@@ -59,12 +58,11 @@ public class MoradorDaoImpl implements MoradorDao {
 		
 		con = datasource.getConnection();
 		pstmt = con.prepareStatement("INSERT INTO Morador"
-				+ "(CPF, Nome, Ap) VALUES"
-				+ "(?,?,?)");
+				+ "(Nome, Ap) VALUES"
+				+ "(?,?)");
 		
-		pstmt.setString(1, morador.getCPF());
-		pstmt.setString(2, morador.getNome());
-		pstmt.setInt(3, morador.getAp());
+		pstmt.setString(1, morador.getNome());
+		pstmt.setInt(2, morador.getAp());
 		
 		pstmt.execute();
 		con.close();
@@ -102,12 +100,12 @@ public class MoradorDaoImpl implements MoradorDao {
 		  PreparedStatement pstmt;
 		  
 		  try {
+			con = datasource.getConnection();
 			pstmt = con.prepareCall("update Morador set CPF=?, Nome=?,"+
 
              " where Ap=?");
-			pstmt.setString(1, morador.getCPF());
-			pstmt.setString(2, morador.getNome());
-			pstmt.setInt(3, morador.getAp());
+			pstmt.setString(1, morador.getNome());
+			pstmt.setInt(2, morador.getAp());
 			
 		} catch (SQLException e) {
 			System.out.println("Ocorreu um erro ao Editar os dados Morador");

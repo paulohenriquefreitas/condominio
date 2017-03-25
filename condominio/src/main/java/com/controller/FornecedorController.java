@@ -1,35 +1,33 @@
 package com.controller;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dao.FornecedorDaoImpl;
+import com.dao.FornecedorDao;
+import com.model.Fornecedor;
+import com.model.Morador;
 
 @Controller
-@RequestMapping("/fornecedor")
 public class FornecedorController {
 	
-	@Autowired
-	FornecedorDaoImpl fornecedorDao;
+	@Autowired 
+	public FornecedorDao fornecedorDao;
 	
-	@RequestMapping("/")	
-	public String list(Model model)throws ServletException, IOException{
+	@RequestMapping("/list")	
+	public String list(Model model){
 		model.addAttribute("fornecedores",fornecedorDao.findAll());
-        return "formsFornec";
+        return "formsMorador";
 		
 	}
 	
 	@RequestMapping("/save")	
-	public String save(Model model)throws ServletException, IOException{
-		System.out.println("teste");
-        return "formsMorador";
-		
+	public String save(Model model,@ModelAttribute("fornecedor") Fornecedor morador){
+		fornecedorDao.save(morador);		
+		model.addAttribute("fornecedores",fornecedorDao.findAll());
+        return "formsFornecedor";		
 	}
 
 }

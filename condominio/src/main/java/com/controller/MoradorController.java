@@ -3,22 +3,31 @@ package com.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dao.MoradorDao;
+import com.model.Morador;
 
 @Controller
+@RequestMapping("/morador")
 public class MoradorController {
 	
 	@Autowired 
 	public MoradorDao moradorDao;
 	
-	@RequestMapping("/morador")	
-	public String list(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name){
+	@RequestMapping("/list")	
+	public String list(Model model){
 		model.addAttribute("moradores",moradorDao.findAll());
         return "formsMorador";
 		
+	}
+	
+	@RequestMapping("/save")	
+	public String save(Model model,@ModelAttribute("morador") Morador morador){
+		moradorDao.save(morador);		
+		model.addAttribute("moradores",moradorDao.findAll());
+        return "formsMorador";		
 	}
 
 }

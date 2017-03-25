@@ -4,7 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:h="http://java.sun.com/jsf/html"
+
+lang="en">
 
 <head>
 
@@ -16,14 +18,13 @@
 
     <title>Condomínio Adail Admin</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <style>
+        @import url('/css/bootstrap.css');
+        @import url('/css/sb-admin.css');
+        @import url('/font-awesome/css/font-awesome.css')
+    </style>   
 
-    <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+    
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -144,7 +145,7 @@
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Cadastro <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse"  class="active">
                         <li>
-                            <a href="morador">Moradores</a>
+                            <a href="morador/list">Moradores</a>
                         </li>
                         <li>
                             <a href="fornecedor">Fornecedores</a>
@@ -187,29 +188,29 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form  action="/form" method="get">
+                        <form  action="morador/save" method="get" modelAttribute="morador" name="morador">
 
                             <div class="form-group">
                             <label>Nome</label>
                                 <label>Insira o nome do morador ou proprietário</label>
-                                <input class="form-control" placeholder="Enter text">
+                                <input id="nome" name="nome" class="form-control" placeholder="Enter text">
                             </div>                            
 
                             <div class="form-group">
                                 <label>Apartamento</label>
-                                <select class="form-control">
-                                    <option>101</option>
-                                    <option>102</option>
-                                    <option>103</option>
-                                    <option>201</option>
-                                    <option>202</option>
-                                    <option>203</option>
-                                    <option>301</option>
-                                    <option>302</option>
-                                    <option>303</option>
-                                    <option>401</option>
-                                    <option>402</option>
-                                    <option>403</option>
+                                <select name="ap"  class="form-control">
+                                    <option value="101">101</option>
+                                    <option value="102">102</option>
+                                    <option value="103">103</option>
+                                    <option value="201">201</option>
+                                    <option value="202">202</option>
+                                    <option value="203">203</option>
+                                    <option value="301">301</option>
+                                    <option value="302">302</option>
+                                    <option value="303">303</option>
+                                    <option value="401">401</option>
+                                    <option value="402">402</option>
+                                    <option value="403">403</option>
                                 </select>
                             </div>                            
                             <button type="submit" class="btn btn-success">Submit Button</button>
@@ -223,8 +224,8 @@
                         <ul class="list-group">
                         <li class="list-group-item active">Moradores</li>
 	                        <c:if test="${fn:length(moradores) gt 0}">
-	                            <c:forEach var="item" items="${moradores}">
-	                                <li class="list-group-item">${item.nome}<p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></li>
+	                            <c:forEach var="morador" items="${moradores}">
+	                                <li class="list-group-item"><p data-placement="top" data-toggle="tooltip" title="Delete">${morador.nome}  -  ${morador.ap}<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></li>
 	                            </c:forEach>                            
 	                        </c:if>    
                         </ul>

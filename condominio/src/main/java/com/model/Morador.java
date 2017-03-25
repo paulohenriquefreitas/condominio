@@ -1,43 +1,29 @@
 package com.model;
 
-
 public class Morador {
 
 	private static final long seriaLVesrionUID= 1l;	
 	
-	String Nome;
-	String CPF;
-	int Ap;
-	String Estado;
-	
+	String nome;
+	int ap;
 	
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 	public void setNome(String nome) {
-		Nome = nome;
-	}
-	
-	public void setCPF(String cpf) {
-		CPF = cpf;
+		this.nome = nome;
 	}
 	public int getAp() {
-		return Ap;
+		return ap;
 	}
 	public void setAp(int ap) {
-		Ap = ap;
+		this.ap = ap;
 	}
-	public String getEstado() {
-		return Estado;
-	}
-	public void setEstado(String estado) {
-		Estado = estado;
-	}
-	public String getCPF() {
-		return CPF;
+	public static long getSerialvesrionuid() {
+		return seriaLVesrionUID;
 	}
 	
 	
-
+	
 }
 

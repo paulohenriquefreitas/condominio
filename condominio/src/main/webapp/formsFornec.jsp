@@ -16,14 +16,11 @@
 
     <title>Condomínio Adail Admin</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+   <style>
+        @import url('/css/bootstrap.css');
+        @import url('/css/sb-admin.css');
+        @import url('/font-awesome/css/font-awesome.css')
+    </style>  
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -186,12 +183,12 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form role="form">
+                        <form  action="/save" method="get" modelAttribute="fornecedor" name="fornecedor">
 
                             <div class="form-group">
                             <label>Nome</label>
                                 <label>Insira o nome do fornecedor</label>
-                                <input class="form-control" placeholder="Enter text">
+                                <input id="nome" name="nome" class="form-control" placeholder="Enter text">
                             </div>                         
                             <button type="submit" class="btn btn-success">Submit Button</button>
                             <button type="reset" class="btn btn-danger">Reset Button</button>
