@@ -183,7 +183,7 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form  action="/save" method="get" modelAttribute="fornecedor" name="fornecedor">
+                        <form  action="/fornecedor/save" method="get" modelAttribute="fornecedor" name="fornecedor">
 
                             <div class="form-group">
                             <label>Nome</label>
@@ -201,8 +201,8 @@
                         <ul class="list-group">
                             <li class="list-group-item active">Fornecedores</li>
                             <c:if test="${fn:length(fornecedores) gt 0}">
-                                <c:forEach var="item" items="${fornecedores}">
-                                    <li class="list-group-item">${item.nome}<p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></li>
+                                <c:forEach var="fornecedor" items="${fornecedores}">
+                                    <li class="list-group-item"><p data-placement="top" data-toggle="tooltip" title="Delete">${fornecedor.nome}<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></li>
                                 </c:forEach>                            
                             </c:if> 
                         </ul>

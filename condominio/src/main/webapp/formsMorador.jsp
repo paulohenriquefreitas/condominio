@@ -17,13 +17,30 @@ lang="en">
     <meta name="author" content="">
 
     <title>Condomínio Adail Admin</title>
+     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/hamburgers.mim.css" rel="stylesheet">
+    <link href="/css/layout.css?v=5.7.8" rel="stylesheet">
+    <link href="/css/sb-admin-rtl.css" rel="stylesheet">
+    <link href="/css/sb-admin.css" rel="stylesheet"> 
 
-    <style>
+   <!--  <style>
         @import url('/css/bootstrap.css');
         @import url('/css/sb-admin.css');
         @import url('/font-awesome/css/font-awesome.css')
-    </style>   
+    </style>  -->  
+    <!-- Bootstrap Core CSS -->
+   <link href="/css/bootstrap.css" rel="stylesheet">
 
+    <!-- Custom CSS -->
+    <link href="/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <!-- Morris Charts CSS -->
+    <link href="/css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
     
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -31,7 +48,33 @@ lang="en">
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->    
+    <![endif]--> 
+    <script type="text/javascript">
+$('#confirm-delete').on('click', '.morador', function(e) {
+
+  var $modalDiv = $(e.delegateTarget);
+  var id = $(this).data('recordId');
+
+  $modalDiv.addClass('loading');
+  setTimeout(function() {
+    $modalDiv.modal('hide').removeClass('loading');
+  }, 1000);
+
+  // In reality would be something like this
+  // $modalDiv.addClass('loading');
+  // $.post('/api/record/' + id).then(function() {
+  //   $modalDiv.modal('hide').removeClass('loading');
+  // });
+});
+
+// Bind to modal opening to set necessary data properties to be used to make request
+$('#confirm-delete').on('show.bs.modal', function(e) {
+  var data = $(e.relatedTarget).data();
+  $('.title', this).text(data.recordTitle);
+  $('.btn-ok', this).data('recordId', data.recordId);
+});
+
+</script>   
     
 </head>
 
@@ -61,108 +104,8 @@ lang="en">
       });
    });
 </script>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html">Condomínio Adail Administração</a>
-        </div>
-        <!-- Top Menu Items -->
-        <ul class="nav navbar-right top-nav">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                <ul class="dropdown-menu message-dropdown">
-                    <li class="message-preview">
-                        <a href="#">
-                            <div class="media">
-                                <span class="pull-left">
-                                    <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                </span>
-                                <div class="media-body">
-                                    <h5 class="media-heading"><strong>Paulo Freitas</strong>
-                                    </h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Ontem at 4:32 PM</p>                                       
-                                </div>
-                            </div>
-                        </a>
-                    </li>                    
-                    
-                    <li class="message-footer">
-                        <a href="#">Read All New Messages</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                <ul class="dropdown-menu alert-dropdown">                       
-                    <li>
-                        <a href="#">Email  <span class="label label-danger">Sinal de Alerta</span></a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">View All</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Paulo Freitas <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i>Dashboard</a>                        
-                    <!-- <a href="#" id="hamburger" class="mm-slideout">
-                        <span class="hamburger hamburger--collapse">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </span>
-                    </a>  -->                       
-                </li>
-                <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Cadastro <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="demo" class="collapse"  class="active">
-                        <li>
-                            <a href="morador/list">Moradores</a>
-                        </li>
-                        <li>
-                            <a href="fornecedor">Fornecedores</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="tables.html"><i class="fa fa-fw fa-table"></i> Balancetes</a>
-                </li>
-                <li>
-                    <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-                </li>                
-                              
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </nav>
+
+	<%@ include file="header.html" %>
 
     <div id="wrapper">
 
@@ -175,7 +118,7 @@ lang="en">
                     <div class="col-lg-12">                        
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="/">Home</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-edit"></i> Cadastro - Moradores
@@ -188,7 +131,7 @@ lang="en">
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form  action="morador/save" method="get" modelAttribute="morador" name="morador">
+                        <form  action="/morador/save" method="get" modelAttribute="morador" name="morador">
 
                             <div class="form-group">
                             <label>Nome</label>
@@ -225,7 +168,17 @@ lang="en">
                         <li class="list-group-item active">Moradores</li>
 	                        <c:if test="${fn:length(moradores) gt 0}">
 	                            <c:forEach var="morador" items="${moradores}">
-	                                <li class="list-group-item"><p data-placement="top" data-toggle="tooltip" title="Delete">${morador.nome}  -  ${morador.ap}<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></li>
+	                                <li class="list-group-item">
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="  modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil">   </span>
+                                            </button>
+                                        </p>
+                                        <p data-placement="top" data-toggle="tooltip" title="Delete">${morador.nome}  -  ${morador.ap}
+                                            <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="     modal" data-target="#delete" >
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </p>                                        
+                                    </li>
 	                            </c:forEach>                            
 	                        </c:if>    
                         </ul>
@@ -241,7 +194,7 @@ lang="en">
         </div>
         <!-- /#page-wrapper -->
 
-    </div>
+    
     <!-- /#wrapper -->
 
     <!-- jQuery -->
@@ -249,6 +202,15 @@ lang="en">
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+
+
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+
+    <%@ include file="footer.html" %>
 
 </body>
 

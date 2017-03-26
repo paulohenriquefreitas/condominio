@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dao.FornecedorDao;
 import com.model.Fornecedor;
-import com.model.Morador;
 
 @Controller
+@RequestMapping("/fornecedor")
 public class FornecedorController {
 	
 	@Autowired 
@@ -19,13 +19,13 @@ public class FornecedorController {
 	@RequestMapping("/list")	
 	public String list(Model model){
 		model.addAttribute("fornecedores",fornecedorDao.findAll());
-        return "formsMorador";
+        return "formsFornecedor";
 		
 	}
 	
 	@RequestMapping("/save")	
-	public String save(Model model,@ModelAttribute("fornecedor") Fornecedor morador){
-		fornecedorDao.save(morador);		
+	public String save(Model model,@ModelAttribute("fornecedor") Fornecedor fornecedor){
+		fornecedorDao.save(fornecedor);		
 		model.addAttribute("fornecedores",fornecedorDao.findAll());
         return "formsFornecedor";		
 	}

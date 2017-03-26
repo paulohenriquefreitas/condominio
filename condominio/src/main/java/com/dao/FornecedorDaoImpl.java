@@ -57,7 +57,7 @@ try {
 	
 	con = datasource.getConnection();
 	pstmt = con.prepareStatement("insert into Fornecedor"
-			+ "(Nome_Fornecedor) VALUES"
+			+ "(Nome) VALUES"
 			+ "(?)");
 		
 	pstmt.setString(1, fornecedor.getNome());
