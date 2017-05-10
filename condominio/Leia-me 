@@ -9,10 +9,12 @@ CREATE TABLE `Condominio`.`Morador` (
   PRIMARY KEY (`ap`));
 
 CREATE TABLE `Condominio`.`Recebimento` (
-  `data` DATE NOT NULL,
+  `id_rece` INT NOT NULL AUTO_INCREMENT,
+  `date` DATE NOT NULL,
   `tipo` VARCHAR(45) NOT NULL,
   `referencia` VARCHAR(45) NOT NULL,
+  `valor` DOUBLE NOT NULL,
   `fk_morador` VARCHAR(45) NOT NULL,
-  `valor` DOUBLE NOT NULL);
+  PRIMARY KEY (`id_rece`));
 
 ALTER TABLE Recebimento ADD CONSTRAINT id_fk_morador foreign key (fk_morador) REFERENCES Morador(ap);
