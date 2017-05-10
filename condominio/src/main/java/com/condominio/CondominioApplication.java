@@ -40,7 +40,7 @@ public class CondominioApplication extends SpringBootServletInitializer {
 	public DataSource dataSource(Environment environment) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/condominio");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/Condominio");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         
