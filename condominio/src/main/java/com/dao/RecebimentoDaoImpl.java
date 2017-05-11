@@ -28,7 +28,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 	    recebimentos = new ArrayList<Recebimento>();
 	try {
 	    con = datasource.getConnection();
-		pstmt = con.prepareStatement("SELECT * FROM Morador	");
+		pstmt = con.prepareStatement("SELECT * FROM Recebimento	");
 		rs = pstmt.executeQuery();
 		while (rs.next()){
 			Recebimento recebimento = new Recebimento();
@@ -59,7 +59,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 	try {
 		
 		con = datasource.getConnection();
-		pstmt = con.prepareStatement("INSERT INTO Morador"
+		pstmt = con.prepareStatement("INSERT INTO Recebimento"
 				+ "(Data, Tipo, Referencia, Valor, Id_rece) VALUES"
 				+ "(?,?,?,?,?)");
 		
