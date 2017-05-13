@@ -6,7 +6,7 @@ public class Pagamento {
 	
 	int id_pagamento;
 	int data;
-	String conta;
+	String fornecedor;
 	String referencia;
 	String complemento;
 	int valor;
@@ -23,10 +23,10 @@ public class Pagamento {
 		this.data = data;
 	}
 	public String getConta() {
-		return conta;
+		return fornecedor;
 	}
 	public void setConta(String conta) {
-		this.conta = conta;
+		this.fornecedor = conta;
 	}
 	public String getReferencia() {
 		return referencia;

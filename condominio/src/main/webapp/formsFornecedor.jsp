@@ -61,6 +61,7 @@
    });
 </script>
 	<%@ include file="header.html" %>
+	<%@ include file="menu.html" %>
 
     <div id="wrapper">
 

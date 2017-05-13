@@ -106,13 +106,10 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
 </script>
 
 	<%@ include file="header.html" %>
-
+	<%@ include file="menu.html" %>
     <div id="wrapper">
-
         <div id="page-wrapper">
-
             <div class="container-fluid">
-
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">                        
@@ -156,8 +153,8 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
                                     <option value="403">403</option>
                                 </select>
                             </div>                            
-                            <button type="submit" class="btn btn-success">Submit Button</button>
-                            <button type="reset" class="btn btn-danger">Reset Button</button>
+                            <button type="submit" class="btn btn-success">Salvar</button>
+                            <button type="reset" class="btn btn-danger">Limpar</button>
 
                         </form>
 
@@ -184,7 +181,7 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
                         </ul>
                         
                     </div>
-                    </div>
+                </div>
                 </div>
                 <!-- /.row -->
 

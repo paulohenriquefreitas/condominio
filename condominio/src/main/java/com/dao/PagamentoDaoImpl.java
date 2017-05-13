@@ -64,7 +64,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 		
 		con = datasource.getConnection();
 		pstmt = con.prepareStatement("INSERT INTO Pagamento"
-				+ "(Id_pagamento, Data, Conta, Referencia, Compelento, Valor) VALUES"
+				+ "(Id_pagamento, Data, Conta, Referencia, Complemento, Valor) VALUES"
 				+ "(?,?,?,?,?,?)");
 		
 		pstmt.setInt(1, pagamento.getId_pagamento());

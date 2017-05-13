@@ -24,7 +24,7 @@ public class PagamentoController {
 	}
 	
 	@RequestMapping("/save")	
-	public String save(Model model,@ModelAttribute("Pagamento") Pagamento pagamento){
+	public String save(Model model,@ModelAttribute("pagamento") Pagamento pagamento){
 		pagamentoDao.save(pagamento);		
 		model.addAttribute("pagamentos",pagamentoDao.findAll());
         return "formsPagamento";		
