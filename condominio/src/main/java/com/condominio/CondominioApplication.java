@@ -14,6 +14,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import com.controller.MoradorController;
 import com.dao.FornecedorDaoImpl;
 import com.dao.MoradorDaoImpl;
+import com.dao.PagamentoDaoImpl;
+import com.dao.RecebimentoDaoImpl;
 
 @SpringBootApplication
 @ComponentScan(basePackageClasses = MoradorController.class)
@@ -34,6 +36,16 @@ public class CondominioApplication extends SpringBootServletInitializer {
 	@Bean
 	public FornecedorDaoImpl fornecedor(){
 		return new FornecedorDaoImpl();
+	}
+	
+	@Bean
+	public RecebimentoDaoImpl recebimento(){
+		return new RecebimentoDaoImpl();
+	}
+	
+	@Bean
+	public PagamentoDaoImpl pagamento(){
+		return new PagamentoDaoImpl();
 	}
 	
 	@Bean	
