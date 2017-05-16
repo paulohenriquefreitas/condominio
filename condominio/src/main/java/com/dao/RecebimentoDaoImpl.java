@@ -32,11 +32,12 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		rs = pstmt.executeQuery();
 		while (rs.next()){
 			Recebimento recebimento = new Recebimento();
-			recebimento.setData(rs.getInt("Data"));
+			recebimento.setData(rs.getDate("Data"));
 			recebimento.setReferencia(rs.getString("Referencia"));
 			recebimento.setTipo(rs.getString("Tipo"));
 			recebimento.setValor(rs.getDouble("Valor"));
 			recebimento.setId_rece(rs.getInt("Id_rece"));
+			recebimento.setFk_morador(rs.getInt("Fk_Morador"));
 			
 			recebimentos.add(recebimento);
 					
@@ -60,15 +61,15 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		
 		con = datasource.getConnection();
 		pstmt = con.prepareStatement("INSERT INTO Recebimento"
-				+ "(Data, Tipo, Referencia, Valor, Id_rece) VALUES"
-				+ "(?,?,?,?,?)");
+				+ "(Data, Tipo, Referencia, Valor, Id_rece, Fk_Morador) VALUES"
+				+ "(?,?,?,?,?,?)");
 		
-		pstmt.setInt(1, recebimento.getData());
+		pstmt.setDate(1, recebimento.getData());
 		pstmt.setString(2, recebimento.getTipo());
 		pstmt.setString(3, recebimento.getReferencia());
 		pstmt.setDouble(4, recebimento.getValor());
 		pstmt.setInt(5, recebimento.getId_rece());
-		
+		pstmt.setInt(6, recebimento.getFk_morador());
 		
 		pstmt.execute();
 		con.close();

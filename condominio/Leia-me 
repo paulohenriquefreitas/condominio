@@ -10,7 +10,7 @@ CREATE TABLE `Condominio`.`Morador` (
 
 CREATE TABLE `Condominio`.`Recebimento` (
   `id_rece` INT NOT NULL AUTO_INCREMENT,
-  `date` DATE NOT NULL,
+  `data` DATE NOT NULL,
   `tipo` VARCHAR(45) NOT NULL,
   `referencia` VARCHAR(45) NOT NULL,
   `valor` DOUBLE NOT NULL,

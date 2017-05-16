@@ -1,14 +1,18 @@
 package com.model;
 
+import java.sql.Date;
+
 public class Recebimento {
 	
 	private static final long seriaLVesrionUID= 1l;
 	
-     int data;
+     Date data;
      String tipo;
      String referencia;
      double valor;
      int id_rece;
+     int fk_morador;
+     
      
 	public int getId_rece() {
 		return id_rece;
@@ -16,10 +20,10 @@ public class Recebimento {
 	public void setId_rece(int id_rece) {
 		this.id_rece = id_rece;
 	}
-	public int getData() {
+	public Date getData() {
 		return data;
 	}
-	public void setData(int data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 	public String getTipo() {
@@ -39,6 +43,12 @@ public class Recebimento {
 	}
 	public void setValor(double valor) {
 		this.valor = valor;
+	}	
+	public int getFk_morador() {
+		return fk_morador;
+	}
+	public void setFk_morador(int fk_morador) {
+		this.fk_morador = fk_morador;
 	}
 	public static long getSerialvesrionuid() {
 		return seriaLVesrionUID;

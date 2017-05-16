@@ -1,11 +1,13 @@
 package com.model;
 
+import java.sql.Date;
+
 public class Pagamento {
 
 	private static final long seriaLVesrionUID= 1l;	
 	
 	int id_pagamento;
-	int data;
+	Date data;
 	String fornecedor;
 	String referencia;
 	String complemento;
@@ -16,10 +18,11 @@ public class Pagamento {
 	public void setId_pagamento(int id_pagamento) {
 		this.id_pagamento = id_pagamento;
 	}
-	public int getData() {
+
+	public Date getData() {
 		return data;
 	}
-	public void setData(int data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 	public String getConta() {

@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,8 @@ public class PagamentoController {
 	
 	@RequestMapping("/save")	
 	public String save(Model model,@ModelAttribute("pagamento") Pagamento pagamento){
+		
+	
 		pagamentoDao.save(pagamento);		
 		model.addAttribute("pagamentos",pagamentoDao.findAll());
         return "formsPagamento";		
