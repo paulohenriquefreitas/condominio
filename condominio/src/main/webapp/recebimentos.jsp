@@ -38,23 +38,23 @@
                 </div>
 			  <div class="row">
 			    <div class="col-lg-6">
-			       <form  action="/recebimento/save" method="get" modelAttribute="recebimento" name="recebimento">
+			       <form  action="/recebimento/save">
 				      <div class="form-group"> <!-- Date input -->
 				        <label class="control-label" for="date">Data</label>
-				        <input class="form-control" id="date" name="date" placeholder="dd/mm/yyyy" type="text"/>
+				        <input class="form-control" id="date" name="data" placeholder="dd/mm/yyyy" type="text"/>
 				     </div>
 				        <div class="form-group">
                                 <label>Tipo de Conta</label>
-                                <select name="conta"  class="form-control">
+                                <select name="tipo"  class="form-control">
                                     <option value="condominio">Condominio</option>
-                                    <option value="fundo">Fundo de Reserva</option>
-                                    <option value="cota">Cota Extra</option>
+                                    <option value="fundo de reserva">Fundo de Reserva</option>
+                                    <option value="cota extra">Cota Extra</option>
                                     
                                 </select>
                          </div>
                          <div class="form-group">
                                 <label>Mês de Referencia</label>
-                                <select name="conta"  class="form-control">
+                                <select name="referencia"  class="form-control">
                                     <option value="Jan">Janeiro</option>
                                     <option value="Fev">Fevereiro</option>
                                     <option value="Mar">Março</option>
@@ -72,7 +72,7 @@
                          </div>
                          <div class="form-group">
                             <label>Apartamento</label>
-                            <select name="ap"  class="form-control">
+                            <select name="fk_morador"  class="form-control">
                                 <option value="101">101</option>
                                 <option value="102">102</option>
                                 <option value="103">103</option>
@@ -120,7 +120,7 @@
     
 	<script>
 	    $(document).ready(function(){
-	      var date_input=$('input[name="date"]'); //our date input has the name "date"
+	      var date_input=$('input[name="data"]'); //our date input has the name "date"
 	      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 	      var options={
 	        format: 'dd/mm/yyyy',

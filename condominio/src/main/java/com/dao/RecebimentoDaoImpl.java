@@ -1,9 +1,11 @@
 package com.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.model.Recebimento;
+import com.utils.ConvertDates;
 
 public class RecebimentoDaoImpl implements RecebimentoDao {
 
@@ -32,7 +35,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		rs = pstmt.executeQuery();
 		while (rs.next()){
 			Recebimento recebimento = new Recebimento();
-			recebimento.setData(rs.getDate("Data"));
+			recebimento.setData(rs.getDate("Data").toString());
 			recebimento.setReferencia(rs.getString("Referencia"));
 			recebimento.setTipo(rs.getString("Tipo"));
 			recebimento.setValor(rs.getDouble("Valor"));
@@ -58,13 +61,14 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		PreparedStatement pstmt;
 	
 	try {
+	
 		
 		con = datasource.getConnection();
 		pstmt = con.prepareStatement("INSERT INTO Recebimento"
 				+ "(Data, Tipo, Referencia, Valor, Id_rece, Fk_Morador) VALUES"
 				+ "(?,?,?,?,?,?)");
 		
-		pstmt.setDate(1, recebimento.getData());
+		pstmt.setDate(1, ConvertDates.convertToSqlDate(recebimento.getData()) );
 		pstmt.setString(2, recebimento.getTipo());
 		pstmt.setString(3, recebimento.getReferencia());
 		pstmt.setDouble(4, recebimento.getValor());
@@ -78,8 +82,11 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 	} catch (SQLException e) {
 		System.out.println("Ocorreu um erro ao inserir dados ");
 		e.printStackTrace();
-	}	
-	}
+	} catch (Exception e) {
+		System.out.println("Ocorreu um erro ao inserir dados ");
+		e.printStackTrace();
+	}		
+}
 
 	@Override
 	public void delete(int Id_rece) {

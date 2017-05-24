@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.model.Pagamento;
+import com.utils.ConvertDates;
 
 
 public class PagamentoDaoImpl implements PagamentoDao{
@@ -36,7 +37,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 		while (rs.next()){
 			Pagamento pagamento = new Pagamento();
 			pagamento.setId_pagamento(rs.getInt("Id_Pagamento"));
-			pagamento.setData(rs.getDate("Data"));
+			pagamento.setData(rs.getDate("Data").toString());
 		    pagamento.setConta(rs.getString("Conta"));
 			pagamento.setReferencia(rs.getString("Referencia"));
 			pagamento.setComplemento(rs.getString("Complemento"));
@@ -68,7 +69,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 				+ "(?,?,?,?,?,?)");
 		
 		pstmt.setInt(1, pagamento.getId_pagamento());
-		pstmt.setDate(2, pagamento.getData());
+		pstmt.setDate(2, ConvertDates.convertToSqlDate(pagamento.getData()));
 		pstmt.setString(3, pagamento.getConta());
 		pstmt.setString(4, pagamento.getReferencia());
 		pstmt.setString(5, pagamento.getComplemento());

@@ -38,14 +38,14 @@
                 </div>
 			  <div class="row">
 			    <div class="col-lg-6">
-			       <form  action="/pagamento/save" method="get" modelAttribute="pagamento" name="pagamento">
+			       <form  action="/pagamento/save">
 				      <div class="form-group"> <!-- Date input -->
 				        <label class="control-label" for="date">Data</label>
-				        <input class="form-control" id="date" name="date" placeholder="dd/mm/yyyy" type="text"/>
+				        <input class="form-control" id="date" name="data" placeholder="dd/mm/yyyy" type="text"/>
 				     </div>
 				        <div class="form-group">
-                            <label>Apartamento</label>
-                            <select name="ap"  class="form-control">
+                            <label>Fornecedor</label>
+                            <select name="fornecedor"  class="form-control">
                                 <option value="101">Supermercado Guanabara Ltda</option>
                                 <option value="102">Eurico de Castor M. Filho</option>
                                 <option value="103">Eucimar de Souza Gomes</option>                                
@@ -106,7 +106,7 @@
     
 	<script>
 	    $(document).ready(function(){
-	      var date_input=$('input[name="date"]'); //our date input has the name "date"
+	      var date_input=$('input[name="data"]'); //our date input has the name "date"
 	      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 	      var options={
 	        format: 'dd/mm/yyyy',

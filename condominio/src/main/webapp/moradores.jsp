@@ -128,11 +128,11 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form  action="/morador/save" method="get" modelAttribute="morador" name="morador">
+                        <form  action="/morador/save">
 
                             <div class="form-group">
                             <label>Nome</label>
-                                <label>Insira o nome do morador ou proprietário</label>
+                                <label>Insira o nome doo morador ou proprietário</label>
                                 <input id="nome" name="nome" class="form-control" placeholder="Enter text">
                             </div>                            
 

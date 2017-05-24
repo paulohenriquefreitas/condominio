@@ -1,12 +1,19 @@
 package com.model;
 
-import java.sql.Date;
+
+
+
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Recebimento {
 	
 	private static final long seriaLVesrionUID= 1l;
 	
-     Date data;
+	
+     String data;
      String tipo;
      String referencia;
      double valor;
@@ -20,10 +27,10 @@ public class Recebimento {
 	public void setId_rece(int id_rece) {
 		this.id_rece = id_rece;
 	}
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 	public String getTipo() {
