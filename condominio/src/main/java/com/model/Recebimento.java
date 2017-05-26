@@ -19,7 +19,7 @@ public class Recebimento {
      double valor;
      int id_rece;
      int fk_morador;
-     
+     double multa;
      
 	public int getId_rece() {
 		return id_rece;
@@ -56,6 +56,12 @@ public class Recebimento {
 	}
 	public void setFk_morador(int fk_morador) {
 		this.fk_morador = fk_morador;
+	}	
+	public double getMulta() {
+		return multa;
+	}
+	public void setMulta(double multa) {
+		this.multa = multa;
 	}
 	public static long getSerialvesrionuid() {
 		return seriaLVesrionUID;

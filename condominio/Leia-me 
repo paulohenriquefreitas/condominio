@@ -15,8 +15,10 @@ CREATE TABLE `Condominio`.`Recebimento` (
   `referencia` VARCHAR(45) NOT NULL,
   `valor` DOUBLE NOT NULL,
   `fk_morador` VARCHAR(45) NOT NULL,
+  `multa` DOUBLE, 
   PRIMARY KEY (`id_rece`));
-
+  
+  ALTER TABLE Recebimento ADD multa DOUBLE;
 ALTER TABLE Recebimento ADD CONSTRAINT id_fk_morador foreign key (fk_morador) REFERENCES Morador(ap);
 
 CREATE TABLE `Condominio`.`Pagamento` (
@@ -27,3 +29,6 @@ CREATE TABLE `Condominio`.`Pagamento` (
   `complemento` VARCHAR(45) NULL,
   `valor` INT NOT NULL,
   PRIMARY KEY (`id_pagamento`));
+
+select * from Recebimento;
+select* from Pagamento;

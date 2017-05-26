@@ -38,9 +38,10 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 			recebimento.setData(rs.getDate("Data").toString());
 			recebimento.setReferencia(rs.getString("Referencia"));
 			recebimento.setTipo(rs.getString("Tipo"));
-			recebimento.setValor(rs.getDouble("Valor"));
+			recebimento.setValor(rs.getDouble("Valor") + (rs.getDouble("Multa")));
 			recebimento.setId_rece(rs.getInt("Id_rece"));
 			recebimento.setFk_morador(rs.getInt("Fk_Morador"));
+			recebimento.setMulta(rs.getDouble("Multa"));
 			
 			recebimentos.add(recebimento);
 					
@@ -65,8 +66,8 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		
 		con = datasource.getConnection();
 		pstmt = con.prepareStatement("INSERT INTO Recebimento"
-				+ "(Data, Tipo, Referencia, Valor, Id_rece, Fk_Morador) VALUES"
-				+ "(?,?,?,?,?,?)");
+				+ "(Data, Tipo, Referencia, Valor, Id_rece, Fk_Morador,Multa) VALUES"
+				+ "(?,?,?,?,?,?,?)");
 		
 		pstmt.setDate(1, ConvertDates.convertToSqlDate(recebimento.getData()) );
 		pstmt.setString(2, recebimento.getTipo());
@@ -74,6 +75,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		pstmt.setDouble(4, recebimento.getValor());
 		pstmt.setInt(5, recebimento.getId_rece());
 		pstmt.setInt(6, recebimento.getFk_morador());
+		pstmt.setDouble(7, recebimento.getMulta());
 		
 		pstmt.execute();
 		con.close();

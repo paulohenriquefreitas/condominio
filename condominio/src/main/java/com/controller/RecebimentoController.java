@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -36,7 +37,8 @@ public class RecebimentoController {
 	
 	@RequestMapping("/save")	
 	public String save(Model model,@ModelAttribute("recebimento") Recebimento recebimento){
-		
+		Double valor = Double.parseDouble(System.getProperty("condominio"));
+		recebimento.setValor(valor);
 		recebimentoDao.save(recebimento);		
 		model.addAttribute("recebimentos",recebimentoDao.findAll());
         return "recebimentos";		

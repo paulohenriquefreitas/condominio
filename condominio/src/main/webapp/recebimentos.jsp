@@ -88,6 +88,11 @@
                             </select>
                         </div> 
 				      
+				        <div class="form-group">
+                             <label>Multa</label>
+                             <input id="multa" name="multa" class="form-control" value="0.00" placeholder="0.00">
+                         </div> 
+				      
 				      <button type="submit" class="btn btn-success">Salvar</button>
                       <button type="reset" class="btn btn-danger">Limpar</button>
                      </form>
@@ -102,7 +107,7 @@
                                             <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="  modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil">   </span>
                                             </button>
                                         </p>
-                                        <p data-placement="top" data-toggle="tooltip" title="Delete">${recebimento.data}  -  ${recebimento.tipo}  -  ${recebimento.referencia}  -  ${recebimento.valor}
+                                        <p data-placement="top" data-toggle="tooltip" title="Delete">${recebimento.data}  -  ${recebimento.tipo}  -  ${recebimento.referencia}   -  ${recebimento.multa}  -  ${recebimento.valor} 
                                             <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="     modal" data-target="#delete" >
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </button>
