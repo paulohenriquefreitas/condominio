@@ -17,69 +17,38 @@ lang="en">
     <meta name="author" content="">
 
     <title>Condomínio Adail Admin</title>
-     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/hamburgers.mim.css" rel="stylesheet">
-    <link href="/css/layout.css?v=5.7.8" rel="stylesheet">
-    <link href="/css/sb-admin-rtl.css" rel="stylesheet">
-    <link href="/css/sb-admin.css" rel="stylesheet"> 
-
-   <!--  <style>
-        @import url('/css/bootstrap.css');
-        @import url('/css/sb-admin.css');
-        @import url('/font-awesome/css/font-awesome.css')
-    </style>  -->  
-    <!-- Bootstrap Core CSS -->
-   <link href="/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
-
-    <!-- Morris Charts CSS -->
-    <link href="/css/plugins/morris.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]--> 
+   
     <script type="text/javascript">
-$('#confirm-delete').on('click', '.morador', function(e) {
+	$('#confirm-delete').on('click', '.morador', function(e) {
+	
+	  var $modalDiv = $(e.delegateTarget);
+	  var id = $(this).data('recordId');
+	
+	  $modalDiv.addClass('loading');
+	  setTimeout(function() {
+	    $modalDiv.modal('hide').removeClass('loading');
+	  }, 1000);
+	
+	  // In reality would be something like this
+	  // $modalDiv.addClass('loading');
+	  // $.post('/api/record/' + id).then(function() {
+	  //   $modalDiv.modal('hide').removeClass('loading');
+	  // });
+	});
 
-  var $modalDiv = $(e.delegateTarget);
-  var id = $(this).data('recordId');
-
-  $modalDiv.addClass('loading');
-  setTimeout(function() {
-    $modalDiv.modal('hide').removeClass('loading');
-  }, 1000);
-
-  // In reality would be something like this
-  // $modalDiv.addClass('loading');
-  // $.post('/api/record/' + id).then(function() {
-  //   $modalDiv.modal('hide').removeClass('loading');
-  // });
-});
-
-// Bind to modal opening to set necessary data properties to be used to make request
-$('#confirm-delete').on('show.bs.modal', function(e) {
-  var data = $(e.relatedTarget).data();
-  $('.title', this).text(data.recordTitle);
-  $('.btn-ok', this).data('recordId', data.recordId);
-});
+	// Bind to modal opening to set necessary data properties to be used to make request
+	/* $('#confirm-delete').on('show.bs.modal', function(e) {
+	  var data = $(e.relatedTarget).data();
+	  $('.title', this).text(data.recordTitle);
+	  $('.btn-ok', this).data('recordId', data.recordId);
+	}); */
 
 </script>   
     
 </head>
 
 <body>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
        $(document).ready(function() {
           $("#my-menu").mmenu({
              // Options
@@ -102,11 +71,12 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
       $("#my-button").click(function() {
          API.close();
       });
-   });
-</script>
+   }); 
+</script>-->
 
 	<%@ include file="header.html" %>
-	<%@ include file="menu.html" %>
+    <%@ include file="menu.html" %>
+	<script>w3.includeHTML();</script>
     <div id="wrapper">
         <div id="page-wrapper">
             <div class="container-fluid">
@@ -126,13 +96,12 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
                 <!-- /.row -->
 
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
 
                         <form  action="/morador/save">
 
-                            <div class="form-group">
-                            <label>Nome</label>
-                                <label>Insira o nome doo morador ou proprietário</label>
+                            <div class="form-group">                            
+                                <label>Nome do morador ou proprietário</label>
                                 <input id="nome" name="nome" class="form-control" placeholder="Enter text">
                             </div>                            
 
@@ -160,55 +129,26 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
 
                     </div>
                     
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <ul class="list-group">
-                        <li class="list-group-item active">Moradores</li>
-	                        <c:if test="${fn:length(moradores) gt 0}">
-	                            <c:forEach var="morador" items="${moradores}">
-	                                <li class="list-group-item">
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="  modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil">   </span>
-                                            </button>
-                                        </p>
-                                        <p data-placement="top" data-toggle="tooltip" title="Delete">${morador.nome}  -  ${morador.ap}
-                                            <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="     modal" data-target="#delete" >
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </button>
-                                        </p>                                        
+                            <li class="list-group-item active">Moradores</li>
+                            <c:if test="${fn:length(moradores) gt 0}">
+                                <c:forEach var="morador" items="${moradores}">                                
+                                    <li class="list-group-item"><p data-placement="top" data-toggle="tooltip" title="Delete">${morador.ap} - ${morador.nome}
+                                    	<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>
+                                   		<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="  modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
                                     </li>
-	                            </c:forEach>                            
-	                        </c:if>    
+                                </c:forEach>                            
+                            </c:if> 
                         </ul>
-                        
                     </div>
-                </div>
                 </div>
                 <!-- /.row -->
 
             </div>
             <!-- /.container-fluid -->
 
-        </div>
-        <!-- /#page-wrapper -->
-
-    
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-
-
-    <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
-
-    <%@ include file="footer.html" %>
-
+        </div>        
 </body>
 
 </html>

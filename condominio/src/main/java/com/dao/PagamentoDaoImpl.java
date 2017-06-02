@@ -38,7 +38,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 			Pagamento pagamento = new Pagamento();
 			pagamento.setId_pagamento(rs.getInt("Id_Pagamento"));
 			pagamento.setData(rs.getDate("Data").toString());
-		    pagamento.setConta(rs.getString("Conta"));
+		    pagamento.setFornecedor(rs.getString("Fornecedor"));
 			pagamento.setReferencia(rs.getString("Referencia"));
 			pagamento.setComplemento(rs.getString("Complemento"));
 			pagamento.setValor(rs.getInt("Valor"));
@@ -65,12 +65,12 @@ public class PagamentoDaoImpl implements PagamentoDao{
 		
 		con = datasource.getConnection();
 		pstmt = con.prepareStatement("INSERT INTO Pagamento"
-				+ "(Id_pagamento, Data, Conta, Referencia, Complemento, Valor) VALUES"
+				+ "(Id_pagamento, Data, Fornecedor , Referencia, Complemento, Valor) VALUES"
 				+ "(?,?,?,?,?,?)");
 		
 		pstmt.setInt(1, pagamento.getId_pagamento());
 		pstmt.setDate(2, ConvertDates.convertToSqlDate(pagamento.getData()));
-		pstmt.setString(3, pagamento.getConta());
+		pstmt.setString(3, pagamento.getFornecedor());
 		pstmt.setString(4, pagamento.getReferencia());
 		pstmt.setString(5, pagamento.getComplemento());
 		pstmt.setInt(6, pagamento.getValor());

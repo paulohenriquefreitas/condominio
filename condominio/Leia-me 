@@ -24,11 +24,13 @@ ALTER TABLE Recebimento ADD CONSTRAINT id_fk_morador foreign key (fk_morador) RE
 CREATE TABLE `Condominio`.`Pagamento` (
   `id_pagamento` INT NOT NULL AUTO_INCREMENT,
   `data` DATE NOT NULL,
-  `conta` VARCHAR(45) NOT NULL,
+  `fornecedor` VARCHAR(45) NOT NULL,
   `referencia` VARCHAR(45) NOT NULL,
   `complemento` VARCHAR(45) NULL,
   `valor` INT NOT NULL,
   PRIMARY KEY (`id_pagamento`));
+  
+  ALTER TABLE `Pagamento` CHANGE COLUMN `conta`  `fornecedor` VARCHAR(255) NOT NULL;
 
 select * from Recebimento;
 select* from Pagamento;

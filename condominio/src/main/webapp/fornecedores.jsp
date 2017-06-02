@@ -15,27 +15,10 @@
     <meta name="author" content="">
 
     <title>Condomínio Adail Admin</title>
-
-   <!-- Bootstrap Core CSS -->
-+    <link href="/css/bootstrap.css" rel="stylesheet">
-+
-+    <!-- Custom CSS -->
-+    <link href="/css/sb-admin.css" rel="stylesheet">
-+
-+    <!-- Custom Fonts -->
-+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->    
-    
 </head>
 
 <body>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
        $(document).ready(function() {
           $("#my-menu").mmenu({
              // Options
@@ -58,8 +41,8 @@
       $("#my-button").click(function() {
          API.close();
       });
-   });
-</script>
+   }); 
+</script>-->
 	<%@ include file="header.html" %>
 	<%@ include file="menu.html" %>
 
@@ -85,7 +68,7 @@
                 <!-- /.row -->
 
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
 
                         <form  action="/fornecedor/save" method="get" modelAttribute="fornecedor" name="fornecedor">
 
@@ -101,42 +84,25 @@
 
                     </div>
                     
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <ul class="list-group">
                             <li class="list-group-item active">Fornecedores</li>
                             <c:if test="${fn:length(fornecedores) gt 0}">
                                 <c:forEach var="fornecedor" items="${fornecedores}">
-                                    <li class="list-group-item"><p data-placement="top" data-toggle="tooltip" title="Delete">${fornecedor.nome}<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></li>
+                                    <li class="list-group-item"><p data-placement="top" data-toggle="tooltip" title="Delete">${fornecedor.nome}
+                                    	<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>
+                                   		<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="  modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                    </li>
                                 </c:forEach>                            
                             </c:if> 
                         </ul>
-                    </div>
-                    
-                </div>
-                <!-- /.row -->
+                    </div>                    
+                </div>           
 
-            </div>
-            <!-- /.container-fluid -->
+            </div>            
+        </div>       
 
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
-
-    <%@ include file="footer.html" %>
-
+    </div>    
 </body>
 
 </html>

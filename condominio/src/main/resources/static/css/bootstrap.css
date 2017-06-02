@@ -1287,7 +1287,7 @@ h6,
   font-size: 12px;
 }
 p {
-  margin: 0 0 10px;
+  margin: 0 0 0 0;
 }
 .lead {
   margin-bottom: 20px;
@@ -1410,7 +1410,7 @@ a.bg-danger:focus {
 .page-header {
   padding-bottom: 9px;
   margin: 0px 0 0px;
-  border-bottom: 1px solid #eee;
+  
 }
 ul,
 ol {
@@ -1995,7 +1995,7 @@ pre code {
   }
   .col-md-pull-5 {
     right: 41.66666667%;
-  }
+  }17px
   .col-md-pull-4 {
     right: 33.33333333%;
   }
@@ -2122,7 +2122,7 @@ pre code {
     width: 33.33333333%;
   }
   .col-lg-3 {
-    width: 25%;
+    width: 33%;
   }
   .col-lg-2 {
     width: 16.66666667%;
@@ -3444,6 +3444,8 @@ fieldset[disabled] .btn-link:focus {
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
+  
+  
 }
 .btn-xs,
 .btn-group-xs > .btn {
@@ -3452,6 +3454,7 @@ fieldset[disabled] .btn-link:focus {
   line-height: 1.5;
   border-radius: 3px;
   float: right;
+  margin-right: 1px
 }
 .btn-block {
   display: block;
@@ -4590,8 +4593,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: #112852;
-  border-color: #080808;
+  background-color: #112852;  
 }
 .navbar-inverse .navbar-brand {
   color: #9d9d9d;

@@ -19,7 +19,7 @@ public class MoradorController {
 	@RequestMapping("/list")	
 	public String list(Model model){
 		model.addAttribute("moradores",moradorDao.findAll());
-        return "formsMorador";
+        return "moradores";
 		
 	}
 	
@@ -27,7 +27,7 @@ public class MoradorController {
 	public String save(Model model,@ModelAttribute("morador") Morador morador){
 		moradorDao.save(morador);		
 		model.addAttribute("moradores",moradorDao.findAll());
-        return "formsMorador";		
+        return "moradores";		
 	}
 
 }

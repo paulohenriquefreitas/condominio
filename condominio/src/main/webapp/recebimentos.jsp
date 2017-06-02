@@ -55,18 +55,18 @@
                          <div class="form-group">
                                 <label>Mês de Referencia</label>
                                 <select name="referencia"  class="form-control">
-                                    <option value="Jan">Janeiro</option>
-                                    <option value="Fev">Fevereiro</option>
-                                    <option value="Mar">Março</option>
-                                    <option value="Abr">Abril</option>
-                                    <option value="Mai">Maio</option>
-                                    <option value="Jun">Junho</option>
-                                    <option value="Jul">Julho</option>
-                                    <option value="Ago">Agosto</option>
-                                    <option value="Set">Setembro</option>
-                                    <option value="Out">Outubro</option>
-                                    <option value="Nov">Novembro</option>
-                                    <option value="Dez">Dezembro</option>
+                                    <option value="Janeiro 2017">Janeiro</option>
+                                    <option value="Fevereiro 2017">Fevereiro</option>
+                                    <option value="Março 2017">Março</option>
+                                    <option value="Abril 2017">Abril</option>
+                                    <option value="Maio 2017">Maio</option>
+                                    <option value="Junho 2017">Junho</option>
+                                    <option value="Julho 2017">Julho</option>
+                                    <option value="Agosto 2017">Agosto</option>
+                                    <option value="Setembro 2017">Setembro</option>
+                                    <option value="Outubro 2017">Outubro</option>
+                                    <option value="Novembro 2017">Novembro</option>
+                                    <option value="Dezembro 2017">Dezembro</option>
                                     
                                 </select>
                          </div>

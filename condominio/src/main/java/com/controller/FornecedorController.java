@@ -19,7 +19,7 @@ public class FornecedorController {
 	@RequestMapping("/list")	
 	public String list(Model model){
 		model.addAttribute("fornecedores",fornecedorDao.findAll());
-        return "formsFornecedor";
+        return "fornecedores";
 		
 	}
 	
@@ -27,7 +27,7 @@ public class FornecedorController {
 	public String save(Model model,@ModelAttribute("fornecedor") Fornecedor fornecedor){
 		fornecedorDao.save(fornecedor);		
 		model.addAttribute("fornecedores",fornecedorDao.findAll());
-        return "formsFornecedor";		
+        return "fornecedores";		
 	}
 
 }
