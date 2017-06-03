@@ -3454,7 +3454,8 @@ fieldset[disabled] .btn-link:focus {
   line-height: 1.5;
   border-radius: 3px;
   float: right;
-  margin-right: 1px
+  margin-right: 1px;
+  margin-top: -18px
 }
 .btn-block {
   display: block;

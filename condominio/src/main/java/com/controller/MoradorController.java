@@ -29,5 +29,7 @@ public class MoradorController {
 		model.addAttribute("moradores",moradorDao.findAll());
         return "moradores";		
 	}
+	
+	//TODO delete update findbyid
 
 }

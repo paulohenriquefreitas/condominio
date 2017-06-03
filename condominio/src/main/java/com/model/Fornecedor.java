@@ -1,7 +1,6 @@
 package com.model;
 
 public class Fornecedor {
-	private static final long seriaLVesrionUID= 1l;	
 
  String  nome;
 

@@ -73,7 +73,8 @@ lang="en">
       });
    }); 
 </script>-->
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 	<%@ include file="header.html" %>
     <%@ include file="menu.html" %>
 	<script>w3.includeHTML();</script>
@@ -134,21 +135,105 @@ lang="en">
                             <li class="list-group-item active">Moradores</li>
                             <c:if test="${fn:length(moradores) gt 0}">
                                 <c:forEach var="morador" items="${moradores}">                                
-                                    <li class="list-group-item"><p data-placement="top" data-toggle="tooltip" title="Delete">${morador.ap} - ${morador.nome}
-                                    	<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>
-                                   		<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="  modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                    <li class="list-group-item"><p data-placement="top">${morador.ap} - ${morador.nome}
+                                    	<p data-placement="top" title="Edit">
+	                                    	<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" >
+	                                    		<span class="glyphicon glyphicon-pencil"></span>
+	                                    	</button>
+                                    	</p>
+                                        <p data-placement="top"title="Delete">
+                                        	<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" >
+                                        		<span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </p>
                                     </li>
                                 </c:forEach>                            
                             </c:if> 
                         </ul>
                     </div>
                 </div>
-                <!-- /.row -->
-
             </div>
-            <!-- /.container-fluid -->
+        </div>
+       <!--  modal -->
+		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+			aria-labelledby="edit" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
+						<h4 class="modal-title custom_align" id="Heading">Edite morador</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<input class="form-control " type="text" readonly placeholder="Ap">
+						</div>
+						<div class="form-group">
+							<input class="form-control " type="text" placeholder="Morador">
+						</div>						
+					</div>
+					<div class="modal-footer ">
+						<button type="button" class="btn btn-warning btn-lg"
+							style="width: 100%;">
+							<span class="glyphicon glyphicon-ok-sign"></span> Update
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        </div>        
+		<div class="modal fade" id="delete" tabindex="-1" role="dialog"
+			aria-labelledby="edit" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
+						<h4 class="modal-title custom_align" id="Heading">Delete este morador</h4>
+					</div>
+					<div class="modal-body">
+
+						<div class="alert alert-danger">
+							<span class="glyphicon glyphicon-warning-sign"></span> Deseja deletar esse morador ?
+						</div>
+
+					</div>
+					<div class="modal-footer ">
+						<button type="button" class="btn btn-success">
+							<span class="glyphicon glyphicon-ok-sign"></span> Yes
+						</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span> No
+						</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+	</div>
+   <script type="text/javascript">
+       $(document).ready(function(){
+	   $("#mytable #checkall").click(function () {
+	           if ($("#mytable #checkall").is(':checked')) {
+	               $("#mytable input[type=checkbox]").each(function () {
+	                   $(this).prop("checked", true);
+	               });
+
+	           } else {
+	               $("#mytable input[type=checkbox]").each(function () {
+	                   $(this).prop("checked", false);
+	               });
+	           }
+	       });
+	       
+	       $("[data-toggle=tooltip]").tooltip();
+	   });
+   </script>     
 </body>
 
 </html>
