@@ -1,8 +1,16 @@
 package com.model;
 
 public class Fornecedor {
+ int id;
+ public int getId() {
+	return id;
+}
 
- String  nome;
+public void setId(int id) {
+	this.id = id;
+}
+
+String  nome;
 
 public String getNome() {
 	return nome;

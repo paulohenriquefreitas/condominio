@@ -34,7 +34,7 @@ public List<Fornecedor> findAll() {
     	while (rs.next()){
     	
     	Fornecedor fornecedor = new Fornecedor();
-    		
+    	 fornecedor.setId(rs.getInt("Id"));	
          fornecedor.setNome(rs.getString("Nome"));    		
     		
     	fornecedores.add(fornecedor);
@@ -73,15 +73,15 @@ try {
 }	
 }
 @Override
-public void delete(String fornecedorNome) {
+public void delete(String id) {
 	Connection con = null;	
 	PreparedStatement pstmt;
 	
 	try {
 		
 		pstmt = con.prepareStatement("delete" +
-	            "from Fornecedor where Fornecedor_Nome=?");
-			pstmt.setString(1,fornecedorNome);
+	            "from Fornecedor where id=?");
+			pstmt.setString(1,id);
 			pstmt.execute();
 			pstmt.close();
 	} catch (Exception e) {
@@ -92,21 +92,49 @@ public void delete(String fornecedorNome) {
 }
 
 @Override
-public void altera(Fornecedor fornecedor) {
+public void update(Fornecedor fornecedor) {
 	Connection con = null;
 	  PreparedStatement pstmt;
 	  
 	  try {
-		pstmt = con.prepareCall("update Fornecedor set CPF=?, Nome=?,"+
+		pstmt = con.prepareCall("update Fornecedor set id=?, Nome=?,"+
 
-       " where Ap=?");
-		pstmt.setString(1, fornecedor.getNome());
+       " where id=?");
+		pstmt.setInt(1, fornecedor.getId());
+		pstmt.setString(2, fornecedor.getNome());
 		
 		
 	} catch (SQLException e) {
-		System.out.println("Ocorreu um erro ao Editar os dados Morador");
+		System.out.println("Ocorreu um erro ao Editar os dados Fornecedor");
 		e.printStackTrace();
 	}
+	
+
+ }
+@Override
+public Fornecedor find(String id) {
+	Connection con;
+    PreparedStatement pstmt;
+    ResultSet rs;
+      
+	try {
+        con = datasource.getConnection();
+    	pstmt = con.prepareStatement("SELECT * FROM Fornecedor where id	");
+    	rs = pstmt.executeQuery();
+    	{
+    	
+    	Fornecedor fornecedor = new Fornecedor();
+    		
+         fornecedor.setId(rs.getInt("Id"));     		
+    	 fornecedor.setNome(rs.getString("Nome"));
+         return fornecedor;			
+    	}
+    } catch (SQLException e) {
+    	System.out.println("Ocorreu um erro de conexão com o banco!");
+    	e.printStackTrace();
+    }
+	
+	return null;
 	
 }
 }

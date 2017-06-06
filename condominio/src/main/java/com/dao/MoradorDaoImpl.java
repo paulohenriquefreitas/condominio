@@ -93,8 +93,8 @@ public class MoradorDaoImpl implements MoradorDao {
 		}
 		
 	} 
-   
-	  public void altera(Morador morador){
+	@Override
+	  public void alterar(Morador morador){
 		  
 		  Connection con = null;
 		  PreparedStatement pstmt;
@@ -113,6 +113,7 @@ public class MoradorDaoImpl implements MoradorDao {
 		}
 		
 		
+		  
 	}
 	
 }

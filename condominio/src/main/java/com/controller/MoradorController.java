@@ -30,6 +30,23 @@ public class MoradorController {
         return "moradores";		
 	}
 	
+	@RequestMapping("/delete")	
+	public String delete(Model model,@ModelAttribute("morador") int ap){
+		moradorDao.delete(ap);		
+		return "Morador deletado com sucesso";		
+	
+	}
+	
+	@RequestMapping("/alterar")	
+	public String alterar(Model model,@ModelAttribute("morador") Morador morador){
+		moradorDao.alterar(morador);		
+		return "Morador alterado com sucesso";		
+	
+	}
+	
+	
+	
+	
 	//TODO delete update findbyid
 
 }

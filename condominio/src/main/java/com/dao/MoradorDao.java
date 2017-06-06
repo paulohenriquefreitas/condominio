@@ -12,4 +12,5 @@ public interface MoradorDao  {
 	
 	public void delete (int ap);
 
+	public void alterar (Morador morador);
 }
