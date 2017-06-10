@@ -8,7 +8,7 @@ public interface FornecedorDao {
 	
 	public List<Fornecedor> findAll();
 
-	public void delete (String id);
+	public void delete (int id);
 
 	public void update(Fornecedor fornecedor);
 	 

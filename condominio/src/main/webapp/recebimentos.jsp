@@ -15,8 +15,11 @@
 </head>
 
 <body>
-    <%@ include file="header.html" %>
-     <%@ include file="menu.html" %>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+	<%@ include file="header.html" %>
+    <%@ include file="menu.html" %>
+	<script>w3.includeHTML();</script>
      <div id="wrapper">
 
         <div id="page-wrapper">
@@ -102,16 +105,17 @@
                         <li class="list-group-item active">Recebimentos</li>
 	                        <c:if test="${fn:length(recebimentos) gt 0}">
 	                            <c:forEach var="recebimento" items="${recebimentos}">
-	                                <li class="list-group-item">
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="  modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil">   </span>
+	                                <li class="list-group-item"><p data-placement="top">${recebimento.data}  -  ${recebimento.tipo}  -  ${recebimento.referencia}   -  ${recebimento.multa}  -  ${recebimento.valor} 
+                                    	<p data-placement="top" title="Edit">
+	                                    	<button class="open-recebimento btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-data="${recebimento.data}" data-tipo="${recebimento.tipo}" data-referencia="${recebimento.referencia}" data-multa="${recebimento.multa}" data-valor="${recebimento.valor}" data-target="#edit" >
+	                                    		<span class="glyphicon glyphicon-pencil"></span>
+	                                    	</button>
+                                    	</p>
+                                        <p data-placement="top" title="Delete">
+                                        	<button class=" delete-recebimento btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-data="${recebimento.data}" data-tipo="${recebimento.tipo}" data-referencia="${recebimento.referencia}" data-target="#delete" >
+                                        		<span class="glyphicon glyphicon-trash"></span>
                                             </button>
                                         </p>
-                                        <p data-placement="top" data-toggle="tooltip" title="Delete">${recebimento.data}  -  ${recebimento.tipo}  -  ${recebimento.referencia}   -  ${recebimento.multa}  -  ${recebimento.valor} 
-                                            <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="     modal" data-target="#delete" >
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </button>
-                                        </p>                                        
                                     </li>
 	                            </c:forEach>                            
 	                        </c:if>    
@@ -121,6 +125,89 @@
 				
 		 </div>
 	 </div>
+	  <!--  modal -->
+		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+			aria-labelledby="edit" aria-hidden="true">
+			<div class="modal-dialog">
+			<form class="form-horizontal" role="form" method="post" action="/recebimento/update">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
+						<h4 class="modal-title custom_align" id="Heading">Edite recebimento</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<input class="form-control "  name="data" id="data"  readonly>
+						</div>
+						<div class="form-group">
+							<input class="form-control "  name="tipo" id="tipo" >
+						</div>
+						<div class="form-group">
+							<input class="form-control "  name="referencia" id="referencia" >
+						</div>
+						<div class="form-group">
+							<input class="form-control "  name="multa" id="multa" >
+						</div>
+						<div class="form-group">
+							<input class="form-control "  name="valor" id="valor" >
+						</div>					
+					</div>
+					<div class="modal-footer ">
+					
+						<button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">
+							<span class="glyphicon glyphicon-ok-sign"></span> Update
+						</button>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="modal fade" id="delete" tabindex="-1" role="dialog"
+			aria-labelledby="edit" aria-hidden="true">
+			<div class="modal-dialog">
+			<form class="form-horizontal" role="form" method="post" action="/recebimento/delete">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
+						<h4 class="modal-title custom_align" id="Heading">Delete este recebimento</h4>						
+					</div>
+					<div class="modal-body delete-modal">
+
+						<div class="alert alert-danger">
+							<span class="glyphicon glyphicon-warning-sign"></span> Deseja deletar esse recebimento ?
+							<div class="form-group">
+								<input class="form-control "  name="data" id="data"  readonly>
+							</div>
+							<div class="form-group">
+								<input class="form-control "  name="tipo" id="tipo" >
+							</div>
+							<div class="form-group">
+								<input class="form-control "  name="referencia" id="referencia" >
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer ">
+						<button type="submit" class="btn btn-success">
+							<span class="glyphicon glyphicon-ok-sign"></span> Yes
+						</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span> No
+						</button>
+					</div>
+				</div>
+				</form>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
   	</div>
     
 	<script>
@@ -135,6 +222,29 @@
 	      };
 	      date_input.datepicker(options);
 	    })
+	    
+	    $(document).on("click", ".open-recebimento", function () {
+		     var data = $(this).data('data');		     
+		     $(".modal-body #data").val(data);
+		     var tipo = $(this).data('tipo');
+		     $(".modal-body #tipo").val(tipo);
+		     var referencia = $(this).data('referencia');
+		     $(".modal-body #referencia").val(referencia);
+		     var multa = $(this).data('multa');
+		     $(".modal-body #multa").val(multa);
+		     var valor = $(this).data('valor');
+		     $(".modal-body #valor").val(valor);
+		     
+		});
+		
+		$(document).on("click", ".delete-recebimento", function () {
+			 var data = $(this).data('data');		     
+		     $(".modal-body #data").val(data);
+		     var tipo = $(this).data('tipo');
+		     $(".modal-body #tipo").val(tipo);
+		     var referencia = $(this).data('referencia');
+		     $(".modal-body #referencia").val(referencia);	     
+		});
 	</script>
 </body>
 </html>	

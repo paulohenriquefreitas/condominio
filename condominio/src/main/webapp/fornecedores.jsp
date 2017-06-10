@@ -93,12 +93,12 @@
                                 <c:forEach var="fornecedor" items="${fornecedores}">
                                     <li class="list-group-item"><p data-placement="top" title="Delete">${fornecedor.nome}
                                     	<p data-placement="top" title="Edit">
-	                                    	<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" >
+	                                    	<button class=" open-fornecedor btn btn-primary btn-xs" data-title="Edit" data-id="${fornecedor.id}" data-nome="${fornecedor.nome}" data-toggle="modal" data-target="#edit" >
 	                                    		<span class="glyphicon glyphicon-pencil"></span>
 	                                    	</button>
                                     	</p>
                                         <p data-placement="top"title="Delete">
-                                        	<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" >
+                                        	<button class=" delete-fornecedor btn btn-danger btn-xs" data-title="Delete" data-id="${fornecedor.id}" data-nome="${fornecedor.nome}" data-toggle="modal" data-target="#delete" >
                                         		<span class="glyphicon glyphicon-trash"></span>
                                             </button>
                                         </p>
@@ -115,6 +115,7 @@
 		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
 			aria-labelledby="edit" aria-hidden="true">
 			<div class="modal-dialog">
+			<form class="form-horizontal" role="form" method="post" action="/fornecedor/update">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
@@ -123,48 +124,49 @@
 						</button>
 						<h4 class="modal-title custom_align" id="Heading">Edite o fornecedor</h4>
 					</div>
-					<div class="modal-body">
-						<div class="modal-body">
+					<div class="modal-body">						
 						<div class="form-group">
-							<input class="form-control " type="text" readonly placeholder="Id">
+							<input class="form-control "  name="id" id="id"  readonly>
 						</div>
 						<div class="form-group">
-							<input class="form-control " type="text" placeholder="Fornecedor">
-						</div>						
-					</div>
+							<input class="form-control "  name="nome" id="nome" >
+						</div>					
+					
 					</div>
 					<div class="modal-footer ">
-						<button type="button" class="btn btn-warning btn-lg"
+						<button type="submit" class="btn btn-warning btn-lg"
 							style="width: 100%;">
 							<span class="glyphicon glyphicon-ok-sign"></span> Update
 						</button>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 
 		<div class="modal fade" id="delete" tabindex="-1" role="dialog"
 			aria-labelledby="edit" aria-hidden="true">
 			<div class="modal-dialog">
+			<form class="form-horizontal" role="form" method="post" action="/fornecedor/delete">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</button>
-						<h4 class="modal-title custom_align" id="Heading">Delete this
-							entry</h4>
+						<h4 class="modal-title custom_align" id="Heading">Delete o fornecedor</h4>
 					</div>
 					<div class="modal-body">
 
 						<div class="alert alert-danger">
-							<span class="glyphicon glyphicon-warning-sign"></span> Are you
-							sure you want to delete this Record?
+							<span class="glyphicon glyphicon-warning-sign"></span>Tem certeza que quer deletar esse fornecedor ?
+							<input class="form-control"  name="id" id="id"  type="hidden">
+							<input class="form-control"  name="nome" id="nome"  readonly>
 						</div>
 
 					</div>
 					<div class="modal-footer ">
-						<button type="button" class="btn btn-success">
+						<button type="submit" class="btn btn-success">
 							<span class="glyphicon glyphicon-ok-sign"></span> Yes
 						</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">
@@ -172,6 +174,7 @@
 						</button>
 					</div>
 				</div>
+				</form>
 				<!-- /.modal-content -->
 			</div>
 			<!-- /.modal-dialog -->
@@ -194,9 +197,23 @@
 	       
 	       $("[data-toggle=tooltip]").tooltip();
 	   });
+       open-fornecedor
+       $(document).on("click", ".open-fornecedor", function () {
+		     var id = $(this).data('id');
+		     $(".modal-body #id").val(id);
+		     var nome = $(this).data('nome');
+		     $(".modal-body #nome").val(nome);
+		     
+		});
+		
+		$(document).on("click", ".delete-fornecedor", function () {
+			var id = $(this).data('id');
+		     $(".modal-body #id").val(id);	
+		     var nome = $(this).data('nome');
+		     $(".modal-body #nome").val(nome);
+		});
    </script>         
 
-    </div>    
 </body>
 
 </html>

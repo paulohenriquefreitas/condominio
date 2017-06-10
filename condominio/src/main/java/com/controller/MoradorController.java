@@ -31,16 +31,18 @@ public class MoradorController {
 	}
 	
 	@RequestMapping("/delete")	
-	public String delete(Model model,@ModelAttribute("morador") int ap){
-		moradorDao.delete(ap);		
-		return "Morador deletado com sucesso";		
+	public String delete(Model model,@ModelAttribute("morador") Morador morador){
+		moradorDao.delete(morador.getAp());		
+		model.addAttribute("moradores",moradorDao.findAll());
+        return "moradores";		
 	
 	}
 	
-	@RequestMapping("/alterar")	
+	@RequestMapping("/update")	
 	public String alterar(Model model,@ModelAttribute("morador") Morador morador){
 		moradorDao.alterar(morador);		
-		return "Morador alterado com sucesso";		
+		model.addAttribute("moradores",moradorDao.findAll());
+        return "moradores";
 	
 	}
 	

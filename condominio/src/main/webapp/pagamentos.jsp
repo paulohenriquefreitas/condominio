@@ -46,9 +46,11 @@
 				        <div class="form-group">
                             <label>Fornecedor</label>
                             <select name="fornecedor"  class="form-control">
-                                <option value="101">Supermercado Guanabara Ltda</option>
-                                <option value="102">Eurico de Castor M. Filho</option>
-                                <option value="103">Eucimar de Souza Gomes</option>                                
+                              <c:if test="${fn:length(fornecedores) gt 0}">
+                                <c:forEach var="fornecedor" items="${fornecedores}">
+	                                <option value="${fornecedor.nome}">${fornecedor.nome}</option>	                                 
+                                </c:forEach>  
+                               </c:if>                            
                             </select>
                         </div> 
                          <div class="form-group">
@@ -81,26 +83,110 @@
 			       <div class="col-lg-8">
                         <ul class="list-group">
                         <li class="list-group-item active">Pagamentos</li>
-	                        <c:if test="${fn:length(moradores) gt 0}">
-	                            <c:forEach var="morador" items="${moradores}">
-	                                <li class="list-group-item">
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="  modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil">   </span>
+	                        <c:if test="${fn:length(pagamentos) gt 0}">
+	                            <c:forEach var="pagamento" items="${pagamentos}">
+	                                <li class="list-group-item"><p data-placement="top">${pagamento.data}  -  ${pagamento.fornecedor}  -  ${pagamento.referencia}   -  ${pagamento.complemento}  -  ${pagamento.valor} 
+                                    	<p data-placement="top" title="Edit">
+	                                    	<button class="open-pagamento btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-data="${pagamento.data}" data-fornecedor="${pagamento.fornecedor}" data-referencia="${pagamento.referencia}" data-complemento="${pagamento.complemento}" data-valor="${pagamento.valor}" data-target="#edit" >
+	                                    		<span class="glyphicon glyphicon-pencil"></span>
+	                                    	</button>
+                                    	</p>
+                                        <p data-placement="top" title="Delete">
+                                        	<button class=" delete-pagamento btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-data="${pagamento.data}" data-fornecedor="${pagamento.fornecedor}" data-referencia="${pagamento.referencia}" data-target="#delete" >
+                                        		<span class="glyphicon glyphicon-trash"></span>
                                             </button>
                                         </p>
-                                        <p data-placement="top" data-toggle="tooltip" title="Delete">${morador.nome}  -  ${morador.ap}
-                                            <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="     modal" data-target="#delete" >
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </button>
-                                        </p>                                        
                                     </li>
 	                            </c:forEach>                            
-	                        </c:if>    
+	                        </c:if>   
                         </ul>                        
                   </div>			    
 			  </div> 
 				
 		 </div>
+		 <!--  modal -->
+		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+			aria-labelledby="edit" aria-hidden="true">
+			<div class="modal-dialog">
+			<form class="form-horizontal" role="form" method="post" action="/pagamento/update">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
+						<h4 class="modal-title custom_align" id="Heading">Edite pagamento</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<input class="form-control "  name="data" id="data"  readonly>
+						</div>
+						<div class="form-group">
+							<input class="form-control "  name="fornecedor" id="fornecedor" >
+						</div>
+						<div class="form-group">
+							<input class="form-control "  name="referencia" id="referencia" >
+						</div>
+						<div class="form-group">
+							<input class="form-control "  name="complemento" id="complemento" >
+						</div>
+						<div class="form-group">
+							<input class="form-control "  name="valor" id="valor" >
+						</div>					
+					</div>
+					<div class="modal-footer ">
+					
+						<button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">
+							<span class="glyphicon glyphicon-ok-sign"></span> Update
+						</button>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="modal fade" id="delete" tabindex="-1" role="dialog"
+			aria-labelledby="edit" aria-hidden="true">
+			<div class="modal-dialog">
+			<form class="form-horizontal" role="form" method="post" action="/pagamento/delete">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
+						<h4 class="modal-title custom_align" id="Heading">Delete este pagamento</h4>						
+					</div>
+					<div class="modal-body delete-modal">
+
+						<div class="alert alert-danger">
+							<span class="glyphicon glyphicon-warning-sign"></span> Deseja deletar esse pagamento ?
+							<div class="form-group">
+								<input class="form-control "  name="data" id="data"  readonly>
+							</div>
+							<div class="form-group">
+								<input class="form-control "  name="fornecedor" id="fornecedor" >
+							</div>
+							<div class="form-group">
+								<input class="form-control "  name="referencia" id="referencia" >
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer ">
+						<button type="submit" class="btn btn-success">
+							<span class="glyphicon glyphicon-ok-sign"></span> Yes
+						</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span> No
+						</button>
+					</div>
+				</div>
+				</form>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
 	 </div>
   	</div>
     

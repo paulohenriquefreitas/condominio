@@ -137,12 +137,12 @@ lang="en">
                                 <c:forEach var="morador" items="${moradores}">                                
                                     <li class="list-group-item"><p data-placement="top">${morador.ap} - ${morador.nome}
                                     	<p data-placement="top" title="Edit">
-	                                    	<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" >
+	                                    	<button class="open-morador btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-ap="${morador.ap}" data-nome="${morador.nome}" data-target="#edit" >
 	                                    		<span class="glyphicon glyphicon-pencil"></span>
 	                                    	</button>
                                     	</p>
                                         <p data-placement="top"title="Delete">
-                                        	<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" >
+                                        	<button class=" delete-morador btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-ap="${morador.ap}" data-nome="${morador.nome}" data-target="#delete" >
                                         		<span class="glyphicon glyphicon-trash"></span>
                                             </button>
                                         </p>
@@ -158,6 +158,7 @@ lang="en">
 		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
 			aria-labelledby="edit" aria-hidden="true">
 			<div class="modal-dialog">
+			<form class="form-horizontal" role="form" method="post" action="/morador/update">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
@@ -168,42 +169,47 @@ lang="en">
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<input class="form-control " type="text" readonly placeholder="Ap">
+							<input class="form-control "  name="ap" id="ap"  readonly>
 						</div>
 						<div class="form-group">
-							<input class="form-control " type="text" placeholder="Morador">
+							<input class="form-control "  name="nome" id="nome" >
 						</div>						
 					</div>
 					<div class="modal-footer ">
-						<button type="button" class="btn btn-warning btn-lg"
-							style="width: 100%;">
+					
+						<button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">
 							<span class="glyphicon glyphicon-ok-sign"></span> Update
 						</button>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 
 		<div class="modal fade" id="delete" tabindex="-1" role="dialog"
 			aria-labelledby="edit" aria-hidden="true">
 			<div class="modal-dialog">
+			<form class="form-horizontal" role="form" method="post" action="/morador/delete">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</button>
-						<h4 class="modal-title custom_align" id="Heading">Delete este morador</h4>
+						<h4 class="modal-title custom_align" id="Heading">Delete este morador</h4>						
 					</div>
-					<div class="modal-body">
+					<div class="modal-body delete-modal">
 
 						<div class="alert alert-danger">
 							<span class="glyphicon glyphicon-warning-sign"></span> Deseja deletar esse morador ?
+							<div class="form-group">
+								<input class="form-control"  name="ap" id="ap"  readonly>
+							</div>
 						</div>
 
 					</div>
 					<div class="modal-footer ">
-						<button type="button" class="btn btn-success">
+						<button type="submit" class="btn btn-success">
 							<span class="glyphicon glyphicon-ok-sign"></span> Yes
 						</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">
@@ -211,6 +217,7 @@ lang="en">
 						</button>
 					</div>
 				</div>
+				</form>
 				<!-- /.modal-content -->
 			</div>
 			<!-- /.modal-dialog -->
@@ -233,6 +240,19 @@ lang="en">
 	       
 	       $("[data-toggle=tooltip]").tooltip();
 	   });
+       
+       $(document).on("click", ".open-morador", function () {
+		     var ap = $(this).data('ap');		     
+		     $(".modal-body #ap").val(ap);
+		     var nome = $(this).data('nome');
+		     $(".modal-body #nome").val(nome);
+		     
+		});
+		
+		$(document).on("click", ".delete-morador", function () {
+			var ap = $(this).data('ap');
+		     $(".modal-body #ap").val(ap);		     
+		});
    </script>     
 </body>
 

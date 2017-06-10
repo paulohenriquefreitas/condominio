@@ -73,15 +73,14 @@ try {
 }	
 }
 @Override
-public void delete(String id) {
+public void delete(int id) {
 	Connection con = null;	
-	PreparedStatement pstmt;
+	PreparedStatement pstmt = null;
 	
 	try {
-		
-		pstmt = con.prepareStatement("delete" +
-	            "from Fornecedor where id=?");
-			pstmt.setString(1,id);
+		    con = datasource.getConnection();
+		    pstmt = con.prepareStatement("delete from Fornecedor where id=?");
+			pstmt.setInt(1,id);
 			pstmt.execute();
 			pstmt.close();
 	} catch (Exception e) {
@@ -93,15 +92,17 @@ public void delete(String id) {
 
 @Override
 public void update(Fornecedor fornecedor) {
-	Connection con = null;
+	  Connection con;
 	  PreparedStatement pstmt;
 	  
 	  try {
-		pstmt = con.prepareCall("update Fornecedor set id=?, Nome=?,"+
-
-       " where id=?");
-		pstmt.setInt(1, fornecedor.getId());
-		pstmt.setString(2, fornecedor.getNome());
+		con = datasource.getConnection();  
+		pstmt = con.prepareCall("update Fornecedor set Nome=?  where id=?");
+		pstmt.setString(1, fornecedor.getNome());
+		pstmt.setInt(2, fornecedor.getId());
+		pstmt.execute();
+		con.close();
+		pstmt.close();
 		
 		
 	} catch (SQLException e) {

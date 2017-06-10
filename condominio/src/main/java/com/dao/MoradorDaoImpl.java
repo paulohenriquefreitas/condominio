@@ -81,10 +81,10 @@ public class MoradorDaoImpl implements MoradorDao {
 	
 		try {
 			con = datasource.getConnection();
-			pstmt = con.prepareStatement("delete" +
-                 "from Morador where Ap=?");
+			pstmt = con.prepareStatement("delete from Morador where Ap=?");
 			pstmt.setInt(1, ap);
 			pstmt.execute();
+			con.close();
 			pstmt.close();
 			
 		} catch (SQLException e) {
@@ -96,16 +96,17 @@ public class MoradorDaoImpl implements MoradorDao {
 	@Override
 	  public void alterar(Morador morador){
 		  
-		  Connection con = null;
+		  Connection con;
 		  PreparedStatement pstmt;
 		  
 		  try {
 			con = datasource.getConnection();
-			pstmt = con.prepareCall("update Morador set CPF=?, Nome=?,"+
-
-             " where Ap=?");
+			pstmt = con.prepareCall("update Morador set Nome=? where Ap=?");
 			pstmt.setString(1, morador.getNome());
 			pstmt.setInt(2, morador.getAp());
+			pstmt.execute();
+			con.close();
+			pstmt.close();
 			
 		} catch (SQLException e) {
 			System.out.println("Ocorreu um erro ao Editar os dados Morador");

@@ -32,16 +32,18 @@ public class FornecedorController {
 	}
 	
 	@RequestMapping("/delete")	
-	public String delete(Model model,@ModelAttribute("fornecedor") String id){
-		fornecedorDao.delete(id);		
-		return "fornecedor deletado com sucesso ";	
+	public String delete(Model model,@ModelAttribute("fornecedor") Fornecedor fornecedor){
+		fornecedorDao.delete(fornecedor.getId());		
+		model.addAttribute("fornecedores",fornecedorDao.findAll());
+        return "fornecedores";	
 
 	}
 	
 	@RequestMapping("/update")	
 	public String update(Model model,@ModelAttribute("fornecedor") Fornecedor fornecedor){
 		fornecedorDao.update(fornecedor);		
-		return "Fornecedor alterado com sucesso";	
+		model.addAttribute("fornecedores",fornecedorDao.findAll());
+        return "fornecedores";
 	
 	}
 	
