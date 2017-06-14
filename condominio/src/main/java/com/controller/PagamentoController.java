@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.dao.FornecedorDao;
 import com.dao.PagamentoDao;
 import com.model.Pagamento;
 
@@ -18,10 +19,14 @@ public class PagamentoController {
 	@Autowired 
 	public PagamentoDao pagamentoDao;
 	
+	@Autowired 
+	public FornecedorDao fornecedorDao;
+	
 	@RequestMapping("/list")	
 	public String list(Model model){
 		model.addAttribute("pagamentos",pagamentoDao.findAll());
-        return "formsPagamento";
+		model.addAttribute("fornecedores", fornecedorDao.findAll());
+        return "pagamentos";
 		
 	}
 	
@@ -29,7 +34,8 @@ public class PagamentoController {
 	public String save(Model model,@ModelAttribute("pagamento") Pagamento pagamento){
 		pagamentoDao.save(pagamento);		
 		model.addAttribute("pagamentos",pagamentoDao.findAll());
-        return "formsPagamento";		
+		model.addAttribute("fornecedores", fornecedorDao.findAll());
+        return "pagamentos";		
 	}
 
 }

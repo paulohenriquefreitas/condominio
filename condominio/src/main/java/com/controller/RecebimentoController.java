@@ -31,7 +31,7 @@ public class RecebimentoController {
 	@RequestMapping("/list")	
 	public String list(Model model){
 		model.addAttribute("recebimentos",recebimentoDao.findAll());
-        return "formsRecebimento";
+        return "recebimentos";
 		
 	}
 	
