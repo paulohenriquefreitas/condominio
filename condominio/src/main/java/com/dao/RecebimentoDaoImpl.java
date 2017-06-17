@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.model.Morador;
 import com.model.Recebimento;
 import com.utils.ConvertDates;
 
@@ -35,7 +36,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		rs = pstmt.executeQuery();
 		while (rs.next()){
 			Recebimento recebimento = new Recebimento();
-			recebimento.setData(rs.getDate("Data").toString());
+			recebimento.setData(ConvertDates.convertSqlDateToString(rs.getDate("data")));
 			recebimento.setReferencia(rs.getString("Referencia"));
 			recebimento.setTipo(rs.getString("Tipo"));
 			recebimento.setValor(rs.getDouble("Valor") + (rs.getDouble("Multa")));
@@ -88,7 +89,34 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		System.out.println("Ocorreu um erro ao inserir dados ");
 		e.printStackTrace();
 	}		
-}
+   }
+	
+	@Override
+	  public void update (Recebimento recebimento){
+		  
+		  Connection con;
+		  PreparedStatement pstmt;
+		  
+		  try {
+			con = datasource.getConnection();
+			pstmt = con.prepareCall("update Recebimento set Data=?,Tipo=?,Referencia=?,Valor=?,fk_morador=?,multa=? where id_rece=?");
+			pstmt.setDate(1, ConvertDates.convertToSqlDate(recebimento.getData()));
+			pstmt.setString(2, recebimento.getTipo());
+			pstmt.setString(3, recebimento.getReferencia());
+			pstmt.setDouble(4, recebimento.getValor());
+			pstmt.setInt(5, recebimento.getFk_morador());
+			pstmt.setDouble(6, recebimento.getMulta());
+			pstmt.setInt(7,recebimento.getId_rece());
+			pstmt.execute();
+			con.close();
+			pstmt.close();
+			
+		} catch (SQLException e) {
+			System.out.println("Ocorreu um erro ao Editar os dados Recebiemento");
+			e.printStackTrace();
+		}
+		  
+	}
 
 	@Override
 	public void delete(int Id_rece) {
@@ -97,8 +125,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 	
 		try {
 			con = datasource.getConnection();
-			pstmt = con.prepareStatement("delete" +
-                 "from Recebimento where Id_rece=?");
+			pstmt = con.prepareStatement("delete from Recebimento where Id_rece=?");
 			pstmt.setInt(1, Id_rece);
 			pstmt.execute();
 			pstmt.close();

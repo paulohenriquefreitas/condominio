@@ -11,6 +11,8 @@ public List<Pagamento> findAll();
 	
 public void save(Pagamento pagamento);
 
+public void update(Pagamento pagamento);
+
 public void delete (int Id_Pagamento);
 
 }

@@ -5,18 +5,26 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
-<!--  jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-
-<!-- Bootstrap Date-Picker Plugin -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<!-- Include Required Prerequisites -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+ 
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
 </head>
 
 <body>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    <!-- Include Required Prerequisites -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+
+ 
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 	<%@ include file="header.html" %>
     <%@ include file="menu.html" %>
 	<script>w3.includeHTML();</script>
@@ -44,7 +52,7 @@
 			       <form  action="/recebimento/save">
 				      <div class="form-group"> <!-- Date input -->
 				        <label class="control-label" for="date">Data</label>
-				        <input class="form-control" id="date" name="data" placeholder="dd/mm/yyyy" type="text"/>
+				        <input class="form-control" id="data" name="data" placeholder="dd/mm/yyyy" type="text"/>
 				     </div>
 				        <div class="form-group">
                                 <label>Tipo de Conta</label>
@@ -105,14 +113,14 @@
                         <li class="list-group-item active">Recebimentos</li>
 	                        <c:if test="${fn:length(recebimentos) gt 0}">
 	                            <c:forEach var="recebimento" items="${recebimentos}">
-	                                <li class="list-group-item"><p data-placement="top">${recebimento.data}  -  ${recebimento.tipo}  -  ${recebimento.referencia}   -  ${recebimento.multa}  -  ${recebimento.valor} 
+	                                <li class="list-group-item"><p data-placement="top">${recebimento.data}  -  ${recebimento.tipo}  -  ${recebimento.fk_morador}   -  ${recebimento.referencia}   - ${recebimento.multa}  -  ${recebimento.valor} 
                                     	<p data-placement="top" title="Edit">
-	                                    	<button class="open-recebimento btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-data="${recebimento.data}" data-tipo="${recebimento.tipo}" data-referencia="${recebimento.referencia}" data-multa="${recebimento.multa}" data-valor="${recebimento.valor}" data-target="#edit" >
+	                                    	<button class="open-recebimento btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-id_rece="${recebimento.id_rece}" data-data="${recebimento.data}" data-tipo="${recebimento.tipo}" data-referencia="${recebimento.referencia}" data-fk_morador="${recebimento.fk_morador}" data-multa="${recebimento.multa}" data-valor="${recebimento.valor}" data-target="#edit" >
 	                                    		<span class="glyphicon glyphicon-pencil"></span>
 	                                    	</button>
                                     	</p>
                                         <p data-placement="top" title="Delete">
-                                        	<button class=" delete-recebimento btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-data="${recebimento.data}" data-tipo="${recebimento.tipo}" data-referencia="${recebimento.referencia}" data-target="#delete" >
+                                        	<button class=" delete-recebimento btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-id_rece="${recebimento.id_rece}" data-data="${recebimento.data}" data-tipo="${recebimento.tipo}" data-fk_morador="${recebimento.fk_morador}" data-referencia="${recebimento.referencia}" data-target="#delete" >
                                         		<span class="glyphicon glyphicon-trash"></span>
                                             </button>
                                         </p>
@@ -139,11 +147,17 @@
 						<h4 class="modal-title custom_align" id="Heading">Edite recebimento</h4>
 					</div>
 					<div class="modal-body">
+					    <div class="form-group">
+							<input class="form-control "  name="id_rece" id="id_rece" readonly>
+						</div>
 						<div class="form-group">
-							<input class="form-control "  name="data" id="data"  readonly>
+							<input class="form-control "  name="data" id="data">
 						</div>
 						<div class="form-group">
 							<input class="form-control "  name="tipo" id="tipo" >
+						</div>
+						<div class="form-group">
+							<input class="form-control "  name="fk_morador" id="fk_morador" >
 						</div>
 						<div class="form-group">
 							<input class="form-control "  name="referencia" id="referencia" >
@@ -183,11 +197,17 @@
 						<div class="alert alert-danger">
 							<span class="glyphicon glyphicon-warning-sign"></span> Deseja deletar esse recebimento ?
 							<div class="form-group">
-								<input class="form-control "  name="data" id="data"  readonly>
+								<input class="form-control "  name="id_rece" id="id_rece"  readonly>
+							</div>
+							<div class="form-group">
+								<input class="form-control "  name="data" id="data">
 							</div>
 							<div class="form-group">
 								<input class="form-control "  name="tipo" id="tipo" >
 							</div>
+							<div class="form-group">
+							 <input class="form-control "  name="fk_morador" id="fk_morador" >
+						    </div>
 							<div class="form-group">
 								<input class="form-control "  name="referencia" id="referencia" >
 							</div>
@@ -211,25 +231,27 @@
   	</div>
     
 	<script>
-	    $(document).ready(function(){
-	      var date_input=$('input[name="data"]'); //our date input has the name "date"
-	      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-	      var options={
-	        format: 'dd/mm/yyyy',
-	        container: container,
-	        todayHighlight: true,
-	        autoclose: true,
-	      };
-	      date_input.datepicker(options);
-	    })
+	$(function() {
+	    $('input[name="data"]').daterangepicker({
+	        locale: {
+	            format: 'DD-MM-YYYY'
+	          },
+	          singleDatePicker: true,
+	          showDropdowns: true
+	    });
+	});
 	    
 	    $(document).on("click", ".open-recebimento", function () {
+	    	 var id_rece = $(this).data('id_rece');		     
+		     $(".modal-body #id_rece").val(id_rece);
 		     var data = $(this).data('data');		     
 		     $(".modal-body #data").val(data);
 		     var tipo = $(this).data('tipo');
 		     $(".modal-body #tipo").val(tipo);
 		     var referencia = $(this).data('referencia');
 		     $(".modal-body #referencia").val(referencia);
+		     var fk_morador = $(this).data('fk_morador');		     
+		     $(".modal-body #fk_morador").val(fk_morador);
 		     var multa = $(this).data('multa');
 		     $(".modal-body #multa").val(multa);
 		     var valor = $(this).data('valor');
@@ -238,8 +260,12 @@
 		});
 		
 		$(document).on("click", ".delete-recebimento", function () {
+			 var id_rece = $(this).data('id_rece');		     
+		     $(".modal-body #id_rece").val(id_rece);
 			 var data = $(this).data('data');		     
 		     $(".modal-body #data").val(data);
+		     var fk_morador = $(this).data('fk_morador');		     
+		     $(".modal-body #fk_morador").val(fk_morador);
 		     var tipo = $(this).data('tipo');
 		     $(".modal-body #tipo").val(tipo);
 		     var referencia = $(this).data('referencia');

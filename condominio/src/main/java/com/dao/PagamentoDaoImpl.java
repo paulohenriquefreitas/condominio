@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.model.Pagamento;
+import com.model.Recebimento;
 import com.utils.ConvertDates;
 
 
@@ -37,7 +38,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 		while (rs.next()){
 			Pagamento pagamento = new Pagamento();
 			pagamento.setId_pagamento(rs.getInt("Id_Pagamento"));
-			pagamento.setData(rs.getDate("Data").toString());
+			pagamento.setData(ConvertDates.convertSqlDateToString(rs.getDate("Data")));
 		    pagamento.setFornecedor(rs.getString("Fornecedor"));
 			pagamento.setReferencia(rs.getString("Referencia"));
 			pagamento.setComplemento(rs.getString("Complemento"));
@@ -73,7 +74,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 		pstmt.setString(3, pagamento.getFornecedor());
 		pstmt.setString(4, pagamento.getReferencia());
 		pstmt.setString(5, pagamento.getComplemento());
-		pstmt.setInt(6, pagamento.getValor());
+		pstmt.setDouble(6, pagamento.getValor());
 		
 		
 		pstmt.execute();
@@ -87,6 +88,32 @@ public class PagamentoDaoImpl implements PagamentoDao{
 	
 		
 	}
+	
+	@Override
+	  public void update (Pagamento pagamento){
+		  
+		  Connection con;
+		  PreparedStatement pstmt;
+		  
+		  try {
+			con = datasource.getConnection();
+			pstmt = con.prepareCall("update Pagamento set Data=?,Fornecedor=?, Referencia=?,Complemento=?, Valor=? where Id_pagamento=?");
+			pstmt.setDate(1, ConvertDates.convertToSqlDate(pagamento.getData()));
+			pstmt.setString(2, pagamento.getFornecedor());
+			pstmt.setString(3, pagamento.getReferencia());
+			pstmt.setString(4, pagamento.getComplemento());
+			pstmt.setDouble(5, pagamento.getValor());
+			pstmt.setInt(6,pagamento.getId_pagamento());
+			pstmt.execute();
+			con.close();
+			pstmt.close();
+			
+		} catch (SQLException e) {
+			System.out.println("Ocorreu um erro ao Editar os dados Recebiemento");
+			e.printStackTrace();
+		}
+		  
+	}
 
 	@Override
 	public void delete(int Id_Pagamento) {
@@ -95,14 +122,13 @@ public class PagamentoDaoImpl implements PagamentoDao{
 		
 			try {
 				con = datasource.getConnection();
-				pstmt = con.prepareStatement("delete" +
-	                 "from Pagamento where Id_Pagamento=?");
+				pstmt = con.prepareStatement("delete from Pagamento where Id_Pagamento=?");
 				pstmt.setInt(1, Id_Pagamento);
 				pstmt.execute();
 				pstmt.close();
 				
 			} catch (SQLException e) {
-				System.out.println("Ocorreu um erro ao Deletar  dados ");
+				System.out.println("Ocorreu um erro ao Deletar  dados de Pagamentos ");
 				e.printStackTrace();
 			}
 		

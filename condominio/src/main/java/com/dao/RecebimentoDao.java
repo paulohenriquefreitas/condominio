@@ -11,4 +11,6 @@ public interface RecebimentoDao {
 	public void save(Recebimento recebimento);
 	
 	public void delete (int Id_rece);
+	
+	public void update (Recebimento recebimento);
 }

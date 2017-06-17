@@ -4,19 +4,29 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
-<head>
-<!--  jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-
-<!-- Bootstrap Date-Picker Plugin -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<!-- Include Required Prerequisites -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+ 
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
 </head>
 
 <body>
-    <%@ include file="header.html" %>
-     <%@ include file="menu.html" %>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    <!-- Include Required Prerequisites -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+
+ 
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+	<%@ include file="header.html" %>
+    <%@ include file="menu.html" %>
+	<script>w3.includeHTML();</script>
      <div id="wrapper">
 
         <div id="page-wrapper">
@@ -75,6 +85,11 @@
                              <label>Complemento</label>
                              <input id="complemento" name="complemento" class="form-control" placeholder="Enter text">
                          </div> 
+                         
+                         <div class="form-group">
+                             <label>Valor</label>
+                             <input id="valor" name="valor" class="form-control"  placeholder="0.00">
+                         </div> 
 				      
 				      <button type="submit" class="btn btn-success">Salvar</button>
                       <button type="reset" class="btn btn-danger">Limpar</button>
@@ -87,12 +102,12 @@
 	                            <c:forEach var="pagamento" items="${pagamentos}">
 	                                <li class="list-group-item"><p data-placement="top">${pagamento.data}  -  ${pagamento.fornecedor}  -  ${pagamento.referencia}   -  ${pagamento.complemento}  -  ${pagamento.valor} 
                                     	<p data-placement="top" title="Edit">
-	                                    	<button class="open-pagamento btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-data="${pagamento.data}" data-fornecedor="${pagamento.fornecedor}" data-referencia="${pagamento.referencia}" data-complemento="${pagamento.complemento}" data-valor="${pagamento.valor}" data-target="#edit" >
+	                                    	<button class="open-pagamento btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-id_pagamento="${pagamento.id_pagamento}" data-data="${pagamento.data}" data-fornecedor="${pagamento.fornecedor}" data-referencia="${pagamento.referencia}" data-complemento="${pagamento.complemento}" data-valor="${pagamento.valor}" data-target="#edit" >
 	                                    		<span class="glyphicon glyphicon-pencil"></span>
 	                                    	</button>
                                     	</p>
                                         <p data-placement="top" title="Delete">
-                                        	<button class=" delete-pagamento btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-data="${pagamento.data}" data-fornecedor="${pagamento.fornecedor}" data-referencia="${pagamento.referencia}" data-target="#delete" >
+                                        	<button class=" delete-pagamento btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-id_pagamento="${pagamento.id_pagamento}" data-data="${pagamento.data}" data-fornecedor="${pagamento.fornecedor}" data-referencia="${pagamento.referencia}" data-target="#delete" >
                                         		<span class="glyphicon glyphicon-trash"></span>
                                             </button>
                                         </p>
@@ -118,8 +133,11 @@
 						<h4 class="modal-title custom_align" id="Heading">Edite pagamento</h4>
 					</div>
 					<div class="modal-body">
+					   <div class="form-group">
+							<input class="form-control "  name="id_pagamento" id="id_pagamento"  readonly>
+						</div>
 						<div class="form-group">
-							<input class="form-control "  name="data" id="data"  readonly>
+							<input class="form-control "  name="data" id="data" >
 						</div>
 						<div class="form-group">
 							<input class="form-control "  name="fornecedor" id="fornecedor" >
@@ -161,9 +179,9 @@
 
 						<div class="alert alert-danger">
 							<span class="glyphicon glyphicon-warning-sign"></span> Deseja deletar esse pagamento ?
-							<div class="form-group">
-								<input class="form-control "  name="data" id="data"  readonly>
-							</div>
+							 <div class="form-group">
+							<input class="form-control "  name="id_pagamento" id="id_pagamento" >
+						</div>
 							<div class="form-group">
 								<input class="form-control "  name="fornecedor" id="fornecedor" >
 							</div>
@@ -191,17 +209,42 @@
   	</div>
     
 	<script>
-	    $(document).ready(function(){
-	      var date_input=$('input[name="data"]'); //our date input has the name "date"
-	      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-	      var options={
-	        format: 'dd/mm/yyyy',
-	        container: container,
-	        todayHighlight: true,
-	        autoclose: true,
-	      };
-	      date_input.datepicker(options);
-	    })
+	$(function() {
+	    $('input[name="data"]').daterangepicker({
+	        locale: {
+	            format: 'DD-MM-YYYY'
+	          },
+	          singleDatePicker: true,
+	          showDropdowns: true
+	        });
+	    });
+	    
+	    $(document).on("click", ".open-pagamento", function () {
+	    	 var id_pagamento = $(this).data('id_pagamento');		     
+		     $(".modal-body #id_pagamento").val(id_pagamento);
+		     var data = $(this).data('data');		     
+		     $(".modal-body #data").val(data);
+		     var fornecedor = $(this).data('fornecedor');
+		     $(".modal-body #fornecedor").val(fornecedor);
+		     var referencia = $(this).data('referencia');
+		     $(".modal-body #referencia").val(referencia);
+		     var complemento = $(this).data('complemento');		     
+		     $(".modal-body #complemento").val(complemento);		    
+		     var valor = $(this).data('valor');
+		     $(".modal-body #valor").val(valor);
+		     
+		});
+		
+		$(document).on("click", ".delete-pagamento", function () {
+			 var id_pagamento = $(this).data('id_pagamento');		     
+		     $(".modal-body #id_pagamento").val(id_pagamento);
+			 var data = $(this).data('data');		     
+		     $(".modal-body #data").val(data);
+		     var fornecedor = $(this).data('fornecedor');
+		     $(".modal-body #fornecedor").val(fornecedor);
+		     var referencia = $(this).data('referencia');
+		     $(".modal-body #referencia").val(referencia);	     
+		});
 	</script>
 </body>
 </html>	

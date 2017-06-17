@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dao.RecebimentoDao;
+import com.model.Morador;
 import com.model.Recebimento;
 
 
@@ -46,6 +47,22 @@ public class RecebimentoController {
         return "recebimentos";		
 	}
 	
+	@RequestMapping("/update")	
+	public String alterar(Model model,@ModelAttribute("recebimento") Recebimento recebimento){
+		recebimentoDao.update(recebimento);		
+		model.addAttribute("recebimentos",recebimentoDao.findAll());
+        return "recebimentos";
+	
+	}
+	
+	@RequestMapping("/delete")	
+	public String delete(Model model,@ModelAttribute("recebimento") Recebimento recebimento){
+		recebimentoDao.delete(recebimento.getId_rece());	
+		model.addAttribute("recebimentos",recebimentoDao.findAll());
+        return "recebimentos";		
+	
+	}
+	
 	@RequestMapping("/date")	
 	public String date(Model model, @RequestParam(value="daterange") final String data){
 		System.out.println(data);
@@ -53,6 +70,8 @@ public class RecebimentoController {
         return "balancetes";
 		
 	}
+	
+	
 
 }
 

@@ -3,11 +3,6 @@ package com.model;
 
 
 
-
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class Recebimento {
 	
 	private static final long seriaLVesrionUID= 1l;

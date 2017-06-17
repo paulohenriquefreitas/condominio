@@ -10,7 +10,7 @@ public class Pagamento {
 	String fornecedor;
 	String referencia;
 	String complemento;
-	int valor;
+	double valor;
 		
 	public int getId_pagamento() {
 		return id_pagamento;
@@ -52,11 +52,11 @@ public class Pagamento {
 		this.complemento = complemento;
 	}
 
-	public int getValor() {
+	public double getValor() {
 		return valor;
 	}
 
-	public void setValor(int valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 

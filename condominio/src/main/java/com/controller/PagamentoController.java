@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.dao.FornecedorDao;
 import com.dao.PagamentoDao;
 import com.model.Pagamento;
+import com.model.Recebimento;
 
 @Controller
 @RequestMapping("/pagamento")
@@ -36,6 +37,24 @@ public class PagamentoController {
 		model.addAttribute("pagamentos",pagamentoDao.findAll());
 		model.addAttribute("fornecedores", fornecedorDao.findAll());
         return "pagamentos";		
+	}
+	
+	@RequestMapping("/update")	
+	public String alterar(Model model,@ModelAttribute("recebimento") Pagamento pagamento){
+		pagamentoDao.update(pagamento);		
+		model.addAttribute("pagamentos",pagamentoDao.findAll());
+		model.addAttribute("fornecedores", fornecedorDao.findAll());
+        return "pagamentos";
+	
+	}
+	
+	@RequestMapping("/delete")	
+	public String delete(Model model,@ModelAttribute("recebimento") Pagamento pagamento){
+		pagamentoDao.delete(pagamento.getId_pagamento());
+		model.addAttribute("pagamentos",pagamentoDao.findAll());
+		model.addAttribute("fornecedores", fornecedorDao.findAll());
+        return "pagamentos";		
+	
 	}
 
 }
