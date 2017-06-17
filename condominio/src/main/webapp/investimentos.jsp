@@ -17,8 +17,8 @@
 <body>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-	<%@ include file="header.html" %>
-    <%@ include file="menu.html" %>
+	<%@ include file="header.jsp" %>
+    <%@ include file = "menu.jsp" %>
 	<script>w3.includeHTML();</script>
      <div id="wrapper">
 

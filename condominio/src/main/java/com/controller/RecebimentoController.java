@@ -63,14 +63,6 @@ public class RecebimentoController {
 	
 	}
 	
-	@RequestMapping("/date")	
-	public String date(Model model, @RequestParam(value="daterange") final String data){
-		System.out.println(data);
-		model.addAttribute("recebimentos",recebimentoDao.findAll());
-        return "balancetes";
-		
-	}
-	
 	
 
 }

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CondomÃ­nio Adail Admin</title>
+    <title>Condomínio Adail Admin</title>
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/hamburgers.mim.css" rel="stylesheet">
     <link href="/css/layout.css?v=5.7.8" rel="stylesheet">
@@ -21,7 +21,7 @@
      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">CondomÃ­nio Adail AdministraÃ§Ã£o</a>
+            <a class="navbar-brand" href="index.html">Condomí­nio Adail Administração</a>
         </div>
         <!-- Top Menu Items -->
       	</nav>

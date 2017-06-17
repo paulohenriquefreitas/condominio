@@ -62,8 +62,9 @@ $(function() {
 
 
 <body>
-     <%@ include file="header.html" %>
-     <%@ include file="menu.html" %>
+    <%@ include file="header.jsp" %>
+    <%@ include file = "menu.jsp" %>
+    <script>w3.includeHTML();</script>
      <div id="wrapper">
 
         <div id="page-wrapper">
@@ -101,20 +102,17 @@ $(function() {
                                 <tbody>
                                   <c:if test="${fn:length(recebimentos) gt 0}">
 	                                 <c:forEach var="recebimento" items="${recebimentos}">
-	                                 
 	                                     <c:if test="${recebimento.tipo eq 'condominio'}"> 
-	                                     Condominio
 		                                    <tr>
 		                                        <td>${recebimento.data}</td>
 		                                        <td>${recebimento.tipo}</td>
 		                                        <td>${recebimento.referencia}</td>
-		                                        <td>${recebimento.fk_morador}</td>
+		                                        <td>${recebimento.fk_morador} - ${recebimento.multa}</td>
 		                                        <td>${recebimento.valor}</td>
 		                                    </tr>
 	                                     </c:if>
 	                                    
-	                                     <c:if test="${recebimento.tipo eq 'fundo'}"> 
-	                                     Fundo
+	                                     <c:if test="${recebimento.tipo eq 'fundo de reserva'}"> 
 		                                    <tr>
 		                                        <td>${recebimento.data}</td>
 		                                        <td>${recebimento.tipo}</td>
@@ -124,8 +122,7 @@ $(function() {
 		                                    </tr>
 	                                     </c:if>
 	                                   
-	                                     <c:if test="${recebimento.tipo eq 'cota'}"> 
-	                                     Cota
+	                                     <c:if test="${recebimento.tipo eq 'cota extra'}"> 
 		                                    <tr>
 		                                        <td>${recebimento.data}</td>
 		                                        <td>${recebimento.tipo}</td>
@@ -155,55 +152,17 @@ $(function() {
                                     </tr>
                                 </thead>
                                <tbody>
-                                    <tr>
-                                        <td>/index.html</td>
-                                        <td>1265</td>
-                                        <td>32.3%</td>
-                                        <td>$321.33</td>
-                                        <td>$321.33</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/about.html</td>
-                                        <td>261</td>
-                                        <td>33.3%</td>
-                                        <td>$234.12</td>
-                                         <td>$234.12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/sales.html</td>
-                                        <td>665</td>
-                                        <td>21.3%</td>
-                                        <td>$16.34</td>
-                                         <td>$16.34</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/blog.html</td>
-                                        <td>9516</td>
-                                        <td>89.3%</td>
-                                        <td>$1644.43</td>
-                                        <td>$1644.43</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/404.html</td>
-                                        <td>23</td>
-                                        <td>34.3%</td>
-                                        <td>$23.52</td>
-                                        <td>$1644.43</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/services.html</td>
-                                        <td>421</td>
-                                        <td>60.3%</td>
-                                        <td>$724.32</td>
-                                        <td>$1644.43</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/blog/post.html</td>
-                                        <td>1233</td>
-                                        <td>93.2%</td>
-                                        <td>$126.34</td>
-                                        <td>$1644.43</td>
-                                    </tr>
+                                <c:if test="${fn:length(pagamentos) gt 0}">
+	                                 <c:forEach var="recebimento" items="${pagamento}">
+	                                    <tr>
+	                                       <td>${pagamento.data}</td>
+	                                        <td>${recebimento.fornecedor}</td>
+	                                        <td>${recebimento.referencia}</td>
+	                                        <td>${recebimento.complemento}</td>
+	                                        <td>${recebimento.valor}</td>
+	                                    </tr>
+	                                   </c:forEach>
+	                                 </c:if>                                    
                                 </tbody>
                             </table>
                         </div>

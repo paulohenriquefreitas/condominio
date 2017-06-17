@@ -24,8 +24,8 @@
  
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-	<%@ include file="header.html" %>
-    <%@ include file="menu.html" %>
+	<%@ include file="header.jsp" %>
+    <%@ include file = "menu.jsp" %>
 	<script>w3.includeHTML();</script>
      <div id="wrapper">
 

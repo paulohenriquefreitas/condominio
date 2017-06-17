@@ -25,8 +25,8 @@
  
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-	<%@ include file="header.html" %>
-    <%@ include file="menu.html" %>
+	<%@ include file="header.jsp" %>
+    <%@ include file = "menu.jsp" %>
 	<script>w3.includeHTML();</script>
      <div id="wrapper">
 
@@ -49,7 +49,7 @@
                 </div>
 			  <div class="row">
 			    <div class="col-lg-6">
-			       <form  action="/recebimento/save">
+			       <form>
 				      <div class="form-group"> <!-- Date input -->
 				        <label class="control-label" for="date">Data</label>
 				        <input class="form-control" id="data" name="data" placeholder="dd/mm/yyyy" type="text"/>
@@ -104,7 +104,8 @@
                              <input id="multa" name="multa" class="form-control" value="0.00" placeholder="0.00">
                          </div> 
 				      
-				      <button type="submit" class="btn btn-success">Salvar</button>
+				      <button type="submit" formaction="/recebimento/save" class="btn btn-success">Salvar</button>
+				      <button type="submit"  formaction="/recebimento/list" class="btn btn-success">Listar</button>
                       <button type="reset" class="btn btn-danger">Limpar</button>
                      </form>
 			       </div>
