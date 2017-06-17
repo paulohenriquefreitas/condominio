@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dao.RecebimentoDao;
 import com.model.Recebimento;
@@ -42,6 +44,14 @@ public class RecebimentoController {
 		recebimentoDao.save(recebimento);		
 		model.addAttribute("recebimentos",recebimentoDao.findAll());
         return "recebimentos";		
+	}
+	
+	@RequestMapping("/date")	
+	public String date(Model model, @RequestParam(value="daterange") final String data){
+		System.out.println(data);
+		model.addAttribute("recebimentos",recebimentoDao.findAll());
+        return "balancetes";
+		
 	}
 
 }

@@ -3,9 +3,18 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+<!-- Include Required Prerequisites -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+ 
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
 <script type="text/javascript">
@@ -14,18 +23,40 @@ $(function() {
         changeMonth: true,
         changeYear: true,
         showButtonPanel: true,
-        dateFormat: 'MM yy',
+        dateFormat: 'dd MM yy',
         monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+        onClick : function(){
+            $('#myFormID').submit();
+        },
         onClose: function(dateText, inst) { 
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
+}); -->
+
+<script type="text/javascript">
+$(function() {
+    $('input[name="daterange"]').daterangepicker({
+    	locale: {
+    	      format: 'DD-MM-YYYY'
+    	    }
+    });
 });
+
 </script>
 <style>
 .ui-datepicker-calendar {
     display: none;
     }
+    
+  @media print {
+    #printPageButton {
+    display: none;
+  }
+  .btn.button_person {
+   margin-left: 51px;
+  }
+}
 </style>
 </head>
 
@@ -41,9 +72,12 @@ $(function() {
 			  <div class="row">
 			    <div class="col-lg-6">
 				      <div class="form-group "> <!-- Date input -->
-    						<input name="startDate" id="startDate" class="date-picker form-control" />
-				      </div>
-				        
+				      <form id="myFormID" action="/recebimento/date" method="GET">
+    						<input name="daterange" id="data" class="date-picker form-control" testetetett/>
+    						<button id="printPageButton" type="submit" class="btn btn-success">Listar</button>
+    						<button id="printPageButton" class="btn btn-success " onClick="window.print();">Imprimir</button>
+    				 </form>
+				      </div>  
 			       </div>
 			       <div class="col-lg-8">
                         <ul class="list-group">
@@ -65,55 +99,44 @@ $(function() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>/index.html</td>
-                                        <td>1265</td>
-                                        <td>32.3%</td>
-                                        <td>$321.33</td>
-                                        <td>$321.33</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/about.html</td>
-                                        <td>261</td>
-                                        <td>33.3%</td>
-                                        <td>$234.12</td>
-                                         <td>$234.12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/sales.html</td>
-                                        <td>665</td>
-                                        <td>21.3%</td>
-                                        <td>$16.34</td>
-                                         <td>$16.34</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/blog.html</td>
-                                        <td>9516</td>
-                                        <td>89.3%</td>
-                                        <td>$1644.43</td>
-                                        <td>$1644.43</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/404.html</td>
-                                        <td>23</td>
-                                        <td>34.3%</td>
-                                        <td>$23.52</td>
-                                        <td>$1644.43</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/services.html</td>
-                                        <td>421</td>
-                                        <td>60.3%</td>
-                                        <td>$724.32</td>
-                                        <td>$1644.43</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/blog/post.html</td>
-                                        <td>1233</td>
-                                        <td>93.2%</td>
-                                        <td>$126.34</td>
-                                        <td>$1644.43</td>
-                                    </tr>
+                                  <c:if test="${fn:length(recebimentos) gt 0}">
+	                                 <c:forEach var="recebimento" items="${recebimentos}">
+	                                 
+	                                     <c:if test="${recebimento.tipo eq 'condominio'}"> 
+	                                     Condominio
+		                                    <tr>
+		                                        <td>${recebimento.data}</td>
+		                                        <td>${recebimento.tipo}</td>
+		                                        <td>${recebimento.referencia}</td>
+		                                        <td>${recebimento.fk_morador}</td>
+		                                        <td>${recebimento.valor}</td>
+		                                    </tr>
+	                                     </c:if>
+	                                    
+	                                     <c:if test="${recebimento.tipo eq 'fundo'}"> 
+	                                     Fundo
+		                                    <tr>
+		                                        <td>${recebimento.data}</td>
+		                                        <td>${recebimento.tipo}</td>
+		                                        <td>${recebimento.referencia}</td>
+		                                        <td>${recebimento.fk_morador}</td>
+		                                        <td>${recebimento.valor}</td>
+		                                    </tr>
+	                                     </c:if>
+	                                   
+	                                     <c:if test="${recebimento.tipo eq 'cota'}"> 
+	                                     Cota
+		                                    <tr>
+		                                        <td>${recebimento.data}</td>
+		                                        <td>${recebimento.tipo}</td>
+		                                        <td>${recebimento.referencia}</td>
+		                                        <td>${recebimento.fk_morador}</td>
+		                                        <td>${recebimento.valor}</td>
+		                                    </tr>
+	                                     </c:if>
+                                     </c:forEach>   
+                                   </c:if>
+                                   
                                 </tbody>
                             </table>
                         </div>
@@ -233,18 +256,5 @@ $(function() {
 		 </div>
 	 </div>
   	</div>
-    
-	<script>
-	$(".data").datepicker({
-	    dateFormat: 'dd/mm/yy',
-	    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
-	    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-	    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-	    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-	    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-	    nextText: 'Próximo',
-	    prevText: 'Anterior'
-	});	
-	</script>
 </body>
 </html>	
