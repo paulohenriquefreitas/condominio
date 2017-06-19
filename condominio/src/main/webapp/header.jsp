@@ -16,7 +16,7 @@
     
 </head>
 <body>
-<div id="header"></div>
+   <div id="header"></div>
 
      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -24,6 +24,6 @@
             <a class="navbar-brand" href="index.html">Condomí­nio Adail Administração</a>
         </div>
         <!-- Top Menu Items -->
-      	</nav>
+      </nav>
    </body>
 </html>

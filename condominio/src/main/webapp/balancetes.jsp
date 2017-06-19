@@ -61,7 +61,7 @@ $(function() {
 </head>
 
 
-<body>
+<body>	
     <%@ include file="header.jsp" %>
     <%@ include file = "menu.jsp" %>
     <script>w3.includeHTML();</script>
@@ -71,12 +71,24 @@ $(function() {
 
             <div class="container-fluid">
 			  <div class="row">
+			    <div id="printPageButton" class="col-lg-12">                        
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="/">Home</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-edit"></i> Balancetes
+                            </li>
+                        </ol>
+                    </div>
 			    <div class="col-lg-6">
 				      <div class="form-group "> <!-- Date input -->
 				      <form id="myFormID" action="/recebimento/date" method="GET">
-    						<input name="daterange" id="data" class="date-picker form-control" testetetett/>
-    						<button id="printPageButton" type="submit" class="btn btn-success">Listar</button>
-    						<button id="printPageButton" class="btn btn-success " onClick="window.print();">Imprimir</button>
+    						<input name="daterange" id="data" class="date-picker form-control"/>
+    						<div style="margin-top: 4px">
+    							<button id="printPageButton" type="submit" class="btn btn-success">Listar</button>
+    							<button id="printPageButton" class="btn btn-success " onClick="window.print();">Imprimir</button>
+    						</div>
     				 </form>
 				      </div>  
 			       </div>
@@ -145,7 +157,7 @@ $(function() {
                                 <thead>
                                     <tr>
                                         <th>Dia</th>
-                                        <th>Conta</th>
+                                        <th>Fornecedor</th>
                                         <th>Ref.</th>
                                         <th>Complemento</th>
                                         <th>Valor</th>

@@ -25,7 +25,7 @@
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 	<%@ include file="header.jsp" %>
-    <%@ include file = "menu.jsp" %>
+	<%@ include file="menu.jsp" %>
 	<script>w3.includeHTML();</script>
      <div id="wrapper">
 
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 			  <div class="row">
-			    <div class="col-lg-6">
+			    <div class="col-lg-4">
 			       <form  action="/pagamento/save">
 				      <div class="form-group"> <!-- Date input -->
 				        <label class="control-label" for="date">Data</label>
@@ -66,18 +66,18 @@
                          <div class="form-group">
                                 <label>Mês de Referencia</label>
                                 <select name="referencia"  class="form-control">
-                                    <option value="Jan">Janeiro</option>
-                                    <option value="Fev">Fevereiro</option>
-                                    <option value="Mar">Março</option>
+                                    <option value="Janeiro">Janeiro</option>
+                                    <option value="Fevereiro">Fevereiro</option>
+                                    <option value="Março">Março</option>
                                     <option value="Abr">Abril</option>
-                                    <option value="Mai">Maio</option>
-                                    <option value="Jun">Junho</option>
-                                    <option value="Jul">Julho</option>
-                                    <option value="Ago">Agosto</option>
-                                    <option value="Set">Setembro</option>
-                                    <option value="Out">Outubro</option>
-                                    <option value="Nov">Novembro</option>
-                                    <option value="Dez">Dezembro</option>
+                                    <option value="Abril">Maio</option>
+                                    <option value="Junho">Junho</option>
+                                    <option value="Julho">Julho</option>
+                                    <option value="Agosto">Agosto</option>
+                                    <option value="Setembro">Setembro</option>
+                                    <option value="Outubro">Outubro</option>
+                                    <option value="Novembro">Novembro</option>
+                                    <option value="Dezembro">Dezembro</option>
                                     
                                 </select>
                          </div>

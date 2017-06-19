@@ -17,8 +17,6 @@
 </head>
 
 <body>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
     <!-- Include Required Prerequisites -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 
@@ -26,7 +24,7 @@
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 	<%@ include file="header.jsp" %>
-    <%@ include file = "menu.jsp" %>
+	<%@ include file="menu.jsp" %>
 	<script>w3.includeHTML();</script>
      <div id="wrapper">
 
@@ -48,7 +46,7 @@
                     </div>
                 </div>
 			  <div class="row">
-			    <div class="col-lg-6">
+			    <div class="col-lg-4">
 			       <form>
 				      <div class="form-group"> <!-- Date input -->
 				        <label class="control-label" for="date">Data</label>
@@ -104,8 +102,7 @@
                              <input id="multa" name="multa" class="form-control" value="0.00" placeholder="0.00">
                          </div> 
 				      
-				      <button type="submit" formaction="/recebimento/save" class="btn btn-success">Salvar</button>
-				      <button type="submit"  formaction="/recebimento/list" class="btn btn-success">Listar</button>
+				      <button type="submit" formaction="/recebimento/save" class="btn btn-success">Salvar</button>				      
                       <button type="reset" class="btn btn-danger">Limpar</button>
                      </form>
 			       </div>

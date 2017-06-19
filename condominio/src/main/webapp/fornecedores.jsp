@@ -43,8 +43,7 @@
       });
    }); 
 </script>-->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    
 	<%@ include file="header.jsp" %>
     <%@ include file = "menu.jsp" %>
 
@@ -79,8 +78,8 @@
                                 <label>Insira o nome do fornecedor</label>
                                 <input id="nome" name="nome" class="form-control" placeholder="Enter text">
                             </div>                         
-                            <button type="submit" class="btn btn-success">Submit Button</button>
-                            <button type="reset" class="btn btn-danger">Reset Button</button>
+                            <button type="submit" class="btn btn-success">Salvar</button>
+                            <button type="reset" class="btn btn-danger">Limpar</button>
 
                         </form>
 
