@@ -99,20 +99,41 @@
                         <ul class="list-group">
                         <li class="list-group-item active">Pagamentos</li>
 	                        <c:if test="${fn:length(pagamentos) gt 0}">
-	                            <c:forEach var="pagamento" items="${pagamentos}">
-	                                <li class="list-group-item"><p data-placement="top">${pagamento.data}  -  ${pagamento.fornecedor}  -  ${pagamento.referencia}   -  ${pagamento.complemento}  -  ${pagamento.valor} 
-                                    	<p data-placement="top" title="Edit">
-	                                    	<button class="open-pagamento btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-id_pagamento="${pagamento.id_pagamento}" data-data="${pagamento.data}" data-fornecedor="${pagamento.fornecedor}" data-referencia="${pagamento.referencia}" data-complemento="${pagamento.complemento}" data-valor="${pagamento.valor}" data-target="#edit" >
-	                                    		<span class="glyphicon glyphicon-pencil"></span>
-	                                    	</button>
-                                    	</p>
-                                        <p data-placement="top" title="Delete">
-                                        	<button class=" delete-pagamento btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-id_pagamento="${pagamento.id_pagamento}" data-data="${pagamento.data}" data-fornecedor="${pagamento.fornecedor}" data-referencia="${pagamento.referencia}" data-target="#delete" >
-                                        		<span class="glyphicon glyphicon-trash"></span>
-                                            </button>
-                                        </p>
-                                    </li>
-	                            </c:forEach>                            
+	                            <table class="table table-bordered table-hover">
+		                                 <tr>
+			                               <td >Data</td>
+			                               <td >Fornecedor</td>
+			                               <td >Referência</td>
+			                               <td >Complemento</td>
+			                               <td >Valor</td>
+			                               <td >Ação</td>
+			                             </tr>
+	                             <c:forEach var="pagamento" items="${pagamentos}">
+	                               
+		                                
+			                             <tr>
+			                               <td>${pagamento.data}</td>
+			                               <td>${pagamento.fornecedor}</td>
+			                               <td>${pagamento.referencia}</td>
+			                               <td>${pagamento.complemento}</td>
+			                               <td>${pagamento.valor}</td>
+			                               <td>
+				                               <p data-placement="top" title="Edit">
+			                                    	<button class="open-pagamento btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-id_pagamento="${pagamento.id_pagamento}" data-data="${pagamento.data}" data-fornecedor="${pagamento.fornecedor}" data-referencia="${pagamento.referencia}" data-complemento="${pagamento.complemento}" data-valor="${pagamento.valor}" data-target="#edit" >
+			                                    		<span class="glyphicon glyphicon-pencil"></span>
+			                                    	</button>
+		                                    	</p>
+		                                        <p data-placement="top" title="Delete">
+		                                        	<button class=" delete-pagamento btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-id_pagamento="${pagamento.id_pagamento}" data-data="${pagamento.data}" data-fornecedor="${pagamento.fornecedor}" data-referencia="${pagamento.referencia}" data-target="#delete" >
+		                                        		<span class="glyphicon glyphicon-trash"></span>
+		                                            </button>
+		                                        </p>
+                                          </td>
+			                             </tr>
+			                           
+                                    	
+	                              </c:forEach>  
+	                            </table>                             
 	                        </c:if>   
                         </ul>                        
                   </div>			    

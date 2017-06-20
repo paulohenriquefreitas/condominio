@@ -46,7 +46,7 @@
                     </div>
                 </div>
 			  <div class="row">
-			    <div class="col-lg-4">
+			    <div class="col-lg-3">
 			       <form>
 				      <div class="form-group"> <!-- Date input -->
 				        <label class="control-label" for="date">Data</label>
@@ -106,24 +106,49 @@
                       <button type="reset" class="btn btn-danger">Limpar</button>
                      </form>
 			       </div>
-			       <div class="col-lg-8">
+			       <div class="col-lg-9">
                         <ul class="list-group">
-                        <li class="list-group-item active">Recebimentos</li>
+                        <li class="list-group-item active"> Recebimentos
+                          
+                        </li>
 	                        <c:if test="${fn:length(recebimentos) gt 0}">
+	                        <table class="table table-bordered table-hover">
+		                                 <tr>
+			                               <td >Data</td>
+			                               <td >Tipo</td>
+			                               <td >Ap</td>
+			                               <td >Referência</td>
+			                               <td >Multa</td>
+			                               <td >Valor</td>
+			                               <td >Ação</td>
+			                             </tr>
 	                            <c:forEach var="recebimento" items="${recebimentos}">
-	                                <li class="list-group-item"><p data-placement="top">${recebimento.data}  -  ${recebimento.tipo}  -  ${recebimento.fk_morador}   -  ${recebimento.referencia}   - ${recebimento.multa}  -  ${recebimento.valor} 
-                                    	<p data-placement="top" title="Edit">
-	                                    	<button class="open-recebimento btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-id_rece="${recebimento.id_rece}" data-data="${recebimento.data}" data-tipo="${recebimento.tipo}" data-referencia="${recebimento.referencia}" data-fk_morador="${recebimento.fk_morador}" data-multa="${recebimento.multa}" data-valor="${recebimento.valor}" data-target="#edit" >
-	                                    		<span class="glyphicon glyphicon-pencil"></span>
-	                                    	</button>
-                                    	</p>
-                                        <p data-placement="top" title="Delete">
-                                        	<button class=" delete-recebimento btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-id_rece="${recebimento.id_rece}" data-data="${recebimento.data}" data-tipo="${recebimento.tipo}" data-fk_morador="${recebimento.fk_morador}" data-referencia="${recebimento.referencia}" data-target="#delete" >
-                                        		<span class="glyphicon glyphicon-trash"></span>
-                                            </button>
-                                        </p>
-                                    </li>
-	                            </c:forEach>                            
+	                               
+		                                
+			                             <tr>
+			                               <td>${recebimento.data}</td>
+			                               <td>${recebimento.tipo}</td>
+			                               <td>${recebimento.fk_morador}</td>
+			                               <td>${recebimento.referencia}</td>
+			                               <td>${recebimento.multa}</td>
+			                               <td>${recebimento.valor}</td>
+			                               <td>
+				                               <p data-placement="top" title="Edit">
+		                                    	<button class="open-recebimento btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-id_rece="${recebimento.id_rece}" data-data="${recebimento.data}" data-tipo="${recebimento.tipo}" data-referencia="${recebimento.referencia}" data-fk_morador="${recebimento.fk_morador}" data-multa="${recebimento.multa}" data-valor="${recebimento.valor}" data-target="#edit" >
+		                                    		<span class="glyphicon glyphicon-pencil"></span>
+		                                    	</button>
+		                                       </p>
+		                                       <p data-placement="top" title="Delete">
+		                                        	<button class=" delete-recebimento btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-id_rece="${recebimento.id_rece}" data-data="${recebimento.data}" data-tipo="${recebimento.tipo}" data-fk_morador="${recebimento.fk_morador}" data-referencia="${recebimento.referencia}" data-target="#delete" >
+		                                        		<span class="glyphicon glyphicon-trash"></span>
+		                                            </button>
+		                                       </p>
+                                          </td>
+			                             </tr>
+			                           
+                                    	
+	                            </c:forEach>  
+	                            </table>                           
 	                        </c:if>    
                         </ul>                        
                   </div>			    

@@ -2122,7 +2122,7 @@ pre code {
     width: 33.33333333%;
   }
   .col-lg-3 {
-    width: 33%;
+    width: 25%;
   }
   .col-lg-2 {
     width: 16.66666667%;
@@ -2263,7 +2263,7 @@ th {
 .table {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,
@@ -2271,7 +2271,7 @@ th {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
-  padding: 8px;
+  padding: 4px;
   line-height: 1.42857143;
   vertical-align: top;
   border-top: 1px solid #ddd;
@@ -3002,7 +3002,7 @@ select[multiple].input-lg {
 }
 .btn {
   display: inline-block;	
-  padding: 6px 36px;
+  padding: 6px 20px;
   margin-bottom: 0;
   font-size: 14px;
   font-weight: normal;
@@ -3449,13 +3449,13 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-xs,
 .btn-group-xs > .btn {
-  padding: 1px 5px;
-  font-size: 12px;
+  padding: 1px 4px;
+  font-size: 10px;
   line-height: 1.5;
   border-radius: 3px;
   float: right;
   margin-right: 1px;
-  margin-top: -15px
+  margin-top: 2px
 }
 .btn-block {
   display: block;
