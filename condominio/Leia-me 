@@ -1,4 +1,6 @@
-CREATE TABLE `Condominio`.`Fornecedor` (
+create database Condominio;
+
+fornecedor CREATE TABLE `Condominio`.`Fornecedor` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`));
@@ -18,7 +20,7 @@ CREATE TABLE `Condominio`.`Recebimento` (
   `multa` DOUBLE, 
   PRIMARY KEY (`id_rece`));
   
-  ALTER TABLE Recebimento ADD multa DOUBLE;
+  
 ALTER TABLE Recebimento ADD CONSTRAINT id_fk_morador foreign key (fk_morador) REFERENCES Morador(ap);
 
 CREATE TABLE `Condominio`.`Pagamento` (
@@ -34,3 +36,6 @@ CREATE TABLE `Condominio`.`Pagamento` (
 
 select * from Recebimento;
 select* from Pagamento;
+
+select data from Pagamento ORDER BY data DESC;
+

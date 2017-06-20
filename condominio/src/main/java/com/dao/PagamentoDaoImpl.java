@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.model.Fornecedor;
 import com.model.Pagamento;
 import com.model.Recebimento;
 import com.utils.ConvertDates;
@@ -132,6 +134,34 @@ public class PagamentoDaoImpl implements PagamentoDao{
 				e.printStackTrace();
 			}
 		
+	}
+
+	@Override
+	public Pagamento find(Date data) {
+		Connection con;
+	    PreparedStatement pstmt;
+	    ResultSet rs;
+	    
+	    try{
+	    	con = datasource.getConnection();
+	    	pstmt = con.prepareStatement("SELECT data from Pagamento ORDER BY data DESC	");
+	    	rs = pstmt.executeQuery();
+	    	{
+	    	
+	    	Pagamento pagamento = new Pagamento();
+	    		
+			pstmt.setDate(2, ConvertDates.convertToSqlDate(pagamento.getData()));
+    		
+	    	 
+	         return pagamento;			
+	    	}
+	    } catch (SQLException e) {
+	    	System.out.println("Ocorreu um erro de conexão com o banco!");
+	    	e.printStackTrace();
+	    	
+	    }
+	    
+		return null;
 	}
 
 

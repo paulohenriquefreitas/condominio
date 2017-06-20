@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.model.Pagamento;
@@ -14,6 +15,8 @@ public void save(Pagamento pagamento);
 public void update(Pagamento pagamento);
 
 public void delete (int Id_Pagamento);
+
+public Pagamento find(Date data);
 
 }
 
