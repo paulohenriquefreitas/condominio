@@ -3,6 +3,7 @@ package com.controller;
 
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,12 @@ public class RecebimentoController {
 	public String save(Model model,@ModelAttribute("recebimento") Recebimento recebimento){
 		Double valor = Double.parseDouble(System.getProperty("condominio"));
 		recebimento.setValor(valor);
-		recebimentoDao.save(recebimento);		
+		try {
+			recebimentoDao.save(recebimento);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		model.addAttribute("recebimentos",recebimentoDao.findAll());
         return "recebimentos";		
 	}

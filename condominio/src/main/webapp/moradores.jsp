@@ -130,26 +130,44 @@ lang="en">
                     </div>
                     
                     <div class="col-lg-8">
-                        <ul class="list-group">
-                            <li class="list-group-item active">Moradores</li>
-                            <c:if test="${fn:length(moradores) gt 0}">
-                                <c:forEach var="morador" items="${moradores}">                                
-                                    <li class="list-group-item"><p data-placement="top">${morador.ap} - ${morador.nome}
-                                    	<p data-placement="top" title="Edit">
-	                                    	<button class="open-morador btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-ap="${morador.ap}" data-nome="${morador.nome}" data-target="#edit" >
-	                                    		<span class="glyphicon glyphicon-pencil"></span>
-	                                    	</button>
-                                    	</p>
-                                        <p data-placement="top"title="Delete">
-                                        	<button class=" delete-morador btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-ap="${morador.ap}" data-nome="${morador.nome}" data-target="#delete" >
-                                        		<span class="glyphicon glyphicon-trash"></span>
-                                            </button>
-                                        </p>
-                                    </li>
-                                </c:forEach>                            
-                            </c:if> 
-                        </ul>
-                    </div>
+						<ul class="list-group">
+							<li class="list-group-item active">Moradores</li>
+							<c:if test="${fn:length(moradores) gt 0}">
+								<table class="table table-bordered table-hover">
+									<tr style = background-color:#eee>
+										<td>Ap</td>
+										<td>Morador</td>
+										<td>Ação</td>
+									</tr>
+									<c:forEach var="morador" items="${moradores}">
+										<tr>
+											<td>${morador.ap}</td>
+											<td>${morador.nome}</td>
+
+											<td width="10%">
+												<p data-placement="top" title="Edit">
+													<button class="open-morador btn btn-primary btn-xs"
+														data-title="Edit" data-toggle="modal"
+														data-ap="${morador.ap}" data-nome="${morador.nome}"
+														data-target="#edit">
+														<span class="glyphicon glyphicon-pencil"></span>
+													</button>
+												</p>
+												<p data-placement="top" title="Delete">
+													<button class=" delete-morador btn btn-danger btn-xs"
+														data-title="Delete" data-toggle="modal"
+														data-ap="${morador.ap}" data-nome="${morador.nome}"
+														data-target="#delete">
+														<span class="glyphicon glyphicon-trash"></span>
+													</button>
+												</p>
+											</td>
+										</tr>
+									</c:forEach>
+								</table>
+							</c:if>
+						</ul>
+					</div>
                 </div>
             </div>
         </div>
@@ -157,30 +175,32 @@ lang="en">
 		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
 			aria-labelledby="edit" aria-hidden="true">
 			<div class="modal-dialog">
-			<form class="form-horizontal" role="form" method="post" action="/morador/update">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-						</button>
-						<h4 class="modal-title custom_align" id="Heading">Edite morador</h4>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<input class="form-control "  name="ap" id="ap"  readonly>
+				<form class="form-horizontal" role="form" method="post"
+					action="/morador/update">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button>
+							<h4 class="modal-title custom_align" id="Heading">Edite	morador</h4>
 						</div>
-						<div class="form-group">
-							<input class="form-control "  name="nome" id="nome" >
-						</div>						
+						<div class="modal-body">
+							<div class="form-group">
+								<input class="form-control " name="ap" id="ap" readonly>
+							</div>
+							<div class="form-group">
+								<input class="form-control " name="nome" id="nome">
+							</div>
+						</div>
+						<div class="modal-footer ">
+
+							<button type="submit" class="btn btn-warning btn-lg"
+								style="width: 100%;">
+								<span class="glyphicon glyphicon-ok-sign"></span> Update
+							</button>
+						</div>
 					</div>
-					<div class="modal-footer ">
-					
-						<button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">
-							<span class="glyphicon glyphicon-ok-sign"></span> Update
-						</button>
-					</div>
-				</div>
 				</form>
 			</div>
 		</div>
@@ -188,34 +208,36 @@ lang="en">
 		<div class="modal fade" id="delete" tabindex="-1" role="dialog"
 			aria-labelledby="edit" aria-hidden="true">
 			<div class="modal-dialog">
-			<form class="form-horizontal" role="form" method="post" action="/morador/delete">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-						</button>
-						<h4 class="modal-title custom_align" id="Heading">Delete este morador</h4>						
-					</div>
-					<div class="modal-body delete-modal">
-
-						<div class="alert alert-danger">
-							<span class="glyphicon glyphicon-warning-sign"></span> Deseja deletar esse morador ?
-							<div class="form-group">
-								<input class="form-control"  name="ap" id="ap"  readonly>
-							</div>
+				<form class="form-horizontal" role="form" method="post"
+					action="/morador/delete">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button>
+							<h4 class="modal-title custom_align" id="Heading">Delete seste morador</h4>
 						</div>
+						<div class="modal-body delete-modal">
 
+							<div class="alert alert-danger">
+								<span class="glyphicon glyphicon-warning-sign"></span> Deseja deletar esse morador ?
+								<div class="form-group">
+									<input class="form-control" name="ap" id="ap" readonly>
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer ">
+							<button type="submit" class="btn btn-success">
+								<span class="glyphicon glyphicon-ok-sign"></span> Yes
+							</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">
+								<span class="glyphicon glyphicon-remove"></span> No
+							</button>
+						</div>
 					</div>
-					<div class="modal-footer ">
-						<button type="submit" class="btn btn-success">
-							<span class="glyphicon glyphicon-ok-sign"></span> Yes
-						</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">
-							<span class="glyphicon glyphicon-remove"></span> No
-						</button>
-					</div>
-				</div>
 				</form>
 				<!-- /.modal-content -->
 			</div>

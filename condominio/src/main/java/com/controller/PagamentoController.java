@@ -41,7 +41,7 @@ public class PagamentoController {
 	}
 	
 	@RequestMapping("/update")	
-	public String alterar(Model model,@ModelAttribute("recebimento") Pagamento pagamento){
+	public String alterar(Model model,@ModelAttribute("pagamento") Pagamento pagamento){
 		pagamentoDao.update(pagamento);		
 		model.addAttribute("pagamentos",pagamentoDao.findAll());
 		model.addAttribute("fornecedores", fornecedorDao.findAll());
@@ -50,7 +50,7 @@ public class PagamentoController {
 	}
 	
 	@RequestMapping("/delete")	
-	public String delete(Model model,@ModelAttribute("recebimento") Pagamento pagamento){
+	public String delete(Model model,@ModelAttribute("pagamento") Pagamento pagamento){
 		pagamentoDao.delete(pagamento.getId_pagamento());
 		model.addAttribute("pagamentos",pagamentoDao.findAll());
 		model.addAttribute("fornecedores", fornecedorDao.findAll());

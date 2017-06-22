@@ -32,7 +32,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 	    recebimentos = new ArrayList<Recebimento>();
 	try {
 	    con = datasource.getConnection();
-		pstmt = con.prepareStatement("SELECT * FROM Recebimento	");
+		pstmt = con.prepareStatement("SELECT * FROM Recebimento ORDER BY data DESC");
 		rs = pstmt.executeQuery();
 		while (rs.next()){
 			Recebimento recebimento = new Recebimento();
@@ -58,11 +58,11 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 	}
 
 	@Override
-	public void save(Recebimento recebimento) {
+	public void save(Recebimento recebimento) throws SQLException {
 		Connection con;	
 		PreparedStatement pstmt;
 	
-	try {
+	
 	
 		
 		con = datasource.getConnection();
@@ -82,13 +82,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		con.close();
 		pstmt.close();
 		
-	} catch (SQLException e) {
-		System.out.println("Ocorreu um erro ao inserir dados ");
-		e.printStackTrace();
-	} catch (Exception e) {
-		System.out.println("Ocorreu um erro ao inserir dados ");
-		e.printStackTrace();
-	}		
+		
    }
 	
 	@Override

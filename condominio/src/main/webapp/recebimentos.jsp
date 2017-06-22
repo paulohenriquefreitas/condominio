@@ -17,6 +17,8 @@
 </head>
 
 <body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>		 + 
+ -    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
     <!-- Include Required Prerequisites -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 
@@ -113,7 +115,7 @@
                         </li>
 	                        <c:if test="${fn:length(recebimentos) gt 0}">
 	                        <table class="table table-bordered table-hover">
-		                                 <tr>
+		                                 <tr style = background-color:#eee>
 			                               <td >Data</td>
 			                               <td >Tipo</td>
 			                               <td >Ap</td>
@@ -256,9 +258,7 @@
 	<script>
 	$(function() {
 	    $('input[name="data"]').daterangepicker({
-	        locale: {
-	            format: 'DD-MM-YYYY'
-	          },
+	        
 	          singleDatePicker: true,
 	          showDropdowns: true
 	    });

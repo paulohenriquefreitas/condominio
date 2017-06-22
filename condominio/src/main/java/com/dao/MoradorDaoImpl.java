@@ -28,7 +28,7 @@ public class MoradorDaoImpl implements MoradorDao {
 	    moradores = new ArrayList<Morador>();
 	try {
 	    con = datasource.getConnection();
-		pstmt = con.prepareStatement("SELECT * FROM Morador	");
+		pstmt = con.prepareStatement("SELECT * FROM Morador ORDER BY Ap ASC");
 		rs = pstmt.executeQuery();
 		while (rs.next()){
 			Morador morador = new Morador();

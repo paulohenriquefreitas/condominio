@@ -35,7 +35,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 	    pagamentos = new ArrayList<Pagamento>();
 	try {
 	    con = datasource.getConnection();
-		pstmt = con.prepareStatement("SELECT * FROM Pagamento");
+		pstmt = con.prepareStatement("SELECT * FROM Pagamento ORDER BY data DESC");
 		rs = pstmt.executeQuery();
 		while (rs.next()){
 			Pagamento pagamento = new Pagamento();

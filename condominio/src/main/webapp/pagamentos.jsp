@@ -47,7 +47,7 @@
                     </div>
                 </div>
 			  <div class="row">
-			    <div class="col-lg-4">
+			    <div class="col-lg-3">
 			       <form  action="/pagamento/save">
 				      <div class="form-group"> <!-- Date input -->
 				        <label class="control-label" for="date">Data</label>
@@ -95,12 +95,12 @@
                       <button type="reset" class="btn btn-danger">Limpar</button>
                      </form>
 			       </div>
-			       <div class="col-lg-8">
+			       <div class="col-lg-9">
                         <ul class="list-group">
                         <li class="list-group-item active">Pagamentos</li>
 	                        <c:if test="${fn:length(pagamentos) gt 0}">
 	                            <table class="table table-bordered table-hover">
-		                                 <tr>
+		                                 <tr style = background-color:#eee>
 			                               <td >Data</td>
 			                               <td >Fornecedor</td>
 			                               <td >Referência</td>

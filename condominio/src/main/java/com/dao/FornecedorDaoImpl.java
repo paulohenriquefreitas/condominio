@@ -29,7 +29,7 @@ public List<Fornecedor> findAll() {
   
 	try {
         con = datasource.getConnection();
-    	pstmt = con.prepareStatement("SELECT * FROM Fornecedor	");
+    	pstmt = con.prepareStatement("SELECT * FROM Fornecedor	ORDER BY id DESC ");
     	rs = pstmt.executeQuery();
     	while (rs.next()){
     	

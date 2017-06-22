@@ -68,47 +68,61 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
-                    <div class="col-lg-4">
+				<div class="row">
+					<div class="col-lg-4">
 
-                        <form  action="/fornecedor/save" method="get" modelAttribute="fornecedor" name="fornecedor">
+						<form action="/fornecedor/save" method="get"
+							modelAttribute="fornecedor" name="fornecedor">
 
-                            <div class="form-group">
-                            <label>Nome</label>
-                                <label>Insira o nome do fornecedor</label>
-                                <input id="nome" name="nome" class="form-control" placeholder="Enter text">
-                            </div>                         
-                            <button type="submit" class="btn btn-success">Salvar</button>
-                            <button type="reset" class="btn btn-danger">Limpar</button>
+							<div class="form-group">
+								<label>Nome</label> <label>Insira o nome do fornecedor</label> <input
+									id="nome" name="nome" class="form-control"
+									placeholder="Enter text">
+							</div>
+							<button type="submit" class="btn btn-success">Salvar</button>
+							<button type="reset" class="btn btn-danger">Limpar</button>
+						</form>
+					</div>
+					<div class="col-lg-8">
+						<ul class="list-group">
+							<li class="list-group-item active">Fornecedores</li>
+							<c:if test="${fn:length(fornecedores) gt 0}">
+								<table class="table table-bordered table-hover">
+									<tr style = background-color:#eee>
+										<td>Nome</td>
+										<td>Ação</td>
+									</tr>
+									<c:forEach var="fornecedor" items="${fornecedores}">
+										<tr>
+											<td>${fornecedor.nome}</td>
 
-                        </form>
+											<td width="10%">
+												<p data-placement="top" title="Edit">
+													<button class=" open-fornecedor btn btn-primary btn-xs"
+														data-title="Edit" data-id="${fornecedor.id}"
+														data-nome="${fornecedor.nome}" data-toggle="modal"
+														data-target="#edit">
+														<span class="glyphicon glyphicon-pencil"></span>
+													</button>
+												</p>
+												<p data-placement="top" title="Delete">
+													<button class=" delete-fornecedor btn btn-danger btn-xs"
+														data-title="Delete" data-id="${fornecedor.id}"
+														data-nome="${fornecedor.nome}" data-toggle="modal"
+														data-target="#delete">
+														<span class="glyphicon glyphicon-trash"></span>
+													</button>
+												</p>
+											</td>
+										</tr>
+									</c:forEach>
+								</table>
 
-                    </div>
-                    
-                    <div class="col-lg-8">
-                        <ul class="list-group">
-                            <li class="list-group-item active">Fornecedores</li>
-                            <c:if test="${fn:length(fornecedores) gt 0}">
-                                <c:forEach var="fornecedor" items="${fornecedores}">
-                                    <li class="list-group-item"><p data-placement="top" title="Delete">${fornecedor.nome}
-                                    	<p data-placement="top" title="Edit">
-	                                    	<button class=" open-fornecedor btn btn-primary btn-xs" data-title="Edit" data-id="${fornecedor.id}" data-nome="${fornecedor.nome}" data-toggle="modal" data-target="#edit" >
-	                                    		<span class="glyphicon glyphicon-pencil"></span>
-	                                    	</button>
-                                    	</p>
-                                        <p data-placement="top"title="Delete">
-                                        	<button class=" delete-fornecedor btn btn-danger btn-xs" data-title="Delete" data-id="${fornecedor.id}" data-nome="${fornecedor.nome}" data-toggle="modal" data-target="#delete" >
-                                        		<span class="glyphicon glyphicon-trash"></span>
-                                            </button>
-                                        </p>
-                                    </li>
-                                </c:forEach>                            
-                            </c:if> 
-                        </ul>
-                    </div>                    
-                </div>           
-
-            </div>            
+							</c:if>
+						</ul>
+					</div>
+				</div>
+			</div>            
         </div> 
         <!--  modal -->
 		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
