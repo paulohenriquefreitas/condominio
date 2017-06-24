@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.model.Morador;
+import com.model.Pagamento;
 import com.model.Recebimento;
 import com.utils.ConvertDates;
 
@@ -130,6 +131,44 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		}
 		
 	} 
+	
+	@Override
+	public List<Recebimento> find(String dataInicial, String dataFinal) {
+		Connection con;
+	    PreparedStatement pstmt;
+	    ResultSet rs;
+	    List<Recebimento> recebimentos = new ArrayList<Recebimento>();
+	    
+	    try{
+	    	con = datasource.getConnection();
+	    	pstmt = con.prepareStatement("SELECT * FROM Recebimento WHERE data BETWEEN ? AND ? ORDER BY data ASC ");
+	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataInicial));
+	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinal));
+	    	rs = pstmt.executeQuery();
+	    	while (rs.next()){
+	    		Recebimento recebimento = new Recebimento();
+				recebimento.setData(ConvertDates.convertSqlDateToString(rs.getDate("data")));
+				recebimento.setReferencia(rs.getString("Referencia"));
+				recebimento.setTipo(rs.getString("Tipo"));
+				recebimento.setValor(rs.getDouble("Valor") + (rs.getDouble("Multa")));
+				recebimento.setId_rece(rs.getInt("Id_rece"));
+				recebimento.setFk_morador(rs.getInt("Fk_Morador"));
+				recebimento.setMulta(rs.getDouble("Multa"));
+				
+				recebimentos.add(recebimento);
+						
+			}
+			con.close();
+			pstmt.close();
+			return recebimentos;
+	    } catch (SQLException e) {
+	    	System.out.println("Ocorreu um erro de conexão com o banco!");
+	    	e.printStackTrace();
+	    	
+	    }
+	    
+		return null;
+	}
 		
 }
 		

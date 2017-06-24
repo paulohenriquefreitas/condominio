@@ -15,20 +15,31 @@
 
 <script type="text/javascript">
 $(function() {
-    $('input[name="dateInicio]').daterangepicker({
+	var start = moment().subtract(29, 'days');
+    var end = moment();
+    function cb(start, end) {
+        $('#dataRange span').html(start.format('DD-MM-YYYY'));
+    }
+    $('input[name="dataRange"]').daterangepicker({
+    	locale: {
+  	      format: 'DD-MM-YYYY'
+  	    },
+    	ranges: {
+	            'Hoje': [moment(), moment()],
+	            'Ontem': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+	            'Últimos 7 Dias': [moment().subtract(6, 'days'), moment()],
+	            'Últimos 30 Days': [moment().subtract(29, 'days'), moment()],
+	            'Este Mês': [moment().startOf('month'), moment().endOf('month')],
+	            'Último Mês': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+	         }
+	        
+    }, cb);
+    $('input[name="dataInicial"]').daterangepicker({
     	locale: {
     	      format: 'DD-MM-YYYY'
     	    },
-    	    singleDatePicker:true
-    });
-});
-
-$(function() {
-    $('input[name="dateFinal"]').daterangepicker({
-    	locale: {
-    	      format: 'DD-MM-YYYY'
-    	    },
-    	    singleDatePicker:true
+    	    singleDatePicker: true,
+	        showDropdowns: true  
     });
 });
 
@@ -66,28 +77,24 @@ $(function() {
 							<li class="active"><i class="fa fa-edit"></i> Balancetes</li>
 						</ol>
 					</div>
-					<div class="col-lg-6">
-						<div class="form-group ">
-							<!-- Date input -->
-							<form id="myFormID" action="/balancete/list" method="GET">
-								<input name="dataInicio" id="dataInicio"
-									class="date-picker form-control" />
-								 <input name="dataFinal" id="dataFinal"
-									class="date-picker form-control" />
-								<div style="margin-top: 4px">
-									<button id="printPageButton" type="submit"
-										class="btn btn-success">Listar</button>
-									<button id="printPageButton" class="btn btn-success "
-										onClick="window.print();">Imprimir</button>
-								</div>
-							</form>>
+					<div class="col-lg-12">
+						<div class="col-lg-12">
+							<ul class="list-group">
+								<li class="list-group-item active">Condomínio Adail -
+									Balancete Mensal de Verificação</li>
+							</ul>
 						</div>
-					</div>
-					<div class="col-lg-8">
-						<ul class="list-group">
-							<li class="list-group-item active">Condomínio Adail -
-								Balancete Mensal de Verificação</li>
-						</ul>
+						<div class="form-group ">
+							<form id="myFormID" action="/balancete/list" method="GET">	
+									<div class="col-lg-4">
+										<input name="dataRange" id="dataRange" class="date-picker form-control" />
+									</div>
+										<div class="col-lg-4">
+										<button id="printPageButton" type="submit"	class="btn btn-success">Listar</button>
+										<button id="printPageButton" class="btn btn-success " onClick="window.print();">Imprimir</button>
+									</div>
+							</form>	
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-12">
@@ -111,7 +118,7 @@ $(function() {
 														<td>${recebimento.data}</td>
 														<td>${recebimento.tipo}</td>
 														<td>${recebimento.referencia}</td>
-														<td>${recebimento.fk_morador}- ${recebimento.multa}</td>
+														<td>${recebimento.fk_morador} <c:if test="${recebimento.multa gt 0.00}"> + Multa de ${recebimento.multa}</c:if></td>
 														<td>${recebimento.valor}</td>
 													</tr>
 												</c:if>

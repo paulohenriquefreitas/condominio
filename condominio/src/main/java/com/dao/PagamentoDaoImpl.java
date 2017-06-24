@@ -35,7 +35,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 	    pagamentos = new ArrayList<Pagamento>();
 	try {
 	    con = datasource.getConnection();
-		pstmt = con.prepareStatement("SELECT * FROM Pagamento");
+		pstmt = con.prepareStatement("SELECT * FROM Pagamento ORDER BY data DESC");
 		rs = pstmt.executeQuery();
 		while (rs.next()){
 			Pagamento pagamento = new Pagamento();
@@ -137,7 +137,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 	}
 	
 	@Override
-	public List<Pagamento> find(Date data) {
+	public List<Pagamento> find(String dataIncial, String dataFinal) {
 		Connection con;
 	    PreparedStatement pstmt;
 	    ResultSet rs;
@@ -145,12 +145,13 @@ public class PagamentoDaoImpl implements PagamentoDao{
 	    
 	    try{
 	    	con = datasource.getConnection();
-	    	pstmt = con.prepareStatement("SELECT * FROM Pagamento WHERE data BETWEEN ? AND ?;");
+	    	pstmt = con.prepareStatement("SELECT * FROM Pagamento WHERE data BETWEEN ? AND ? ORDER BY data ASC ");
+	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataIncial));
+	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinal));
 	    	rs = pstmt.executeQuery();
 	    	
 	    	while (rs.next()){
-		    	Pagamento pagamento = new Pagamento();
-		    		
+		    	Pagamento pagamento = new Pagamento();		    		
 		    	pagamento.setId_pagamento(rs.getInt("Id_Pagamento"));
 				pagamento.setData(ConvertDates.convertSqlDateToString(rs.getDate("Data")));
 			    pagamento.setFornecedor(rs.getString("Fornecedor"));
