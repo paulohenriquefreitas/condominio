@@ -3,122 +3,132 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="paulo.freitas">
 
-    <title>Condomínio Adail Admin</title>
-    
-    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">    
+<title>Condomínio Adail Admin</title>
+
 </head>
 
-<body>	
-	<script src="https://www.w3schools.com/lib/w3.js"></script>	   
+<body>
+	<script src="js/w3.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
 	<div w3-include-html="header.jsp"></div>
 	<div w3-include-html="menu.jsp"></div>
-	<script>w3.includeHTML();</script>
-    <div id="wrapper">       
+	<script>
+		w3.includeHTML();
+	</script>
 
-        <div id="page-wrapper">
+	<div id="wrapper">
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="col-lg-12">
+					<ol class="breadcrumb">
+						<li><i class="fa fa-dashboard"></i> <a href="/">Home</a></li>
+						<li class="active"><i class="fa fa-edit"></i> Lançamentos</li>
+					</ol>
+				</div>
 
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="col-lg-12">                        
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="/">Home</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-edit"></i> Lançamentos
-                            </li>
-                        </ol>
-                    </div>
-                <!-- /.row -->
-
-
-                <div class="row">                    
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">1</div>
-                                    </div>
-                                </div>
-                            </div>                            
-                            <div class="panel-footer">
-                            	<a href="recebimento/list"> 
-                            	  <button type="submit" class="btn btn-success">                               
-                                    <span class="pull-left">Recebimentos</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                   </button>
-                                 </a>
-                                 <div class="clearfix"></div>
-                             </div>                           
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-shopping-cart fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">2</div>                                        
-                                    </div>
-                                </div>
-                            </div>                           
-                            <div class="panel-footer">
-                            	<a href="pagamento/list">
-                            	<button type="submit" class="btn btn-success">
-                                    <span class="pull-left">Pagamentos</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                </button>    
-                            	</a>
-                                <div class="clearfix"></div>
-                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6" >
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">3</div>
-                                    </div>
-                                </div>
-                            </div>                            
-                            <div class="panel-footer">
-                            	<a href="investimento/list"> 
-                            	  <button type="submit" class="btn btn-success" disabled>                               
-                                    <span class="pull-left">Investimentos</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                   </button>
-                                 </a>
-                                 <div class="clearfix"></div>
-                             </div>                           
-                        </div>
-                    </div>
-                </div>
-            </div> 
-        </div>        
-    </div>
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
- 
+				<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-tasks fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge">1</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<a href="recebimento/list">
+									<button type="submit" class="btn btn-primary">
+										<span class="pull-left">Recebimentos</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+									</button>
+								</a>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-green">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-shopping-cart fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge">2</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<a href="pagamento/list">
+									<button type="submit" class="btn btn-success">
+										<span class="pull-left">Pagamentos</span> <span
+											class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+									</button>
+								</a>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-yellow">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-tasks fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge">3</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<a href="investimento/list">
+									<button type="submit" class="btn btn-warning" disabled>
+										<span class="pull-left">Investimentos</span> <span
+											class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+									</button>
+								</a>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-red">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-tasks fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge">4</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<a href="investimento/list">
+									<button type="submit" class="btn btn-danger" disabled>
+										<span class="pull-left">Gráficos</span> <span
+											class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+									</button>
+								</a>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
-
 </html>

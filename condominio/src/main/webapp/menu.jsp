@@ -8,8 +8,7 @@
 
 lang="en">
 <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 
 </head>
 <body>

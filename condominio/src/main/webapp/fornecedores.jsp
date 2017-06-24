@@ -1,73 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <title>Condomínio Adail Admin</title>
+<title>Condomínio Adail Admin</title>
 </head>
 
 <body>
-    <!-- <script type="text/javascript">
-       $(document).ready(function() {
-          $("#my-menu").mmenu({
-             // Options
-          });
-          var API = $("#my-menu").data( "mmenu" );
-          
-          $("#my-button").click(function() {
-             API.open();
-          });
-       });
-    </script>
-    
-    <script type="text/javascript">
-   $(document).ready(function() {
-      $("#my-menu").mmenu({
-         // Options
-      });
-      var API = $("#my-menu").data( "mmenu" );
 
-      $("#my-button").click(function() {
-         API.close();
-      });
-   }); 
-</script>-->
-    
-	<%@ include file="header.jsp" %>
-    <%@ include file = "menu.jsp" %>
+	<%@ include file="header.jsp"%>
+	<%@ include file="menu.jsp"%>
 
-    <div id="wrapper">
-
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">                        
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="/">Home</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-edit"></i> Cadastro - Fornecedores
-                            </li>                            
-                        </ol>
-                    </div>
-                </div>
-                <!-- /.row -->
-
+	<div id="wrapper">
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<ol class="breadcrumb">
+							<li><i class="fa fa-dashboard"></i> <a href="/">Home</a></li>
+							<li class="active"><i class="fa fa-edit"></i> Cadastro -
+								Fornecedores</li>
+						</ol>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-lg-4">
 
@@ -88,7 +56,7 @@
 							<li class="list-group-item active">Fornecedores</li>
 							<c:if test="${fn:length(fornecedores) gt 0}">
 								<table class="table table-bordered table-hover">
-									<tr style = background-color:#eee>
+									<tr style="background-color: #eee">
 										<td>Nome</td>
 										<td>Ação</td>
 									</tr>
@@ -117,42 +85,42 @@
 										</tr>
 									</c:forEach>
 								</table>
-
 							</c:if>
 						</ul>
 					</div>
 				</div>
-			</div>            
-        </div> 
-        <!--  modal -->
+			</div>
+		</div>
 		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
 			aria-labelledby="edit" aria-hidden="true">
 			<div class="modal-dialog">
-			<form class="form-horizontal" role="form" method="post" action="/fornecedor/update">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-						</button>
-						<h4 class="modal-title custom_align" id="Heading">Edite o fornecedor</h4>
-					</div>
-					<div class="modal-body">						
-						<div class="form-group">
-							<input class="form-control "  name="id" id="id"  readonly>
+				<form class="form-horizontal" role="form" method="post"
+					action="/fornecedor/update">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button>
+							<h4 class="modal-title custom_align" id="Heading">Edite o
+								fornecedor</h4>
 						</div>
-						<div class="form-group">
-							<input class="form-control "  name="nome" id="nome" >
-						</div>					
-					
+						<div class="modal-body">
+							<div class="form-group">
+								<input class="form-control " name="id" id="id" readonly>
+							</div>
+							<div class="form-group">
+								<input class="form-control " name="nome" id="nome">
+							</div>
+
+						</div>
+						<div class="modal-footer ">
+							<button type="submit" class="btn btn-warning btn-lg"
+								style="width: 100%;">
+								<span class="glyphicon glyphicon-ok-sign"></span> Update
+							</button>
+						</div>
 					</div>
-					<div class="modal-footer ">
-						<button type="submit" class="btn btn-warning btn-lg"
-							style="width: 100%;">
-							<span class="glyphicon glyphicon-ok-sign"></span> Update
-						</button>
-					</div>
-				</div>
 				</form>
 			</div>
 		</div>
@@ -160,40 +128,42 @@
 		<div class="modal fade" id="delete" tabindex="-1" role="dialog"
 			aria-labelledby="edit" aria-hidden="true">
 			<div class="modal-dialog">
-			<form class="form-horizontal" role="form" method="post" action="/fornecedor/delete">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-						</button>
-						<h4 class="modal-title custom_align" id="Heading">Delete o fornecedor</h4>
-					</div>
-					<div class="modal-body">
-
-						<div class="alert alert-danger">
-							<span class="glyphicon glyphicon-warning-sign"></span>Tem certeza que quer deletar esse fornecedor ?
-							<input class="form-control"  name="id" id="id"  type="hidden">
-							<input class="form-control"  name="nome" id="nome"  readonly>
+				<form class="form-horizontal" role="form" method="post"
+					action="/fornecedor/delete">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button>
+							<h4 class="modal-title custom_align" id="Heading">Delete o
+								fornecedor</h4>
 						</div>
+						<div class="modal-body">
 
+							<div class="alert alert-danger">
+								<span class="glyphicon glyphicon-warning-sign"></span>Tem
+								certeza que quer deletar esse fornecedor ? <input
+									class="form-control" name="id" id="id" type="hidden"> <input
+									class="form-control" name="nome" id="nome" readonly>
+							</div>
+
+						</div>
+						<div class="modal-footer ">
+							<button type="submit" class="btn btn-success">
+								<span class="glyphicon glyphicon-ok-sign"></span> Yes
+							</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">
+								<span class="glyphicon glyphicon-remove"></span> No
+							</button>
+						</div>
 					</div>
-					<div class="modal-footer ">
-						<button type="submit" class="btn btn-success">
-							<span class="glyphicon glyphicon-ok-sign"></span> Yes
-						</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">
-							<span class="glyphicon glyphicon-remove"></span> No
-						</button>
-					</div>
-				</div>
 				</form>
-				<!-- /.modal-content -->
 			</div>
-			<!-- /.modal-dialog -->
 		</div>
 	</div>
-   <script type="text/javascript">
+	<script type="text/javascript">
        $(document).ready(function(){
 	   $("#mytable #checkall").click(function () {
 	           if ($("#mytable #checkall").is(':checked')) {
@@ -225,8 +195,6 @@
 		     var nome = $(this).data('nome');
 		     $(".modal-body #nome").val(nome);
 		});
-   </script>         
-
+   </script>
 </body>
-
 </html>
