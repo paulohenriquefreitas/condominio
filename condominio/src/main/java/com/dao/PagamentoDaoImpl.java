@@ -35,7 +35,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 	    pagamentos = new ArrayList<Pagamento>();
 	try {
 	    con = datasource.getConnection();
-		pstmt = con.prepareStatement("SELECT * FROM Pagamento ORDER BY data DESC");
+		pstmt = con.prepareStatement("SELECT * FROM Pagamento");
 		rs = pstmt.executeQuery();
 		while (rs.next()){
 			Pagamento pagamento = new Pagamento();
@@ -135,26 +135,34 @@ public class PagamentoDaoImpl implements PagamentoDao{
 			}
 		
 	}
-
+	
 	@Override
-	public Pagamento find(Date data) {
+	public List<Pagamento> find(Date data) {
 		Connection con;
 	    PreparedStatement pstmt;
 	    ResultSet rs;
+	    List<Pagamento> pagamentos = new ArrayList<Pagamento>();
 	    
 	    try{
 	    	con = datasource.getConnection();
-	    	pstmt = con.prepareStatement("SELECT data from Pagamento ORDER BY data DESC	");
+	    	pstmt = con.prepareStatement("SELECT * FROM Pagamento WHERE data BETWEEN ? AND ?;");
 	    	rs = pstmt.executeQuery();
-	    	{
 	    	
-	    	Pagamento pagamento = new Pagamento();
-	    		
-			pstmt.setDate(2, ConvertDates.convertToSqlDate(pagamento.getData()));
-    		
-	    	 
-	         return pagamento;			
+	    	while (rs.next()){
+		    	Pagamento pagamento = new Pagamento();
+		    		
+		    	pagamento.setId_pagamento(rs.getInt("Id_Pagamento"));
+				pagamento.setData(ConvertDates.convertSqlDateToString(rs.getDate("Data")));
+			    pagamento.setFornecedor(rs.getString("Fornecedor"));
+				pagamento.setReferencia(rs.getString("Referencia"));
+				pagamento.setComplemento(rs.getString("Complemento"));
+				pagamento.setValor(rs.getInt("Valor"));
+				
+				pagamentos.add(pagamento);
 	    	}
+	    	 
+	         return pagamentos;			
+	    	
 	    } catch (SQLException e) {
 	    	System.out.println("Ocorreu um erro de conexão com o banco!");
 	    	e.printStackTrace();
@@ -163,7 +171,9 @@ public class PagamentoDaoImpl implements PagamentoDao{
 	    
 		return null;
 	}
-
-
-
 }
+	
+
+
+	
+

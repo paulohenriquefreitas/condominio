@@ -37,5 +37,7 @@ CREATE TABLE `Condominio`.`Pagamento` (
 select * from Recebimento;
 select* from Pagamento;
 
-select data from Pagamento ORDER BY data DESC;
+select * from Pagamento ORDER BY data DESC;
+
+SELECT * FROM Pagamento WHERE data BETWEEN 2010/09/10 AND 2011/10/10;
 

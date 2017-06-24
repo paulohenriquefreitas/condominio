@@ -16,7 +16,7 @@ public void update(Pagamento pagamento);
 
 public void delete (int Id_Pagamento);
 
-public Pagamento find(Date data);
+public List<Pagamento> find(Date data);
 
 }
 

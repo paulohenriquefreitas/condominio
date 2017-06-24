@@ -15,10 +15,20 @@
 
 <script type="text/javascript">
 $(function() {
-    $('input[name="daterange"]').daterangepicker({
+    $('input[name="dateInicio]').daterangepicker({
     	locale: {
     	      format: 'DD-MM-YYYY'
-    	    }
+    	    },
+    	    singleDatePicker:true
+    });
+});
+
+$(function() {
+    $('input[name="dateFinal"]').daterangepicker({
+    	locale: {
+    	      format: 'DD-MM-YYYY'
+    	    },
+    	    singleDatePicker:true
     });
 });
 
@@ -59,8 +69,10 @@ $(function() {
 					<div class="col-lg-6">
 						<div class="form-group ">
 							<!-- Date input -->
-							<form id="myFormID" action="/recebimento/list" method="GET">
-								<input name="daterange" id="data"
+							<form id="myFormID" action="/balancete/list" method="GET">
+								<input name="dataInicio" id="dataInicio"
+									class="date-picker form-control" />
+								 <input name="dataFinal" id="dataFinal"
 									class="date-picker form-control" />
 								<div style="margin-top: 4px">
 									<button id="printPageButton" type="submit"
@@ -68,7 +80,7 @@ $(function() {
 									<button id="printPageButton" class="btn btn-success "
 										onClick="window.print();">Imprimir</button>
 								</div>
-							</form>
+							</form>>
 						</div>
 					</div>
 					<div class="col-lg-8">
@@ -145,13 +157,13 @@ $(function() {
 									</thead>
 									<tbody>
 										<c:if test="${fn:length(pagamentos) gt 0}">
-											<c:forEach var="recebimento" items="${pagamento}">
+											<c:forEach var="pagamento" items="${pagamentos}">
 												<tr>
 													<td>${pagamento.data}</td>
-													<td>${recebimento.fornecedor}</td>
-													<td>${recebimento.referencia}</td>
-													<td>${recebimento.complemento}</td>
-													<td>${recebimento.valor}</td>
+													<td>${pagamento.fornecedor}</td>
+													<td>${pagamento.referencia}</td>
+													<td>${pagamento.complemento}</td>
+													<td>${pagamento.valor}</td>
 												</tr>
 											</c:forEach>
 										</c:if>
