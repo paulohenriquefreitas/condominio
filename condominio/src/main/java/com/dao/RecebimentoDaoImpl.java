@@ -1,11 +1,9 @@
 package com.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +11,6 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.model.Morador;
-import com.model.Pagamento;
 import com.model.Recebimento;
 import com.utils.ConvertDates;
 
@@ -52,7 +48,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		pstmt.close();
 		
 	} catch (SQLException e) {
-		System.out.println("Ocorreu um erro de conexão com o banco!");
+		System.out.println("Ocorreu um erro de conexão com o banco!" + e);
 		e.printStackTrace();
 	}
 		return recebimentos;
@@ -170,6 +166,37 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		return null;
 	}
 		
+	
+	@Override
+	public double findRecebimento(String dataInicialTotal, String dataFinalTotal, String tipo) {
+		
+		double somaTotal=0;
+		Connection con;
+	    PreparedStatement pstmt;
+	    ResultSet rs;
+	    
+	    try{
+	    	con = datasource.getConnection();
+	    	pstmt = con.prepareStatement("SELECT SUM(valor)+SUM(multa) AS total FROM Recebimento WHERE data BETWEEN ? AND ? AND tipo=?");
+	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataInicialTotal));
+	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinalTotal));
+	    	pstmt.setString(3, tipo);
+	    	rs = pstmt.executeQuery();
+	    	while (rs.next()) {
+	    	somaTotal = rs.getDouble("total");
+	    	}
+			con.close();
+			pstmt.close();
+			return somaTotal;
+	    } catch (SQLException e) {
+	    	System.out.println("Ocorreu um erro de conexão com o banco!" + e);
+	    	e.printStackTrace();
+	    	return 0;
+	    }	    
+		
+	}
+	
+	
 }
 		
 	

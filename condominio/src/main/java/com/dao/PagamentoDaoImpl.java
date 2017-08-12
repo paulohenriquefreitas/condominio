@@ -1,7 +1,6 @@
 package com.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +11,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.model.Fornecedor;
 import com.model.Pagamento;
-import com.model.Recebimento;
 import com.utils.ConvertDates;
 
 
@@ -171,6 +168,36 @@ public class PagamentoDaoImpl implements PagamentoDao{
 	    }
 	    
 		return null;
+	}
+
+	@Override
+public double findPagamento(String dataInicialTotal, String dataFinalTotal) {
+		
+		double somaTotal=0;
+		Connection con;
+	    PreparedStatement pstmt;
+	    ResultSet rs;
+	    
+	    try{
+	    	con = datasource.getConnection();
+	    	pstmt = con.prepareStatement("SELECT SUM(valor) AS total FROM Pagamento  WHERE data BETWEEN ? AND ?");
+	    	
+	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataInicialTotal));
+	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinalTotal));
+	    	rs = pstmt.executeQuery();
+	    	while (rs.next()) {
+		    	somaTotal = rs.getDouble("total");
+		    }
+			con.close();
+			pstmt.close();
+			return somaTotal;
+	    } catch (SQLException e) {
+	    	System.out.println("Ocorreu um erro de conexão com o banco!" + e);
+	    	e.printStackTrace();
+	    	return 0;
+	}
+	
+	
 	}
 }
 	

@@ -17,4 +17,6 @@ public interface RecebimentoDao {
 	public void update (Recebimento recebimento);
 
 	public List<Recebimento> find(String dataInicial, String dataFinal);
+	
+	double findRecebimento(String dataInicialTotal, String dataFinalTotal, String tipo);
 }

@@ -23,8 +23,12 @@ public class BalanceteController {
 		@RequestMapping("/list")	
 		public String list(Model model , @RequestParam ("dataRange") String dataRange){
 			String [] datas = dataRange.split(" - ");
-			model.addAttribute("pagamentos",pagamentoDao.find(datas[0].trim(), datas[1].trim()));
 			model.addAttribute("recebimentos", recebimentoDao.find(datas[0].trim(), datas[1].trim()));
+			model.addAttribute("totalCondominio",recebimentoDao.findRecebimento(datas[0].trim(), datas[1].trim(), "condominio"));
+			model.addAttribute("totalFundo",recebimentoDao.findRecebimento(datas[0].trim(), datas[1].trim(), "fundo de reserva"));
+			model.addAttribute("totalCota",recebimentoDao.findRecebimento(datas[0].trim(), datas[1].trim(), "cota extra"));			
+			model.addAttribute("pagamentos",pagamentoDao.find(datas[0].trim(), datas[1].trim()));
+			model.addAttribute("totalPagamento",pagamentoDao.findPagamento(datas[0].trim(), datas[1].trim()));
 	        return "balancetes";
 			
 		}

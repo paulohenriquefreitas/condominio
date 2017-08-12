@@ -57,6 +57,22 @@ $(function() {
 		margin-left: 51px;
 	}
 }
+.td {
+font: blue;
+}
+
+.gtext {
+    font-weight: bold  
+}
+
+.right {
+    float: right;
+    font-size: 18px;
+    font-weight: bold;
+    width: 224px;
+}
+
+
 </style>
 </head>
 
@@ -81,11 +97,8 @@ $(function() {
 						<div class="col-lg-12">
 							<ul class="list-group">
 								<li class="list-group-item active">Condomínio Adail -
-									Balancete Mensal de Verificação</li>
-							</ul>
-						</div>
-						<div class="form-group ">
-							<form id="myFormID" action="/balancete/list" method="GET">	
+									Balancete Mensal de Verificação 
+									<form id="myFormID" action="/balancete/list" method="GET">	
 									<div class="col-lg-4">
 										<input name="dataRange" id="dataRange" class="date-picker form-control" />
 									</div>
@@ -94,6 +107,11 @@ $(function() {
 										<button id="printPageButton" class="btn btn-success " onClick="window.print();">Imprimir</button>
 									</div>
 							</form>	
+									</li>
+							</ul>
+						</div>
+						<div class="form-group ">
+							
 						</div>
 					</div>
 					<div class="row">
@@ -118,35 +136,66 @@ $(function() {
 														<td>${recebimento.data}</td>
 														<td>${recebimento.tipo}</td>
 														<td>${recebimento.referencia}</td>
-														<td>${recebimento.fk_morador} <c:if test="${recebimento.multa gt 0.00}"> + Multa de ${recebimento.multa}</c:if></td>
+														<td>Apart ${recebimento.fk_morador} <c:if test="${recebimento.multa gt 0.00}"> + Multa de ${recebimento.multa}</c:if></td>
 														<td>${recebimento.valor}</td>
-													</tr>
+													</tr>													
 												</c:if>
-
+											</c:forEach>
+											<c:if test="${totalCondominio gt 0}">
+										    	   <tr>													<td></td>
+														<td></td>
+														<td></td>
+														<td class="gtext">Total de Créditos</td>
+														<td class="gtext">${totalCondominio}</td>
+													</tr>
+										    	   
+											</c:if>												
+											<c:forEach var="recebimento" items="${recebimentos}">
 												<c:if test="${recebimento.tipo eq 'fundo de reserva'}">
 													<tr>
 														<td>${recebimento.data}</td>
 														<td>${recebimento.tipo}</td>
 														<td>${recebimento.referencia}</td>
-														<td>${recebimento.fk_morador}</td>
+														<td>Apart ${recebimento.fk_morador}</td>
 														<td>${recebimento.valor}</td>
 													</tr>
 												</c:if>
-
+											</c:forEach>
+											<c:if test="${totalFundo gt 0}">
+										    	   <tr>													<td></td>
+														<td></td>
+														<td></td>
+														<td class="gtext">Total de Créditos</td>
+														<td class="gtext">${totalFundo}</td>
+													</tr>
+										    	   
+											</c:if>
+											<c:forEach var="recebimento" items="${recebimentos}">
 												<c:if test="${recebimento.tipo eq 'cota extra'}">
 													<tr>
 														<td>${recebimento.data}</td>
 														<td>${recebimento.tipo}</td>
 														<td>${recebimento.referencia}</td>
-														<td>${recebimento.fk_morador}</td>
+														<td>Apart ${recebimento.fk_morador}</td>
 														<td>${recebimento.valor}</td>
 													</tr>
 												</c:if>
 											</c:forEach>
+											<c:if test="${totalCota gt 0}">
+										    	   <tr>													<td></td>
+														<td></td>
+														<td></td>
+														<td class="gtext">Total de Débitos</td>
+														<td class="gtext">${totalCota}</td>
+													</tr>
+										    	   
+											</c:if>
 										</c:if>
-
 									</tbody>
 								</table>
+								<span class="right">Total de Créditos  ${totalCondominio + totalCota + totalFundo}
+								</span>
+								
 							</div>
 						</div>
 						<div class="col-lg-12">
@@ -173,6 +222,15 @@ $(function() {
 													<td>${pagamento.valor}</td>
 												</tr>
 											</c:forEach>
+											<c:if test="${totalPagamento gt 0}">
+										    	   <tr>													<td></td>
+														<td></td>
+														<td></td>
+														<td class="gtext">Total de Créditos</td>
+														<td class="gtext">${totalPagamento}</td>
+													</tr>
+										    	   
+											</c:if>
 										</c:if>
 									</tbody>
 								</table>
@@ -184,36 +242,34 @@ $(function() {
 								<table class="table table-bordered table-hover">
 									<thead>
 									</thead>
-									<tbody>
-										<tr>
-											<td>Aplicação CDB</td>
-											<td>261</td>
-											<td>33.3%</td>
-											<td>$234.12</td>
-										</tr>
+									<tbody style="font-weight: bold">										
 										<tr>
 											<td>Condomínio</td>
-											<td>665</td>
-											<td>21.3%</td>
-											<td>$16.34</td>
+											<td>Last Total</td>
+											<td>${totalCondominio}</td>
+											<td>${totalPagamento}</td>
+											<td>${totalCondominio - totalPagamento}</td>
 										</tr>
 										<tr>
 											<td>Fundo de Reserva</td>
-											<td>9516</td>
-											<td>89.3%</td>
-											<td>$1644.43</td>
+											<td>Last Total</td>
+											<td>${totalFundo}</td>
+											<td></td>
+											<td>${totalFundo}</td>
 										</tr>
 										<tr>
 											<td>Taxa Extra</td>
-											<td>23</td>
-											<td>34.3%</td>
-											<td>$23.52</td>
+											<td>Last Total</td>
+											<td>${totalCota}</td>
+											<td></td>
+											<td>${totalCota}</td>
 										</tr>
 										<tr>
 											<td>Saldo Total</td>
 											<td>421</td>
 											<td>60.3%</td>
 											<td>$724.32</td>
+											<td>$234.12</td>
 										</tr>
 									</tbody>
 								</table>
