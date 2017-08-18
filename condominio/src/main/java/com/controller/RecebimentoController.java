@@ -2,6 +2,8 @@ package com.controller;
 
 
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,15 @@ public class RecebimentoController {
 	
 	@RequestMapping("/save")	
 	public String save(Model model,@ModelAttribute("recebimento") Recebimento recebimento){
-		Double valor = Double.parseDouble(System.getProperty("condominio"));
+		BigDecimal valor = null;
+		if (recebimento.getTipo().equals("condominio")){
+			valor = new BigDecimal(System.getProperty("condominio")).setScale(2, RoundingMode.HALF_UP);
+		}else if(recebimento.getTipo().equals("fundo de reserva")){
+			valor = new BigDecimal(System.getProperty("fundo")).setScale(2, RoundingMode.HALF_UP);;
+		}else {
+			valor = new BigDecimal(System.getProperty("cota")).setScale(2, RoundingMode.HALF_UP);
+		}
+		
 		recebimento.setValor(valor);
 		try {
 			recebimentoDao.save(recebimento);

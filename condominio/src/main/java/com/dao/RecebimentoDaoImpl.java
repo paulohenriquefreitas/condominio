@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,7 +38,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 			recebimento.setData(ConvertDates.convertSqlDateToString(rs.getDate("data")));
 			recebimento.setReferencia(rs.getString("Referencia"));
 			recebimento.setTipo(rs.getString("Tipo"));
-			recebimento.setValor(rs.getDouble("Valor") + (rs.getDouble("Multa")));
+			recebimento.setValor(new BigDecimal(rs.getDouble("Valor") + (rs.getDouble("Multa"))).setScale(2, RoundingMode.HALF_UP));
 			recebimento.setId_rece(rs.getInt("Id_rece"));
 			recebimento.setFk_morador(rs.getInt("Fk_Morador"));
 			recebimento.setMulta(rs.getDouble("Multa"));
@@ -70,7 +72,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		pstmt.setDate(1, ConvertDates.convertToSqlDate(recebimento.getData()) );
 		pstmt.setString(2, recebimento.getTipo());
 		pstmt.setString(3, recebimento.getReferencia());
-		pstmt.setDouble(4, recebimento.getValor());
+		pstmt.setBigDecimal(4, recebimento.getValor());
 		pstmt.setInt(5, recebimento.getId_rece());
 		pstmt.setInt(6, recebimento.getFk_morador());
 		pstmt.setDouble(7, recebimento.getMulta());
@@ -94,7 +96,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 			pstmt.setDate(1, ConvertDates.convertToSqlDate(recebimento.getData()));
 			pstmt.setString(2, recebimento.getTipo());
 			pstmt.setString(3, recebimento.getReferencia());
-			pstmt.setDouble(4, recebimento.getValor());
+			pstmt.setBigDecimal(4, recebimento.getValor());
 			pstmt.setInt(5, recebimento.getFk_morador());
 			pstmt.setDouble(6, recebimento.getMulta());
 			pstmt.setInt(7,recebimento.getId_rece());
@@ -146,7 +148,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 				recebimento.setData(ConvertDates.convertSqlDateToString(rs.getDate("data")));
 				recebimento.setReferencia(rs.getString("Referencia"));
 				recebimento.setTipo(rs.getString("Tipo"));
-				recebimento.setValor(rs.getDouble("Valor") + (rs.getDouble("Multa")));
+				recebimento.setValor(new BigDecimal(rs.getDouble("Valor") + (rs.getDouble("Multa"))).setScale(2, RoundingMode.HALF_UP));
 				recebimento.setId_rece(rs.getInt("Id_rece"));
 				recebimento.setFk_morador(rs.getInt("Fk_Morador"));
 				recebimento.setMulta(rs.getDouble("Multa"));
@@ -168,9 +170,9 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		
 	
 	@Override
-	public double findRecebimento(String dataInicialTotal, String dataFinalTotal, String tipo) {
+	public BigDecimal findRecebimento(String dataInicialTotal, String dataFinalTotal, String tipo) {
 		
-		double somaTotal=0;
+		BigDecimal  somaTotal = null;
 		Connection con;
 	    PreparedStatement pstmt;
 	    ResultSet rs;
@@ -183,7 +185,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 	    	pstmt.setString(3, tipo);
 	    	rs = pstmt.executeQuery();
 	    	while (rs.next()) {
-	    	somaTotal = rs.getDouble("total");
+	    	somaTotal = new BigDecimal(rs.getDouble("total")).setScale(2, RoundingMode.HALF_UP);
 	    	}
 			con.close();
 			pstmt.close();
@@ -191,7 +193,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 	    } catch (SQLException e) {
 	    	System.out.println("Ocorreu um erro de conexão com o banco!" + e);
 	    	e.printStackTrace();
-	    	return 0;
+	    	return new BigDecimal(0.00);
 	    }	    
 		
 	}

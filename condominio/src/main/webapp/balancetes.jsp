@@ -193,7 +193,8 @@ font: blue;
 										</c:if>
 									</tbody>
 								</table>
-								<span class="right">Total de Créditos  ${totalCondominio + totalCota + totalFundo}
+								<c:set var = "totalCredito" scope = "session" value = "${totalCondominio + totalCota + totalFundo}"/>
+								<span class="right">Total de Créditos  ${totalCredito}
 								</span>
 								
 							</div>
@@ -205,6 +206,7 @@ font: blue;
 									<thead>
 										<tr>
 											<th>Dia</th>
+											<th>Tipo</th>
 											<th>Fornecedor</th>
 											<th>Ref.</th>
 											<th>Complemento</th>
@@ -214,26 +216,78 @@ font: blue;
 									<tbody>
 										<c:if test="${fn:length(pagamentos) gt 0}">
 											<c:forEach var="pagamento" items="${pagamentos}">
-												<tr>
-													<td>${pagamento.data}</td>
-													<td>${pagamento.fornecedor}</td>
-													<td>${pagamento.referencia}</td>
-													<td>${pagamento.complemento}</td>
-													<td>${pagamento.valor}</td>
-												</tr>
+											${pagamento.tipo eq 'ordinario'}
+												<c:if test="${pagamento.tipo eq 'condominio'}">
+													<tr>
+														<td>${pagamento.data}</td>
+														<td>${pagamento.tipo}</td>
+														<td>${pagamento.fornecedor}</td>
+														<td>${pagamento.referencia}</td>
+														<td>${pagamento.complemento}</td>
+														<td>${pagamento.valor}</td>
+													</tr>
+												</c:if>
 											</c:forEach>
-											<c:if test="${totalPagamento gt 0}">
+											<c:if test="${totalPagamentoOrdinario gt 0}">
 										    	   <tr>													<td></td>
 														<td></td>
 														<td></td>
+														<td></td>
+														<td class="gtext">Total de Débitos</td>
+														<td class="gtext">${totalPagamentoOrdinario}</td>
+													</tr>
+										    	   
+											</c:if>
+											<c:forEach var="pagamento" items="${pagamentos}">
+												<c:if test="${pagamento.tipo eq 'fundo de reserva'}">
+													<tr>
+														<td>${pagamento.data}</td>
+														<td>${pagamento.tipo}</td>
+														<td>${pagamento.fornecedor}</td>
+														<td>${pagamento.referencia}</td>
+														<td>${pagamento.complemento}</td>
+														<td>${pagamento.valor}</td>
+													</tr>
+												</c:if>
+											</c:forEach>
+											<c:if test="${totalPagamentoFundo gt 0}">
+										    	   <tr>													<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td class="gtext">Total de Débitos</td>
+														<td class="gtext">${totalPagamentoFundo}</td>
+													</tr>
+										    	   
+											</c:if>
+											<c:forEach var="pagamento" items="${pagamentos}">
+												<c:if test="${pagamento.tipo eq 'cota extra'}">
+													<tr>
+														<td>${pagamento.data}</td>
+														<td>${pagamento.tipo}</td>
+														<td>${pagamento.fornecedor}</td>
+														<td>${pagamento.referencia}</td>
+														<td>${pagamento.complemento}</td>
+														<td>${pagamento.valor}</td>
+													</tr>
+												</c:if>
+											</c:forEach>
+											<c:if test="${totalPagamentoExtra gt 0}">
+										    	   <tr>													<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
 														<td class="gtext">Total de Créditos</td>
-														<td class="gtext">${totalPagamento}</td>
+														<td class="gtext">${totalPagamentoExtra}</td>
 													</tr>
 										    	   
 											</c:if>
 										</c:if>
 									</tbody>
 								</table>
+								<c:set var = "totalDebito" scope = "session" value = "${totalPagamentoOrdinario + totalPagamentoFundo + totalPagamentoExtra}"/>
+								<span class="right">Total de Débitos  ${totalDebito}
+								</span>
 							</div>
 						</div>
 						<div class="col-lg-12">
@@ -245,35 +299,38 @@ font: blue;
 									<tbody style="font-weight: bold">										
 										<tr>
 											<td>Condomínio</td>
-											<td>Last Total</td>
+											<td>3017,32</td>
 											<td>${totalCondominio}</td>
-											<td>${totalPagamento}</td>
-											<td>${totalCondominio - totalPagamento}</td>
+											<td>${totalPagamentoOrdinario}</td>
+											<td>${totalCondominio - totalPagamentoOrdinario}</td>
 										</tr>
 										<tr>
 											<td>Fundo de Reserva</td>
-											<td>Last Total</td>
+											<td>1357,00</td>
 											<td>${totalFundo}</td>
-											<td></td>
-											<td>${totalFundo}</td>
+											<td>${totalPagamentoFundo}</td>
+											<td>${totalFundo - totalPagamentoFundo}</td>
 										</tr>
 										<tr>
 											<td>Taxa Extra</td>
-											<td>Last Total</td>
+											<td>1780,40</td>
 											<td>${totalCota}</td>
-											<td></td>
-											<td>${totalCota}</td>
+											<td>${totalPagamentoExtra}</td>
+											<td>${totalCota - totalPagamentoExtra}</td>
 										</tr>
-										<tr>
+										<tr style="font-size: 22px">
 											<td>Saldo Total</td>
-											<td>421</td>
-											<td>60.3%</td>
-											<td>$724.32</td>
-											<td>$234.12</td>
+											<td>6.154,72</td>
+											<td>${totalCredito}</td>
+											<td>${totalDebito}</td>
+											<td>${totalCredito - totalDebito}</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
+						</div>
+						<div class="col-lg-12">
+						<h4>Obs.: Contêm 01 unidade em aberto até a data do fechamento, referentes ao mês de Junho de 2017.</h4>
 						</div>
 					</div>
 				</div>

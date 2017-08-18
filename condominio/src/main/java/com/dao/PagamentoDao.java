@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.model.Pagamento;
@@ -7,16 +8,16 @@ import com.model.Pagamento;
 
 public interface PagamentoDao {
 	
-public List<Pagamento> findAll();
+ List<Pagamento> findAll();
 	
-public void save(Pagamento pagamento);
+ void save(Pagamento pagamento);
 
-public void update(Pagamento pagamento);
+ void update(Pagamento pagamento);
 
-public void delete (int Id_Pagamento);
+ void delete (int Id_Pagamento);
 
-public List<Pagamento> find(String dataIncial, String dataFinal);
+ List<Pagamento> find(String dataIncial, String dataFinal);
 
-double findPagamento(String dataInicialTotal, String dataFinalTotal);
+ BigDecimal findPagamento(String dataInicialTotal, String dataFinalTotal, String tipo);
 }
 

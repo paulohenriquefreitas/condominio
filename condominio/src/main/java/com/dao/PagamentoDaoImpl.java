@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,10 +40,11 @@ public class PagamentoDaoImpl implements PagamentoDao{
 			Pagamento pagamento = new Pagamento();
 			pagamento.setId_pagamento(rs.getInt("Id_Pagamento"));
 			pagamento.setData(ConvertDates.convertSqlDateToString(rs.getDate("Data")));
+			pagamento.setTipo(rs.getString("tipo"));
 		    pagamento.setFornecedor(rs.getString("Fornecedor"));
 			pagamento.setReferencia(rs.getString("Referencia"));
 			pagamento.setComplemento(rs.getString("Complemento"));
-			pagamento.setValor(rs.getInt("Valor"));
+			pagamento.setValor(new BigDecimal(rs.getDouble("Valor")).setScale(2, RoundingMode.HALF_UP));
 			
 			pagamentos.add(pagamento);
 					
@@ -65,15 +68,16 @@ public class PagamentoDaoImpl implements PagamentoDao{
 		
 		con = datasource.getConnection();
 		pstmt = con.prepareStatement("INSERT INTO Pagamento"
-				+ "(Id_pagamento, Data, Fornecedor , Referencia, Complemento, Valor) VALUES"
-				+ "(?,?,?,?,?,?)");
+				+ "(Id_pagamento,Data, Tipo, Fornecedor , Referencia, Complemento, Valor) VALUES"
+				+ "(?,?,?,?,?,?,?)");
 		
 		pstmt.setInt(1, pagamento.getId_pagamento());
 		pstmt.setDate(2, ConvertDates.convertToSqlDate(pagamento.getData()));
-		pstmt.setString(3, pagamento.getFornecedor());
-		pstmt.setString(4, pagamento.getReferencia());
-		pstmt.setString(5, pagamento.getComplemento());
-		pstmt.setDouble(6, pagamento.getValor());
+		pstmt.setString(3, pagamento.getTipo());
+		pstmt.setString(4, pagamento.getFornecedor());
+		pstmt.setString(5, pagamento.getReferencia());
+		pstmt.setString(6, pagamento.getComplemento());
+		pstmt.setBigDecimal(7, pagamento.getValor());
 		
 		
 		pstmt.execute();
@@ -96,13 +100,14 @@ public class PagamentoDaoImpl implements PagamentoDao{
 		  
 		  try {
 			con = datasource.getConnection();
-			pstmt = con.prepareCall("update Pagamento set Data=?,Fornecedor=?, Referencia=?,Complemento=?, Valor=? where Id_pagamento=?");
+			pstmt = con.prepareCall("update Pagamento set Data=?, Tipo=?, Fornecedor=?, Referencia=?,Complemento=?, Valor=? where Id_pagamento=?");
 			pstmt.setDate(1, ConvertDates.convertToSqlDate(pagamento.getData()));
-			pstmt.setString(2, pagamento.getFornecedor());
-			pstmt.setString(3, pagamento.getReferencia());
-			pstmt.setString(4, pagamento.getComplemento());
-			pstmt.setDouble(5, pagamento.getValor());
-			pstmt.setInt(6,pagamento.getId_pagamento());
+			pstmt.setString(2, pagamento.getTipo());
+			pstmt.setString(3, pagamento.getFornecedor());
+			pstmt.setString(4, pagamento.getReferencia());
+			pstmt.setString(5, pagamento.getComplemento());
+			pstmt.setBigDecimal(6, pagamento.getValor());
+			pstmt.setInt(7,pagamento.getId_pagamento());
 			pstmt.execute();
 			con.close();
 			pstmt.close();
@@ -151,10 +156,11 @@ public class PagamentoDaoImpl implements PagamentoDao{
 		    	Pagamento pagamento = new Pagamento();		    		
 		    	pagamento.setId_pagamento(rs.getInt("Id_Pagamento"));
 				pagamento.setData(ConvertDates.convertSqlDateToString(rs.getDate("Data")));
+				pagamento.setTipo(rs.getString("tipo"));
 			    pagamento.setFornecedor(rs.getString("Fornecedor"));
 				pagamento.setReferencia(rs.getString("Referencia"));
 				pagamento.setComplemento(rs.getString("Complemento"));
-				pagamento.setValor(rs.getInt("Valor"));
+				pagamento.setValor(new BigDecimal(rs.getDouble("Valor")).setScale(2, RoundingMode.HALF_UP));
 				
 				pagamentos.add(pagamento);
 	    	}
@@ -171,22 +177,23 @@ public class PagamentoDaoImpl implements PagamentoDao{
 	}
 
 	@Override
-public double findPagamento(String dataInicialTotal, String dataFinalTotal) {
+public BigDecimal findPagamento(String dataInicialTotal, String dataFinalTotal, String tipo) {
 		
-		double somaTotal=0;
+		BigDecimal somaTotal=null;
 		Connection con;
 	    PreparedStatement pstmt;
 	    ResultSet rs;
 	    
 	    try{
 	    	con = datasource.getConnection();
-	    	pstmt = con.prepareStatement("SELECT SUM(valor) AS total FROM Pagamento  WHERE data BETWEEN ? AND ?");
+	    	pstmt = con.prepareStatement("SELECT SUM(valor) AS total FROM Pagamento  WHERE data BETWEEN ? AND ? AND tipo=?");
 	    	
 	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataInicialTotal));
 	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinalTotal));
+			pstmt.setString(3, tipo);
 	    	rs = pstmt.executeQuery();
 	    	while (rs.next()) {
-		    	somaTotal = rs.getDouble("total");
+		    	somaTotal = new BigDecimal(rs.getDouble("total")).setScale(2, RoundingMode.HALF_UP);
 		    }
 			con.close();
 			pstmt.close();
@@ -194,7 +201,7 @@ public double findPagamento(String dataInicialTotal, String dataFinalTotal) {
 	    } catch (SQLException e) {
 	    	System.out.println("Ocorreu um erro de conexão com o banco!" + e);
 	    	e.printStackTrace();
-	    	return 0;
+	    	return new BigDecimal(0.00);
 	}
 	
 	

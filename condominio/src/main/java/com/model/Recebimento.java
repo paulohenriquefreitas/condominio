@@ -1,20 +1,19 @@
 package com.model;
 
-
-
+import java.math.BigDecimal;
 
 public class Recebimento {
 	
 	private static final long seriaLVesrionUID= 1l;
 	
 	
-     String data;
-     String tipo;
-     String referencia;
-     double valor;
-     int id_rece;
-     int fk_morador;
-     double multa;
+    private String data;
+    private String tipo;
+    private String referencia;
+    private BigDecimal valor;
+    private int id_rece;
+    private int fk_morador;
+    private double multa;
      
 	public int getId_rece() {
 		return id_rece;
@@ -40,10 +39,10 @@ public class Recebimento {
 	public void setReferencia(String referencia) {
 		this.referencia = referencia;
 	}
-	public double getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
-	public void setValor(double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}	
 	public int getFk_morador() {

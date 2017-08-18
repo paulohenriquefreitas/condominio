@@ -28,8 +28,11 @@ public class BalanceteController {
 			model.addAttribute("totalFundo",recebimentoDao.findRecebimento(datas[0].trim(), datas[1].trim(), "fundo de reserva"));
 			model.addAttribute("totalCota",recebimentoDao.findRecebimento(datas[0].trim(), datas[1].trim(), "cota extra"));			
 			model.addAttribute("pagamentos",pagamentoDao.find(datas[0].trim(), datas[1].trim()));
-			model.addAttribute("totalPagamento",pagamentoDao.findPagamento(datas[0].trim(), datas[1].trim()));
-	        return "balancetes";
+			model.addAttribute("totalPagamentoOrdinario",pagamentoDao.findPagamento(datas[0].trim(), datas[1].trim(), "condominio"));
+			model.addAttribute("totalPagamentoFundo",pagamentoDao.findPagamento(datas[0].trim(), datas[1].trim(), "fundo de reserva"));
+			model.addAttribute("totalPagamentoExtra",pagamentoDao.findPagamento(datas[0].trim(), datas[1].trim(), "cota extra"));
+
+			return "balancetes";
 			
 		}
 	}

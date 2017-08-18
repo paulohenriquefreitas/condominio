@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,5 +19,5 @@ public interface RecebimentoDao {
 
 	public List<Recebimento> find(String dataInicial, String dataFinal);
 	
-	double findRecebimento(String dataInicialTotal, String dataFinalTotal, String tipo);
+	public BigDecimal findRecebimento(String dataInicialTotal, String dataFinalTotal, String tipo);
 }

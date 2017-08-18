@@ -1,16 +1,18 @@
 package com.model;
 
+import java.math.BigDecimal;
 
 public class Pagamento {
 
 	private static final long seriaLVesrionUID= 1l;	
 	
-	int id_pagamento;
-	String data;
-	String fornecedor;
-	String referencia;
-	String complemento;
-	double valor;
+	private int id_pagamento;
+	private String data;
+	private String tipo;
+	private String fornecedor;
+	private String referencia;
+	private String complemento;
+	private BigDecimal valor;
 		
 	public int getId_pagamento() {
 		return id_pagamento;
@@ -22,6 +24,14 @@ public class Pagamento {
 
 	public String getData() {
 		return data;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public void setData(String data) {
@@ -52,11 +62,11 @@ public class Pagamento {
 		this.complemento = complemento;
 	}
 
-	public double getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 

@@ -38,6 +38,15 @@
 									placeholder="dd/mm/yyyy" type="text" />
 							</div>
 							<div class="form-group">
+								<label>Tipo de Conta</label> <select name="tipo"
+									class="form-control">
+									<option value="condominio">Condominio</option>
+									<option value="fundo de reserva">Fundo de Reserva</option>
+									<option value="cota extra">Cota Extra</option>
+
+								</select>
+							</div>
+							<div class="form-group">
 								<label>Fornecedor</label> <select name="fornecedor"
 									class="form-control">
 									<c:if test="${fn:length(fornecedores) gt 0}">
@@ -87,6 +96,7 @@
 								<table class="table table-bordered table-hover">
 									<tr style="background-color: #eee">
 										<td>Data</td>
+										<td>Tipo</td>
 										<td>Fornecedor</td>
 										<td>Referência</td>
 										<td>Complemento</td>
@@ -94,10 +104,9 @@
 										<td>Ação</td>
 									</tr>
 									<c:forEach var="pagamento" items="${pagamentos}">
-
-
 										<tr>
 											<td>${pagamento.data}</td>
+											<td>${pagamento.tipo}</td>
 											<td>${pagamento.fornecedor}</td>
 											<td>${pagamento.referencia}</td>
 											<td>${pagamento.complemento}</td>
@@ -108,6 +117,7 @@
 														data-title="Edit" data-toggle="modal"
 														data-id_pagamento="${pagamento.id_pagamento}"
 														data-data="${pagamento.data}"
+														data-tipo="${pagamento.tipo}"
 														data-fornecedor="${pagamento.fornecedor}"
 														data-referencia="${pagamento.referencia}"
 														data-complemento="${pagamento.complemento}"
@@ -120,6 +130,7 @@
 														data-title="Delete" data-toggle="modal"
 														data-id_pagamento="${pagamento.id_pagamento}"
 														data-data="${pagamento.data}"
+														data-tipo="${pagamento.tipo}"
 														data-fornecedor="${pagamento.fornecedor}"
 														data-referencia="${pagamento.referencia}"
 														data-target="#delete">
@@ -156,6 +167,9 @@
 								</div>
 								<div class="form-group">
 									<input class="form-control " name="data" id="data">
+								</div>
+								<div class="form-group">
+									<input class="form-control " name="tipo" id="tipo">
 								</div>
 								<div class="form-group">
 									<input class="form-control " name="fornecedor" id="fornecedor">
@@ -207,6 +221,9 @@
 											id="id_pagamento">
 									</div>
 									<div class="form-group">
+										<input class="form-control " name="tipo" id="tipo">
+									</div>
+									<div class="form-group">
 										<input class="form-control " name="fornecedor" id="fornecedor">
 									</div>
 									<div class="form-group">
@@ -249,6 +266,8 @@
 		     $(".modal-body #id_pagamento").val(id_pagamento);
 		     var data = $(this).data('data');		     
 		     $(".modal-body #data").val(data);
+		     var tipo = $(this).data('tipo');		     
+		     $(".modal-body #tipo").val(tipo);
 		     var fornecedor = $(this).data('fornecedor');
 		     $(".modal-body #fornecedor").val(fornecedor);
 		     var referencia = $(this).data('referencia');
@@ -265,6 +284,8 @@
 		     $(".modal-body #id_pagamento").val(id_pagamento);
 			 var data = $(this).data('data');		     
 		     $(".modal-body #data").val(data);
+		     var tipo = $(this).data('tipo');		     
+		     $(".modal-body #tipo").val(tipo);
 		     var fornecedor = $(this).data('fornecedor');
 		     $(".modal-body #fornecedor").val(fornecedor);
 		     var referencia = $(this).data('referencia');
