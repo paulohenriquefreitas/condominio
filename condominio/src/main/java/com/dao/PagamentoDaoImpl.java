@@ -44,7 +44,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 		    pagamento.setFornecedor(rs.getString("Fornecedor"));
 			pagamento.setReferencia(rs.getString("Referencia"));
 			pagamento.setComplemento(rs.getString("Complemento"));
-			pagamento.setValor(new BigDecimal(rs.getDouble("Valor")).setScale(2, RoundingMode.HALF_UP));
+			pagamento.setValor(new BigDecimal(rs.getDouble("Valor")).setScale(2, BigDecimal.ROUND_HALF_DOWN));
 			
 			pagamentos.add(pagamento);
 					
@@ -72,7 +72,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 				+ "(?,?,?,?,?,?,?)");
 		
 		pstmt.setInt(1, pagamento.getId_pagamento());
-		pstmt.setDate(2, ConvertDates.convertToSqlDate(pagamento.getData()));
+		pstmt.setDate(2, ConvertDates.convertToSqlDate(pagamento.getData(),null));
 		pstmt.setString(3, pagamento.getTipo());
 		pstmt.setString(4, pagamento.getFornecedor());
 		pstmt.setString(5, pagamento.getReferencia());
@@ -101,7 +101,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 		  try {
 			con = datasource.getConnection();
 			pstmt = con.prepareCall("update Pagamento set Data=?, Tipo=?, Fornecedor=?, Referencia=?,Complemento=?, Valor=? where Id_pagamento=?");
-			pstmt.setDate(1, ConvertDates.convertToSqlDate(pagamento.getData()));
+			pstmt.setDate(1, ConvertDates.convertToSqlDate(pagamento.getData(),null));
 			pstmt.setString(2, pagamento.getTipo());
 			pstmt.setString(3, pagamento.getFornecedor());
 			pstmt.setString(4, pagamento.getReferencia());
@@ -148,8 +148,8 @@ public class PagamentoDaoImpl implements PagamentoDao{
 	    try{
 	    	con = datasource.getConnection();
 	    	pstmt = con.prepareStatement("SELECT * FROM Pagamento WHERE data BETWEEN ? AND ? ORDER BY data ASC ");
-	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataIncial));
-	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinal));
+	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataIncial,null));
+	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinal,null));
 	    	rs = pstmt.executeQuery();
 	    	
 	    	while (rs.next()){
@@ -160,7 +160,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 			    pagamento.setFornecedor(rs.getString("Fornecedor"));
 				pagamento.setReferencia(rs.getString("Referencia"));
 				pagamento.setComplemento(rs.getString("Complemento"));
-				pagamento.setValor(new BigDecimal(rs.getDouble("Valor")).setScale(2, RoundingMode.HALF_UP));
+				pagamento.setValor(new BigDecimal(rs.getDouble("Valor")).setScale(2, BigDecimal.ROUND_HALF_DOWN));
 				
 				pagamentos.add(pagamento);
 	    	}
@@ -188,12 +188,12 @@ public BigDecimal findPagamento(String dataInicialTotal, String dataFinalTotal, 
 	    	con = datasource.getConnection();
 	    	pstmt = con.prepareStatement("SELECT SUM(valor) AS total FROM Pagamento  WHERE data BETWEEN ? AND ? AND tipo=?");
 	    	
-	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataInicialTotal));
-	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinalTotal));
+	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataInicialTotal,null));
+	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinalTotal,null));
 			pstmt.setString(3, tipo);
 	    	rs = pstmt.executeQuery();
 	    	while (rs.next()) {
-		    	somaTotal = new BigDecimal(rs.getDouble("total")).setScale(2, RoundingMode.HALF_UP);
+		    	somaTotal = new BigDecimal(rs.getDouble("total")).setScale(2, BigDecimal.ROUND_HALF_DOWN);
 		    }
 			con.close();
 			pstmt.close();

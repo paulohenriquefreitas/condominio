@@ -1,6 +1,7 @@
 package com.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Recebimento {
 	
@@ -9,6 +10,7 @@ public class Recebimento {
 	
     private String data;
     private String tipo;
+    private List<String> tipos;
     private String referencia;
     private BigDecimal valor;
     private int id_rece;
@@ -56,6 +58,13 @@ public class Recebimento {
 	}
 	public void setMulta(double multa) {
 		this.multa = multa;
+	}
+	
+	public List<String> getTipos() {
+		return tipos;
+	}
+	public void setTipos(List<String> tipos) {
+		this.tipos = tipos;
 	}
 	public static long getSerialvesrionuid() {
 		return seriaLVesrionUID;

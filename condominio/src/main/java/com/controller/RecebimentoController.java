@@ -34,22 +34,32 @@ public class RecebimentoController {
 	
 	@RequestMapping("/save")	
 	public String save(Model model,@ModelAttribute("recebimento") Recebimento recebimento){
-		BigDecimal valor = null;
-		if (recebimento.getTipo().equals("condominio")){
-			valor = new BigDecimal(System.getProperty("condominio")).setScale(2, RoundingMode.HALF_UP);
-		}else if(recebimento.getTipo().equals("fundo de reserva")){
-			valor = new BigDecimal(System.getProperty("fundo")).setScale(2, RoundingMode.HALF_UP);;
-		}else {
-			valor = new BigDecimal(System.getProperty("cota")).setScale(2, RoundingMode.HALF_UP);
+		for(String tipo : recebimento.getTipos()){
+			BigDecimal valor = null;
+			if (tipo.equals("condominio")){
+				recebimento.setTipo(tipo);
+				valor = new BigDecimal(System.getProperty("condominio")).setScale(2, RoundingMode.HALF_UP);
+			}else if(tipo.equals("fundo de reserva")){
+				recebimento.setTipo(tipo);
+				recebimento.setMulta(0.00);
+				valor = new BigDecimal(System.getProperty("fundo")).setScale(2, RoundingMode.HALF_UP);;
+			}else if(tipo.equals("cota extra")){
+				recebimento.setTipo(tipo);
+				recebimento.setMulta(0.00);
+				valor = new BigDecimal(System.getProperty("cota")).setScale(2, RoundingMode.HALF_UP);
+			}
+		    if(valor == null ){
+		    	model.addAttribute("recebimentos",recebimentoDao.findAll());
+		    	return "recebimentos";
+		    }
+			recebimento.setValor(valor);
+			try {
+				recebimentoDao.save(recebimento);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		}
-		
-		recebimento.setValor(valor);
-		try {
-			recebimentoDao.save(recebimento);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
 		model.addAttribute("recebimentos",recebimentoDao.findAll());
         return "recebimentos";		
 	}

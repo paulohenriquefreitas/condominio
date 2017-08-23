@@ -2261,6 +2261,7 @@ th {
   text-align: left;
 }
 .table {
+  font-size: 13px;
   width: 100%;
   max-width: 100%;
   margin-bottom: 0px;
@@ -2289,7 +2290,7 @@ th {
   border-top: 0;
 }
 .table > tbody + tbody {
-  border-top: 2px solid #ddd;
+  border-top: 3px solid #000;
 }
 .table .table {
   background-color: #fff;
@@ -2303,7 +2304,7 @@ th {
   padding: 5px;
 }
 .table-bordered {
-  border: 1px solid #ddd;
+  border: 2px solid #000;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
@@ -2311,7 +2312,7 @@ th {
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
-  border: 1px solid #ddd;
+  border: 2px solid #000;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {

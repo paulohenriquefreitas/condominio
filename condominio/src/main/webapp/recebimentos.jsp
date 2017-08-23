@@ -41,13 +41,17 @@
 									placeholder="dd/mm/yyyy" type="text" />
 							</div>
 							<div class="form-group">
-								<label>Tipo de Conta</label> <select name="tipo"
-									class="form-control">
-									<option value="condominio">Condominio</option>
-									<option value="fundo de reserva">Fundo de Reserva</option>
-									<option value="cota extra">Cota Extra</option>
-
-								</select>
+							<label>Tipo de Conta</label>
+							<div class="checkbox">
+							  <label><input type="checkbox" name="tipos" value="condominio">Condominio</label>
+							</div>
+							<div class="checkbox">
+							  <label><input type="checkbox" name="tipos" value="fundo de reserva">Fundo de Reserva</label>
+							</div>
+							<div class="checkbox">
+							  <label><input type="checkbox" name="tipos" value="cota extra">Cota Extra</label>
+							</div>
+									
 							</div>
 							<div class="form-group">
 								<label>Mês de Referencia</label> <select name="referencia"

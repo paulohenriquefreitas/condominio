@@ -3,10 +3,11 @@ package com.utils;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class ConvertDates {
 	
-	public static java.sql.Date convertToSqlDate(String date){
+	public static java.sql.Date convertToSqlDate(String date, Integer interval){
 		Date sqlStartDate = null;
 		SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
 		try {
@@ -16,8 +17,16 @@ public class ConvertDates {
 			System.out.println(e);
 		}
 		
-		
-		return sqlStartDate;
+		if(interval != null){
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(sqlStartDate);
+			cal.add(Calendar.MONTH,-interval);
+			
+			java.sql.Date sqlTommorow = new java.sql.Date(cal.getTimeInMillis());
+			return sqlTommorow;
+		}else{
+			return sqlStartDate; 
+		}
 	}
 	
 	public static String convertSqlDateToString(Date date){

@@ -1,7 +1,7 @@
 package com.dao;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,7 +38,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 			recebimento.setData(ConvertDates.convertSqlDateToString(rs.getDate("data")));
 			recebimento.setReferencia(rs.getString("Referencia"));
 			recebimento.setTipo(rs.getString("Tipo"));
-			recebimento.setValor(new BigDecimal(rs.getDouble("Valor") + (rs.getDouble("Multa"))).setScale(2, RoundingMode.HALF_UP));
+			recebimento.setValor(new BigDecimal(rs.getDouble("Valor") + (rs.getDouble("Multa"))).setScale(2, BigDecimal.ROUND_HALF_DOWN));
 			recebimento.setId_rece(rs.getInt("Id_rece"));
 			recebimento.setFk_morador(rs.getInt("Fk_Morador"));
 			recebimento.setMulta(rs.getDouble("Multa"));
@@ -69,7 +69,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 				+ "(Data, Tipo, Referencia, Valor, Id_rece, Fk_Morador,Multa) VALUES"
 				+ "(?,?,?,?,?,?,?)");
 		
-		pstmt.setDate(1, ConvertDates.convertToSqlDate(recebimento.getData()) );
+		pstmt.setDate(1, ConvertDates.convertToSqlDate(recebimento.getData(),null) );
 		pstmt.setString(2, recebimento.getTipo());
 		pstmt.setString(3, recebimento.getReferencia());
 		pstmt.setBigDecimal(4, recebimento.getValor());
@@ -93,7 +93,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		  try {
 			con = datasource.getConnection();
 			pstmt = con.prepareCall("update Recebimento set Data=?,Tipo=?,Referencia=?,Valor=?,fk_morador=?,multa=? where id_rece=?");
-			pstmt.setDate(1, ConvertDates.convertToSqlDate(recebimento.getData()));
+			pstmt.setDate(1, ConvertDates.convertToSqlDate(recebimento.getData(),null));
 			pstmt.setString(2, recebimento.getTipo());
 			pstmt.setString(3, recebimento.getReferencia());
 			pstmt.setBigDecimal(4, recebimento.getValor());
@@ -140,15 +140,15 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 	    try{
 	    	con = datasource.getConnection();
 	    	pstmt = con.prepareStatement("SELECT * FROM Recebimento WHERE data BETWEEN ? AND ? ORDER BY data ASC ");
-	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataInicial));
-	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinal));
+	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataInicial,null));
+	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinal,null));
 	    	rs = pstmt.executeQuery();
 	    	while (rs.next()){
 	    		Recebimento recebimento = new Recebimento();
 				recebimento.setData(ConvertDates.convertSqlDateToString(rs.getDate("data")));
 				recebimento.setReferencia(rs.getString("Referencia"));
 				recebimento.setTipo(rs.getString("Tipo"));
-				recebimento.setValor(new BigDecimal(rs.getDouble("Valor") + (rs.getDouble("Multa"))).setScale(2, RoundingMode.HALF_UP));
+				recebimento.setValor(new BigDecimal(rs.getDouble("Valor") + (rs.getDouble("Multa"))).setScale(2, BigDecimal.ROUND_HALF_DOWN));
 				recebimento.setId_rece(rs.getInt("Id_rece"));
 				recebimento.setFk_morador(rs.getInt("Fk_Morador"));
 				recebimento.setMulta(rs.getDouble("Multa"));
@@ -170,7 +170,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		
 	
 	@Override
-	public BigDecimal findRecebimento(String dataInicialTotal, String dataFinalTotal, String tipo) {
+	public BigDecimal findRecebimento(String dataInicialTotal, String dataFinalTotal, String tipo, Integer intervalo) {
 		
 		BigDecimal  somaTotal = null;
 		Connection con;
@@ -180,12 +180,12 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 	    try{
 	    	con = datasource.getConnection();
 	    	pstmt = con.prepareStatement("SELECT SUM(valor)+SUM(multa) AS total FROM Recebimento WHERE data BETWEEN ? AND ? AND tipo=?");
-	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataInicialTotal));
-	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinalTotal));
+	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataInicialTotal,intervalo));
+	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinalTotal,intervalo));
 	    	pstmt.setString(3, tipo);
 	    	rs = pstmt.executeQuery();
 	    	while (rs.next()) {
-	    	somaTotal = new BigDecimal(rs.getDouble("total")).setScale(2, RoundingMode.HALF_UP);
+	    	somaTotal = new BigDecimal(rs.getDouble("total")).setScale(2, BigDecimal.ROUND_HALF_DOWN);
 	    	}
 			con.close();
 			pstmt.close();

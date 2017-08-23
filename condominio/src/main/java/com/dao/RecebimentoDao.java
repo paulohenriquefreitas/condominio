@@ -19,5 +19,5 @@ public interface RecebimentoDao {
 
 	public List<Recebimento> find(String dataInicial, String dataFinal);
 	
-	public BigDecimal findRecebimento(String dataInicialTotal, String dataFinalTotal, String tipo);
+	public BigDecimal findRecebimento(String dataInicialTotal, String dataFinalTotal, String tipo, Integer intervalo);
 }

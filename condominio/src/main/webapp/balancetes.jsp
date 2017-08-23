@@ -11,6 +11,7 @@
 <script type="text/javascript"	src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 <script type="text/javascript"	src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <link rel="stylesheet" type="text/css"	href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+<link href="/css/bootstrap.css" rel="stylesheet">
 
 
 <script type="text/javascript">
@@ -50,6 +51,10 @@ $(function() {
 }
 
 @media print {
+	@page {
+	    size: auto;   /* auto is the initial value */
+	    margin: 0;  /* this affects the margin in the printer settings */
+	}
 	#printPageButton {
 		display: none;
 	}
@@ -78,7 +83,6 @@ font: blue;
 
 
 <body>
-	<%@ include file="header.jsp"%>
 	<%@ include file="menu.jsp"%>
 	<script>w3.includeHTML();</script>
 	<div id="wrapper">
@@ -88,19 +92,19 @@ font: blue;
 			<div class="container-fluid">
 				<div class="row">
 					<div id="printPageButton" class="col-lg-12">
-						<ol class="breadcrumb">
+						<!-- <ol class="breadcrumb">
 							<li><i class="fa fa-dashboard"></i> <a href="/">Home</a></li>
 							<li class="active"><i class="fa fa-edit"></i> Balancetes</li>
-						</ol>
+						</ol> -->
 					</div>
 					<div class="col-lg-12">
 						<div class="col-lg-12">
 							<ul class="list-group">
 								<li class="list-group-item active">Condomínio Adail -
-									Balancete Mensal de Verificação 
+									Balancete Mensal de Verificação  - Julho
 									<form id="myFormID" action="/balancete/list" method="GET">	
 									<div class="col-lg-4">
-										<input name="dataRange" id="dataRange" class="date-picker form-control" />
+										<input name="dataRange" id="printPageButton" class="date-picker form-control" />
 									</div>
 										<div class="col-lg-4">
 										<button id="printPageButton" type="submit"	class="btn btn-success">Listar</button>
@@ -116,7 +120,7 @@ font: blue;
 					</div>
 					<div class="row">
 						<div class="col-lg-12">
-							<h2>Recebimentos</h2>
+							<h4>Recebimentos</h4>
 							<div class="table-responsive">
 								<table class="table table-bordered table-hover">
 									<thead>
@@ -136,13 +140,13 @@ font: blue;
 														<td>${recebimento.data}</td>
 														<td>${recebimento.tipo}</td>
 														<td>${recebimento.referencia}</td>
-														<td>Apart ${recebimento.fk_morador} <c:if test="${recebimento.multa gt 0.00}"> + Multa de ${recebimento.multa}</c:if></td>
+														<td>Apart ${recebimento.fk_morador} (${recebimento.valor - recebimento.multa})<c:if test="${recebimento.multa gt 0.00}"> + Multa de ${recebimento.multa}</c:if></td>
 														<td>${recebimento.valor}</td>
 													</tr>													
 												</c:if>
 											</c:forEach>
 											<c:if test="${totalCondominio gt 0}">
-										    	   <tr>													<td></td>
+										    	   <tr>	<td></td>
 														<td></td>
 														<td></td>
 														<td class="gtext">Total de Créditos</td>
@@ -162,7 +166,8 @@ font: blue;
 												</c:if>
 											</c:forEach>
 											<c:if test="${totalFundo gt 0}">
-										    	   <tr>													<td></td>
+										    	   <tr>	
+										    	        <td></td>
 														<td></td>
 														<td></td>
 														<td class="gtext">Total de Créditos</td>
@@ -182,7 +187,7 @@ font: blue;
 												</c:if>
 											</c:forEach>
 											<c:if test="${totalCota gt 0}">
-										    	   <tr>													<td></td>
+										    	   <tr>	<td></td>
 														<td></td>
 														<td></td>
 														<td class="gtext">Total de Débitos</td>
@@ -200,13 +205,12 @@ font: blue;
 							</div>
 						</div>
 						<div class="col-lg-12">
-							<h2>Pagamentos</h2>
+							<h4>Pagamentos</h4>
 							<div class="table-responsive">
 								<table class="table table-bordered table-hover">
 									<thead>
 										<tr>
 											<th>Dia</th>
-											<th>Tipo</th>
 											<th>Fornecedor</th>
 											<th>Ref.</th>
 											<th>Complemento</th>
@@ -216,11 +220,9 @@ font: blue;
 									<tbody>
 										<c:if test="${fn:length(pagamentos) gt 0}">
 											<c:forEach var="pagamento" items="${pagamentos}">
-											${pagamento.tipo eq 'ordinario'}
 												<c:if test="${pagamento.tipo eq 'condominio'}">
 													<tr>
 														<td>${pagamento.data}</td>
-														<td>${pagamento.tipo}</td>
 														<td>${pagamento.fornecedor}</td>
 														<td>${pagamento.referencia}</td>
 														<td>${pagamento.complemento}</td>
@@ -229,8 +231,7 @@ font: blue;
 												</c:if>
 											</c:forEach>
 											<c:if test="${totalPagamentoOrdinario gt 0}">
-										    	   <tr>													<td></td>
-														<td></td>
+										    	   <tr>	<td></td>
 														<td></td>
 														<td></td>
 														<td class="gtext">Total de Débitos</td>
@@ -242,7 +243,6 @@ font: blue;
 												<c:if test="${pagamento.tipo eq 'fundo de reserva'}">
 													<tr>
 														<td>${pagamento.data}</td>
-														<td>${pagamento.tipo}</td>
 														<td>${pagamento.fornecedor}</td>
 														<td>${pagamento.referencia}</td>
 														<td>${pagamento.complemento}</td>
@@ -251,8 +251,7 @@ font: blue;
 												</c:if>
 											</c:forEach>
 											<c:if test="${totalPagamentoFundo gt 0}">
-										    	   <tr>													<td></td>
-														<td></td>
+										    	   <tr>	<td></td>
 														<td></td>
 														<td></td>
 														<td class="gtext">Total de Débitos</td>
@@ -264,7 +263,6 @@ font: blue;
 												<c:if test="${pagamento.tipo eq 'cota extra'}">
 													<tr>
 														<td>${pagamento.data}</td>
-														<td>${pagamento.tipo}</td>
 														<td>${pagamento.fornecedor}</td>
 														<td>${pagamento.referencia}</td>
 														<td>${pagamento.complemento}</td>
@@ -274,7 +272,6 @@ font: blue;
 											</c:forEach>
 											<c:if test="${totalPagamentoExtra gt 0}">
 										    	   <tr>													<td></td>
-														<td></td>
 														<td></td>
 														<td></td>
 														<td class="gtext">Total de Créditos</td>
@@ -291,46 +288,55 @@ font: blue;
 							</div>
 						</div>
 						<div class="col-lg-12">
-							<h2>Patrimônio Financeiro</h2>
+							<h4>Patrimônio Financeiro</h4>
 							<div class="table-responsive">
 								<table class="table table-bordered table-hover">
+								<c:set var = "totalCreditoAnterior" scope = "session" value = "${totalCondominioAnterior + totalCotaAnterior + totalFundoAnterior}"/>
 									<thead>
 									</thead>
-									<tbody style="font-weight: bold">										
+									<tbody style="font-weight: bold">	
+									   <tr>
+											<td>Grupo de Saldos</td>
+											<td>Saldo Anteriror</td>
+											<td>Créditos</td>
+											<td>Débitos</td>
+											<td>Saldo Atual</td>
+										</tr> 									
 										<tr>
 											<td>Condomínio</td>
-											<td>3017,32</td>
+											<td>${totalCondominioAnterior}</td>
 											<td>${totalCondominio}</td>
 											<td>${totalPagamentoOrdinario}</td>
-											<td>${totalCondominio - totalPagamentoOrdinario}</td>
+											<td>${totalCondominioAnterior + totalCondominio - totalPagamentoOrdinario}</td>
 										</tr>
 										<tr>
 											<td>Fundo de Reserva</td>
-											<td>1357,00</td>
+											<td>${totalFundoAnterior}</td>
 											<td>${totalFundo}</td>
 											<td>${totalPagamentoFundo}</td>
-											<td>${totalFundo - totalPagamentoFundo}</td>
+											<td>${totalFundoAnterior + totalFundo - totalPagamentoFundo}</td>
 										</tr>
 										<tr>
 											<td>Taxa Extra</td>
-											<td>1780,40</td>
+											<td>${totalCotaAnterior}</td>
 											<td>${totalCota}</td>
 											<td>${totalPagamentoExtra}</td>
-											<td>${totalCota - totalPagamentoExtra}</td>
+											<td>${totalCotaAnterior + totalCota - totalPagamentoExtra}</td>
 										</tr>
-										<tr style="font-size: 22px">
+										<tr style="font-size: 18px">
 											<td>Saldo Total</td>
-											<td>6.154,72</td>
+											<td>${totalCreditoAnterior}</td>
 											<td>${totalCredito}</td>
 											<td>${totalDebito}</td>
-											<td>${totalCredito - totalDebito}</td>
+											<td>${totalCreditoAnterior + totalCredito - totalDebito}</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 						</div>
 						<div class="col-lg-12">
-						<h4>Obs.: Contêm 01 unidade em aberto até a data do fechamento, referentes ao mês de Junho de 2017.</h4>
+						<h5>Obs.: Errata: Não foi feito o lançamento do pagamento do ap 202 no mês de Junho, sendo feito agora em Julho.</h5>
+                        <h5>Todos os apartamentos estão em dia. Parabéns.</h5>
 						</div>
 					</div>
 				</div>
