@@ -177,7 +177,7 @@ public class PagamentoDaoImpl implements PagamentoDao{
 	}
 
 	@Override
-public BigDecimal findPagamento(String dataInicialTotal, String dataFinalTotal, String tipo) {
+public BigDecimal findPagamento(String dataInicialTotal, String dataFinalTotal, String tipo, Integer intervalo) {
 		
 		BigDecimal somaTotal=null;
 		Connection con;
@@ -188,8 +188,8 @@ public BigDecimal findPagamento(String dataInicialTotal, String dataFinalTotal, 
 	    	con = datasource.getConnection();
 	    	pstmt = con.prepareStatement("SELECT SUM(valor) AS total FROM Pagamento  WHERE data BETWEEN ? AND ? AND tipo=?");
 	    	
-	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataInicialTotal,null));
-	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinalTotal,null));
+	    	pstmt.setDate(1, ConvertDates.convertToSqlDate(dataInicialTotal,intervalo));
+	    	pstmt.setDate(2, ConvertDates.convertToSqlDate(dataFinalTotal,intervalo));
 			pstmt.setString(3, tipo);
 	    	rs = pstmt.executeQuery();
 	    	while (rs.next()) {

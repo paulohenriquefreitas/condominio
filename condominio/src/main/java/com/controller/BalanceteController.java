@@ -25,15 +25,18 @@ public class BalanceteController {
 			String [] datas = dataRange.split(" - ");
 			model.addAttribute("recebimentos", recebimentoDao.find(datas[0].trim(), datas[1].trim()));
 			model.addAttribute("totalCondominio",recebimentoDao.findRecebimento(datas[0].trim(), datas[1].trim(), "condominio", null));
-			model.addAttribute("totalCondominioAnterior",recebimentoDao.findRecebimento(datas[0].trim(), datas[1].trim(), "condominio",1));
+			model.addAttribute("totalCondominioAnterior",recebimentoDao.findRecebimento("01-01-2015", datas[1].trim(), "condominio",1));
 			model.addAttribute("totalFundo",recebimentoDao.findRecebimento(datas[0].trim(), datas[1].trim(), "fundo de reserva",null));
-			model.addAttribute("totalFundoAnterior",recebimentoDao.findRecebimento(datas[0].trim(), datas[1].trim(), "fundo de reserva",1));
+			model.addAttribute("totalFundoAnterior",recebimentoDao.findRecebimento("01-01-2015", datas[1].trim(), "fundo de reserva",1));
 			model.addAttribute("totalCota",recebimentoDao.findRecebimento(datas[0].trim(), datas[1].trim(), "cota extra",null));	
-			model.addAttribute("totalCotaAnterior",recebimentoDao.findRecebimento(datas[0].trim(), datas[1].trim(), "cota extra",1));	
+			model.addAttribute("totalCotaAnterior",recebimentoDao.findRecebimento("01-01-2015", datas[1].trim(), "cota extra",1));	
 			model.addAttribute("pagamentos",pagamentoDao.find(datas[0].trim(), datas[1].trim()));
-			model.addAttribute("totalPagamentoOrdinario",pagamentoDao.findPagamento(datas[0].trim(), datas[1].trim(), "condominio"));
-			model.addAttribute("totalPagamentoFundo",pagamentoDao.findPagamento(datas[0].trim(), datas[1].trim(), "fundo de reserva"));
-			model.addAttribute("totalPagamentoExtra",pagamentoDao.findPagamento(datas[0].trim(), datas[1].trim(), "cota extra"));
+			model.addAttribute("totalPagamentoOrdinario",pagamentoDao.findPagamento(datas[0].trim(), datas[1].trim(), "condominio",null));
+			model.addAttribute("totalPagamentoFundo",pagamentoDao.findPagamento(datas[0].trim(), datas[1].trim(), "fundo de reserva",null));
+			model.addAttribute("totalPagamentoExtra",pagamentoDao.findPagamento(datas[0].trim(), datas[1].trim(), "cota extra",null));
+			model.addAttribute("totalPagamentoOrdinarioAnterior",pagamentoDao.findPagamento("01-01-2015", datas[1].trim(), "condominio",1));
+			model.addAttribute("totalPagamentoFundoAnterior",pagamentoDao.findPagamento("01-01-2015", datas[1].trim(), "fundo de reserva",1));
+			model.addAttribute("totalPagamentoExtraAnterior",pagamentoDao.findPagamento("01-01-2015", datas[1].trim(), "cota extra",1));
 
 			return "balancetes";
 			

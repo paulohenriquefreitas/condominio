@@ -160,7 +160,7 @@ font: blue;
 														<td>${recebimento.data}</td>
 														<td>${recebimento.tipo}</td>
 														<td>${recebimento.referencia}</td>
-														<td>Apart ${recebimento.fk_morador}</td>
+														<td>Apart ${recebimento.fk_morador} (${recebimento.valor})</td>
 														<td>${recebimento.valor}</td>
 													</tr>
 												</c:if>
@@ -291,51 +291,53 @@ font: blue;
 							<h4>Patrimônio Financeiro</h4>
 							<div class="table-responsive">
 								<table class="table table-bordered table-hover">
-								<c:set var = "totalCreditoAnterior" scope = "session" value = "${totalCondominioAnterior + totalCotaAnterior + totalFundoAnterior}"/>
+								<c:set var = "totalAtual" scope = "session" value = "${totalCondominio - totalPagamentoOrdinario}"/>
+								<c:set var = "totalAnterior" scope = "session" value = "${totalCondominioAnterior  - totalPagamentoOrdinarioAnterior}"/>
+								<c:set var = "totalFundoReserva" scope = "session" value = "${totalFundoAnterior + totalFundo - totalPagamentoFundo}"/>
+								<c:set var = "totalTaxaExtra" scope = "session" value = "${totalCotaAnterior + totalCota - totalPagamentoExtra}"/>
 									<thead>
-									</thead>
-									<tbody style="font-weight: bold">	
+									</thead>									
+									 <tbody style="font-weight: bold">	
 									   <tr>
 											<td>Grupo de Saldos</td>
-											<td>Saldo Anteriror</td>
+											<td>Saldo Anterior</td>
 											<td>Créditos</td>
 											<td>Débitos</td>
 											<td>Saldo Atual</td>
 										</tr> 									
 										<tr>
 											<td>Condomínio</td>
-											<td>${totalCondominioAnterior}</td>
+											<td>${totalAnterior}</td>
 											<td>${totalCondominio}</td>
 											<td>${totalPagamentoOrdinario}</td>
-											<td>${totalCondominioAnterior + totalCondominio - totalPagamentoOrdinario}</td>
+											<td>${totalAtual + totalAnterior}</td>
 										</tr>
 										<tr>
 											<td>Fundo de Reserva</td>
 											<td>${totalFundoAnterior}</td>
 											<td>${totalFundo}</td>
 											<td>${totalPagamentoFundo}</td>
-											<td>${totalFundoAnterior + totalFundo - totalPagamentoFundo}</td>
+											<td>${totalFundoReserva}</td>
 										</tr>
 										<tr>
 											<td>Taxa Extra</td>
 											<td>${totalCotaAnterior}</td>
 											<td>${totalCota}</td>
 											<td>${totalPagamentoExtra}</td>
-											<td>${totalCotaAnterior + totalCota - totalPagamentoExtra}</td>
+											<td>${totalTaxaExtra}</td>
 										</tr>
 										<tr style="font-size: 18px">
 											<td>Saldo Total</td>
-											<td>${totalCreditoAnterior}</td>
+											<td>${totalAnterior + totalFundoAnterior + totalCotaAnterior}</td>
 											<td>${totalCredito}</td>
 											<td>${totalDebito}</td>
-											<td>${totalCreditoAnterior + totalCredito - totalDebito}</td>
+											<td>${totalAtual + totalAnterior + totalFundoReserva + totalTaxaExtra}</td>
 										</tr>
-									</tbody>
+									</tbody> 
 								</table>
 							</div>
 						</div>
-						<div class="col-lg-12">
-						<h5>Obs.: Errata: Não foi feito o lançamento do pagamento do ap 202 no mês de Junho, sendo feito agora em Julho.</h5>
+						<div class="col-lg-12">						
                         <h5>Todos os apartamentos estão em dia. Parabéns.</h5>
 						</div>
 					</div>

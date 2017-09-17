@@ -18,6 +18,6 @@ public interface PagamentoDao {
 
  List<Pagamento> find(String dataIncial, String dataFinal);
 
- BigDecimal findPagamento(String dataInicialTotal, String dataFinalTotal, String tipo);
+ BigDecimal findPagamento(String dataInicialTotal, String dataFinalTotal, String tipo, Integer intervalo);
 }
 
