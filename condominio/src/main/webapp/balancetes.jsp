@@ -101,7 +101,7 @@ font: blue;
 						<div class="col-lg-12">
 							<ul class="list-group">
 								<li class="list-group-item active">Condomínio Adail -
-									Balancete Mensal de Verificação  - Julho
+									Balancete Mensal de Verificação  - Setembro
 									<form id="myFormID" action="/balancete/list" method="GET">	
 									<div class="col-lg-4">
 										<input name="dataRange" id="printPageButton" class="date-picker form-control" />
@@ -294,7 +294,7 @@ font: blue;
 								<c:set var = "totalAtual" scope = "session" value = "${totalCondominio - totalPagamentoOrdinario}"/>
 								<c:set var = "totalAnterior" scope = "session" value = "${totalCondominioAnterior  - totalPagamentoOrdinarioAnterior}"/>
 								<c:set var = "totalFundoReserva" scope = "session" value = "${totalFundoAnterior + totalFundo - totalPagamentoFundo}"/>
-								<c:set var = "totalTaxaExtra" scope = "session" value = "${totalCotaAnterior + totalCota - totalPagamentoExtra}"/>
+								<c:set var = "totalTaxaExtra" scope = "session" value = "${totalCotaAnterior + totalCota - totalPagamentoExtra - totalPagamentoExtraAnterior}"/>
 									<thead>
 									</thead>									
 									 <tbody style="font-weight: bold">	
@@ -321,14 +321,14 @@ font: blue;
 										</tr>
 										<tr>
 											<td>Taxa Extra</td>
-											<td>${totalCotaAnterior}</td>
+											<td>${totalCotaAnterior - totalPagamentoExtraAnterior}</td>
 											<td>${totalCota}</td>
 											<td>${totalPagamentoExtra}</td>
 											<td>${totalTaxaExtra}</td>
 										</tr>
 										<tr style="font-size: 18px">
 											<td>Saldo Total</td>
-											<td>${totalAnterior + totalFundoAnterior + totalCotaAnterior}</td>
+											<td>${totalAnterior + totalFundoAnterior + totalCotaAnterior - totalPagamentoExtraAnterior}</td>
 											<td>${totalCredito}</td>
 											<td>${totalDebito}</td>
 											<td>${totalAtual + totalAnterior + totalFundoReserva + totalTaxaExtra}</td>
@@ -338,7 +338,7 @@ font: blue;
 							</div>
 						</div>
 						<div class="col-lg-12">						
-                        <h5>Todos os apartamentos estão em dia. Parabéns.</h5>
+                        <h5>Contêm 01 unidade em aberto até a data do fechamento, referentes ao mês de Setembro de 2017.</h5>
 						</div>
 					</div>
 				</div>

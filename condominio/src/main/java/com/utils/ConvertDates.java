@@ -20,7 +20,7 @@ public class ConvertDates {
 		if(interval != null){
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(sqlStartDate);
-			cal.add(Calendar.MONTH,-interval);
+			cal.add(Calendar.AM_PM,-interval);
 			
 			java.sql.Date sqlTommorow = new java.sql.Date(cal.getTimeInMillis());
 			return sqlTommorow;
