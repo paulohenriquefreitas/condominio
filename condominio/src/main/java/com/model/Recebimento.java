@@ -15,7 +15,7 @@ public class Recebimento {
     private BigDecimal valor;
     private int id_rece;
     private int fk_morador;
-    private double multa;
+    private BigDecimal multa;
      
 	public int getId_rece() {
 		return id_rece;
@@ -53,10 +53,10 @@ public class Recebimento {
 	public void setFk_morador(int fk_morador) {
 		this.fk_morador = fk_morador;
 	}	
-	public double getMulta() {
+	public BigDecimal getMulta() {
 		return multa;
 	}
-	public void setMulta(double multa) {
+	public void setMulta(BigDecimal multa) {
 		this.multa = multa;
 	}
 	

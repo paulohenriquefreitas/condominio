@@ -41,7 +41,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 			recebimento.setValor(new BigDecimal(rs.getDouble("Valor") + (rs.getDouble("Multa"))).setScale(2, BigDecimal.ROUND_HALF_DOWN));
 			recebimento.setId_rece(rs.getInt("Id_rece"));
 			recebimento.setFk_morador(rs.getInt("Fk_Morador"));
-			recebimento.setMulta(rs.getDouble("Multa"));
+			recebimento.setMulta(rs.getBigDecimal("Multa"));
 			
 			recebimentos.add(recebimento);
 					
@@ -75,7 +75,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 		pstmt.setBigDecimal(4, recebimento.getValor());
 		pstmt.setInt(5, recebimento.getId_rece());
 		pstmt.setInt(6, recebimento.getFk_morador());
-		pstmt.setDouble(7, recebimento.getMulta());
+		pstmt.setBigDecimal(7, recebimento.getMulta());
 		
 		pstmt.execute();
 		con.close();
@@ -98,7 +98,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 			pstmt.setString(3, recebimento.getReferencia());
 			pstmt.setBigDecimal(4, recebimento.getValor());
 			pstmt.setInt(5, recebimento.getFk_morador());
-			pstmt.setDouble(6, recebimento.getMulta());
+			pstmt.setBigDecimal(6, recebimento.getMulta());
 			pstmt.setInt(7,recebimento.getId_rece());
 			pstmt.execute();
 			con.close();
@@ -151,7 +151,7 @@ public class RecebimentoDaoImpl implements RecebimentoDao {
 				recebimento.setValor(new BigDecimal(rs.getDouble("Valor") + (rs.getDouble("Multa"))).setScale(2, BigDecimal.ROUND_HALF_DOWN));
 				recebimento.setId_rece(rs.getInt("Id_rece"));
 				recebimento.setFk_morador(rs.getInt("Fk_Morador"));
-				recebimento.setMulta(rs.getDouble("Multa"));
+				recebimento.setMulta(rs.getBigDecimal("Multa"));
 				
 				recebimentos.add(recebimento);
 						

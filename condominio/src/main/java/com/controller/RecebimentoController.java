@@ -41,11 +41,11 @@ public class RecebimentoController {
 				valor = new BigDecimal(System.getProperty("condominio")).setScale(2, RoundingMode.HALF_UP);
 			}else if(tipo.equals("fundo de reserva")){
 				recebimento.setTipo(tipo);
-				recebimento.setMulta(0.00);
+				recebimento.setMulta(new BigDecimal("0.00"));
 				valor = new BigDecimal(System.getProperty("fundo")).setScale(2, RoundingMode.HALF_UP);;
 			}else if(tipo.equals("cota extra")){
 				recebimento.setTipo(tipo);
-				recebimento.setMulta(0.00);
+				recebimento.setMulta(new BigDecimal("0.00"));
 				valor = new BigDecimal(System.getProperty("cota")).setScale(2, RoundingMode.HALF_UP);
 			}
 		    if(valor == null ){
