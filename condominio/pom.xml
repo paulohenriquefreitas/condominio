@@ -9,6 +9,9 @@
 	<packaging>war</packaging>
 
 	<name>condominio</name>
+	<configuration>
+	  <appName>condominio</appName>
+	</configuration>
 	<description>Aplicacao de gestao de condominio</description>
 
 	<parent>
