@@ -6,12 +6,10 @@
 	<groupId>com.condominio</groupId>
 	<artifactId>condominio</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>condominio</name>
-	<configuration>
-	  <appName>condominio</appName>
-	</configuration>
+	
 	<description>Aplicacao de gestao de condominio</description>
 
 	<parent>
@@ -32,7 +30,7 @@
 	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
-	    <version>5.1.6</version>
+	    <version>5.1.6</version><!--$NO-MVN-MAN-VER$-->
 	</dependency>
 	
 		
@@ -42,18 +40,18 @@
 		</dependency>
 		
 		<dependency>
-    <groupId>com.sun.faces</groupId>
-    <artifactId>jsf-api</artifactId>
-    <version>2.2.8</version>
-    <scope>provided</scope>
-</dependency>
-<dependency>
-    <groupId>com.sun.faces</groupId>
-    <artifactId>jsf-impl</artifactId>
-    <version>2.2.8</version>
-    <scope>compile</scope>
-    <optional>true</optional>
-</dependency>
+		    <groupId>com.sun.faces</groupId>
+		    <artifactId>jsf-api</artifactId>
+		    <version>2.2.8</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>com.sun.faces</groupId>
+		    <artifactId>jsf-impl</artifactId>
+		    <version>2.2.8</version>
+		    <scope>compile</scope>
+		    <optional>true</optional>
+		</dependency>
 		
 				<dependency>
 		    <groupId>org.springframework.boot</groupId>

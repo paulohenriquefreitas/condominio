@@ -2,6 +2,7 @@ package com.condominio;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -20,6 +21,17 @@ import com.dao.RecebimentoDaoImpl;
 @SpringBootApplication
 @ComponentScan(basePackageClasses = MoradorController.class)
 public class CondominioApplication extends SpringBootServletInitializer {	
+	
+	@Value("${url}")
+	private String url;
+	
+	@Value("${username}")
+	private String username;
+	
+	@Value("${password}")
+	private String password;
+	
+	
 	
 	@Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -52,9 +64,9 @@ public class CondominioApplication extends SpringBootServletInitializer {
 	public DataSource dataSource(Environment environment) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/Condominio");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
         
         return dataSource;
     }

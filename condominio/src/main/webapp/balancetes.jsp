@@ -101,7 +101,7 @@ font: blue;
 						<div class="col-lg-12">
 							<ul class="list-group">
 								<li class="list-group-item active">Condomínio Adail -
-									Balancete Mensal de Verificação  - Novembro
+									Balancete Mensal de Verificação  - Janeiro
 									<form id="myFormID" action="/balancete/list" method="GET">	
 									<div class="col-lg-4">
 										<input name="dataRange" id="printPageButton" class="date-picker form-control" />
@@ -293,6 +293,13 @@ font: blue;
 						<br/>
 						<br/>
 						<br/>
+						
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
 						<div class="col-lg-12">
 							<h4>Patrimônio Financeiro</h4>
 							<div class="table-responsive">
@@ -344,8 +351,8 @@ font: blue;
 							</div>
 						</div>
 						<div class="col-lg-12">						
-                        <h5>Contêm 01 unidade em aberto até a data do fechamento, referentes ao mês de Outubro de 2017 e 
-                        01 unidade referente a Novembro.</h5>
+                        <h5>Contêm 01 unidade em aberto até a data do fechamento, referentes ao mês de Outubro, 01 unidade referente a Dezembro de
+2017 e 01 unidade referente a Janeiro de 2018.</h5>
 						</div>
 					</div>
 				</div>
