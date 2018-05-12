@@ -101,7 +101,7 @@ font: blue;
 						<div class="col-lg-12">
 							<ul class="list-group">
 								<li class="list-group-item active">Condomínio Adail -
-									Balancete Mensal de Verificação  - Janeiro
+									Balancete Mensal de Verificação  - Abril
 									<form id="myFormID" action="/balancete/list" method="GET">	
 									<div class="col-lg-4">
 										<input name="dataRange" id="printPageButton" class="date-picker form-control" />
@@ -181,7 +181,7 @@ font: blue;
 														<td>${recebimento.data}</td>
 														<td>${recebimento.tipo}</td>
 														<td>${recebimento.referencia}</td>
-														<td>Apart ${recebimento.fk_morador}</td>
+														<td>Apart ${recebimento.fk_morador} (${recebimento.valor})</td>
 														<td>${recebimento.valor}</td>
 													</tr>
 												</c:if>
@@ -190,7 +190,7 @@ font: blue;
 										    	   <tr>	<td></td>
 														<td></td>
 														<td></td>
-														<td class="gtext">Total de Débitos</td>
+														<td class="gtext">Total de Créditos</td>
 														<td class="gtext">${totalCota}</td>
 													</tr>
 										    	   
@@ -204,7 +204,15 @@ font: blue;
 								
 							</div>
 						</div>
+						
 						<div class="col-lg-12">
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
 							<h4>Pagamentos</h4>
 							<div class="table-responsive">
 								<table class="table table-bordered table-hover">
@@ -212,8 +220,9 @@ font: blue;
 										<tr>
 											<th>Dia</th>
 											<th>Fornecedor</th>
+											<th>Tipo</th>
 											<th>Ref.</th>
-											<th>Complemento</th>
+											<th>Complemento</th>											
 											<th>Valor</th>
 										</tr>
 									</thead>
@@ -224,14 +233,16 @@ font: blue;
 													<tr>
 														<td>${pagamento.data}</td>
 														<td>${pagamento.fornecedor}</td>
+														<td>${pagamento.tipo}</td>
 														<td>${pagamento.referencia}</td>
-														<td>${pagamento.complemento}</td>
+														<td>${pagamento.complemento}</td>														
 														<td>${pagamento.valor}</td>
 													</tr>
 												</c:if>
 											</c:forEach>
 											<c:if test="${totalPagamentoOrdinario gt 0}">
 										    	   <tr>	<td></td>
+														<td></td>
 														<td></td>
 														<td></td>
 														<td class="gtext">Total de Débitos</td>
@@ -244,14 +255,16 @@ font: blue;
 													<tr>
 														<td>${pagamento.data}</td>
 														<td>${pagamento.fornecedor}</td>
+														<td>${pagamento.tipo}</td>
 														<td>${pagamento.referencia}</td>
-														<td>${pagamento.complemento}</td>
+														<td>${pagamento.complemento}</td>														
 														<td>${pagamento.valor}</td>
 													</tr>
 												</c:if>
 											</c:forEach>
 											<c:if test="${totalPagamentoFundo gt 0}">
 										    	   <tr>	<td></td>
+														<td></td>
 														<td></td>
 														<td></td>
 														<td class="gtext">Total de Débitos</td>
@@ -264,8 +277,9 @@ font: blue;
 													<tr>
 														<td>${pagamento.data}</td>
 														<td>${pagamento.fornecedor}</td>
+														<td>${pagamento.tipo}</td>
 														<td>${pagamento.referencia}</td>
-														<td>${pagamento.complemento}</td>
+														<td>${pagamento.complemento}</td>														
 														<td>${pagamento.valor}</td>
 													</tr>
 												</c:if>
@@ -274,7 +288,8 @@ font: blue;
 										    	   <tr>													<td></td>
 														<td></td>
 														<td></td>
-														<td class="gtext">Total de Créditos</td>
+														<td></td>
+														<td class="gtext">Total de Débitos</td>
 														<td class="gtext">${totalPagamentoExtra}</td>
 													</tr>
 										    	   
@@ -287,26 +302,14 @@ font: blue;
 								</span>
 							</div>
 						</div>
-						<br/>
-						<br/>
-						<br/>
-						<br/>
-						<br/>
-						<br/>
 						
-						<br/>
-						<br/>
-						<br/>
-						<br/>
-						<br/>
-						<br/>
 						<div class="col-lg-12">
 							<h4>Patrimônio Financeiro</h4>
 							<div class="table-responsive">
 								<table class="table table-bordered table-hover">
 								<c:set var = "totalAtual" scope = "session" value = "${totalCondominio - totalPagamentoOrdinario}"/>
 								<c:set var = "totalAnterior" scope = "session" value = "${totalCondominioAnterior  - totalPagamentoOrdinarioAnterior}"/>
-								<c:set var = "totalFundoReserva" scope = "session" value = "${totalFundoAnterior + totalFundo - totalPagamentoFundo}"/>
+								<c:set var = "totalFundoReserva" scope = "session" value = "${totalFundoAnterior + totalFundo - totalPagamentoFundoAnterior}"/>
 								<c:set var = "totalTaxaExtra" scope = "session" value = "${totalCotaAnterior + totalCota - totalPagamentoExtra - totalPagamentoExtraAnterior}"/>
 									<thead>
 									</thead>									
@@ -327,7 +330,7 @@ font: blue;
 										</tr>
 										<tr>
 											<td>Fundo de Reserva</td>
-											<td>${totalFundoAnterior}</td>
+											<td>${totalFundoAnterior - totalPagamentoFundoAnterior}</td>
 											<td>${totalFundo}</td>
 											<td>${totalPagamentoFundo}</td>
 											<td>${totalFundoReserva}</td>
@@ -341,7 +344,7 @@ font: blue;
 										</tr>
 										<tr style="font-size: 18px">
 											<td>Saldo Total</td>
-											<td>${totalAnterior + totalFundoAnterior + totalCotaAnterior - totalPagamentoExtraAnterior}</td>
+											<td>${totalAnterior + totalFundoAnterior + totalCotaAnterior - totalPagamentoExtraAnterior - totalPagamentoFundoAnterior}</td>
 											<td>${totalCredito}</td>
 											<td>${totalDebito}</td>
 											<td>${totalAtual + totalAnterior + totalFundoReserva + totalTaxaExtra}</td>
@@ -351,8 +354,7 @@ font: blue;
 							</div>
 						</div>
 						<div class="col-lg-12">						
-                        <h5>Contêm 01 unidade em aberto até a data do fechamento, referentes ao mês de Outubro, 01 unidade referente a Dezembro de
-2017 e 01 unidade referente a Janeiro de 2018.</h5>
+                        <h5>Contêm 01 unidade em aberto até a data do fechamento, referentes ao mês de Fevereiro de 2018 e 01 unidade referente a Abril.
 						</div>
 					</div>
 				</div>

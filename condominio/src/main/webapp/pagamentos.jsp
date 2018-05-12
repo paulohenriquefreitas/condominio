@@ -62,8 +62,8 @@
 									<option value="Janeiro">Janeiro</option>
 									<option value="Fevereiro">Fevereiro</option>
 									<option value="Março">Março</option>
-									<option value="Abr">Abril</option>
-									<option value="Abril">Maio</option>
+									<option value="Abril">Abril</option>
+									<option value="Maio">Maio</option>
 									<option value="Junho">Junho</option>
 									<option value="Julho">Julho</option>
 									<option value="Agosto">Agosto</option>
