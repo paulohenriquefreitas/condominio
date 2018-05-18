@@ -309,7 +309,7 @@ font: blue;
 								<table class="table table-bordered table-hover">
 								<c:set var = "totalAtual" scope = "session" value = "${totalCondominio - totalPagamentoOrdinario}"/>
 								<c:set var = "totalAnterior" scope = "session" value = "${totalCondominioAnterior  - totalPagamentoOrdinarioAnterior}"/>
-								<c:set var = "totalFundoReserva" scope = "session" value = "${totalFundoAnterior + totalFundo - totalPagamentoFundoAnterior}"/>
+								<c:set var = "totalFundoReserva" scope = "session" value = "${totalFundoAnterior - totalPagamentoFundoAnterior + totalFundo - totalPagamentoFundo}"/>
 								<c:set var = "totalTaxaExtra" scope = "session" value = "${totalCotaAnterior + totalCota - totalPagamentoExtra - totalPagamentoExtraAnterior}"/>
 									<thead>
 									</thead>									
